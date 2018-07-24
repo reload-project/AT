@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>广东亚齐信息后台系统登录页</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <script src="__PUBLIC__assets/js/jquery.min.js"></script>
+     <script type="text/javascript" src="__PUBLIC__common/js/jquery.md5.js"></script>
+     <script type="text/javascript" src="__PUBLIC__layer/layer.js"></script>
+
+</head>
+
+<body data-type="login">
+    <div class="" style="text-align:center; margin-top: 300px;">
+        <span >亚齐信息后台管理系统</span>
+            <form class="" style="margin-top: 20px;">
+                <div class="am-form-group">
+                    <input type="text" class="" id="user-name" placeholder="请输入账号">
+
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="" id="password" placeholder="请输入密码">
+
+                </div>
+
+
+                <div class="am-form-group">
+
+                    <button type="button" class="am-btn">提交</button>
+
+                </div>
+            </form>
+
+    </div>
+    <script type="text/javascript">
+
+    $(function(){
+        document.onkeydown = function(e){ 
+            var ev = document.all ? window.event : e;
+            if(ev.keyCode==13) {
+
+                   $('.am-btn').click();
+
+             }
+        }
+    });
+
+
+            $('.am-btn').click(function(){
+                var username = $('#user-name').val();
+                var password = $.md5($('#password').val());
+                $.post('{:U("Admin/checkLogin")}',{
+                    username:username,
+                    password:password,
+                },function(res){
+                    // if(res.err==1){
+                        // layer.msg(res.msg,function(){location.href="/"});
+                    //}else{
+                        // layer.msg(res.msg);
+                    //}
+                    if(res.err==1) {
+                        location.href="/";
+                    } else {
+                        layer.msg("密码输入错误");
+                    }
+                    
+                },'json')
+            })
+    </script>
+</body>
+
+</html>

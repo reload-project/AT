@@ -1,0 +1,93 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                添加员工级别
+                            </div>
+                            <div class="card-content">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            员工级别:<input id="level" type="text" class="validate">
+                                            <!--<label for="username">姓名</label>-->
+                                            <small>PS:级别为纯数字！例:1</small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            基本工资:<input id="basic_salary" type="text" class="validate">
+                                            <!--<label for="nickname">昵称</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            岗位工资:<input id="post_salary" type="text" class="validate">
+                                            <!--<label for="password">密码</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            岗位职责:<input id="responsibility" type="text" class="validate">
+                                            <!--<label for="phone">手机号</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            工资架构:<input id="salary_structure" type="text" class="validate">
+                                            <!--<label for="phone">手机号</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            备注:<textarea id="note" class="materialize-textarea"></textarea>
+                                            <!--<label for="textarea1">Textarea</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="btn " role="group" aria-label="..." onclick="addLevels()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script type="text/javascript">
+        function addLevels() {
+            var level = $("#level").val();
+            var basic_salary = $("#basic_salary").val();
+            var post_salary = $("#post_salary").val();
+            var responsibility = $("#responsibility").val();
+            var salary_structure = $("#salary_structure").val();
+            var note = $("#note").val();
+            if(!level) {
+                layer.msg("级别不能为空");return;
+            }
+            $.post("{:U('Levels/addLevels')}",{level:level,basic_salary:basic_salary,post_salary:post_salary,responsibility:responsibility,salary_structure:salary_structure,note:note},function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('Levels/index')}";
+                }
+            });
+        }
+    </script>
+</block>

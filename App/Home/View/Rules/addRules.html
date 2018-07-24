@@ -1,0 +1,65 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                添加规则
+                            </div>
+                            <div class="card-content">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            规则名称:<input id="rules" type="text" class="validate" />
+                                            <!--<label for="username">姓名</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            规则地址:<input id="url" type="text" class="validate" />
+                                            <!--<label for="username">姓名</label>-->
+                                            <small>PS:地址例子:(Index/index);</small>
+                                        </div>
+                                    </div>
+                                    <div class="btn " role="group" aria-label="..." onclick="addRules()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script type="text/javascript">
+        function addRules() {
+            var rules = $("#rules").val();
+            var url = $("#url").val();
+            if(!rules) {
+                layer.msg("规则名称不能为空");return;
+            }
+            $.post("{:U('Rules/addRules')}",{rules:rules,url:url},function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('Rules/index')}";
+                }
+            });
+        }
+    </script>
+</block>

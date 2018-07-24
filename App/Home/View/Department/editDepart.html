@@ -1,0 +1,78 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+
+</block>
+<block name="main">
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-action">
+                            编辑部门
+                        </div>
+                        <div class="card-content">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        部门名称:<input id="depart" type="text" class="validate" value="{$info.depart}" />
+                                        <!--<label for="username">姓名</label>-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        分配规则权限:
+                                        <foreach name="rules" item="v">
+                                            <p>
+                                                <input name="rules" type="checkbox" class="filled-in"  id="rules{$v.id}" value="{$v.id}"
+                                                <php>if(in_array($v['id'],$info['rules_id'])){echo "checked=checked";}</php>  />
+                                                <label for="rules{$v.id}">{$v.rules}</label>
+                                            </p>
+                                        </foreach>
+                                    </div>
+                                </div>
+                                <div class="btn " role="group" aria-label="..." onclick="editDepart()">
+                                    提交
+
+                                </div>
+                            </form>
+                            <div class="clearBoth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+
+
+</block>
+<block name="js">
+
+    <script type="text/javascript">
+        function editDepart() {
+            var id = "{$_GET['id']}";
+            var depart = $("#depart").val();
+            //获取权限
+            obj = $("input[name='rules']");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            var rules_id = check_val;
+            if(!depart) {
+                layer.msg("部门名称不能为空");return;
+            }
+            $.post("{:U('Department/editDepart')}",{id:id,depart:depart,rules_id:rules_id},function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('Department/index')}";
+                }
+            });
+        }
+    </script>
+</block>

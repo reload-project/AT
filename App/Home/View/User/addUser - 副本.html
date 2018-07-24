@@ -1,0 +1,121 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                添加用户
+                            </div>
+                            <div class="card-content">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            姓名:<input id="name" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            昵称:<input id="nickname" type="text" class="validate">
+                                        </div>
+                                    </div>
+<!--                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            性别:<input id="gender" type="text" class="validate">
+                                        </div>
+                                    </div>-->
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            性别:
+                                            <p>
+                                                <input name="gender" type="radio" value="1" id="test1" />
+                                                <label for="test1">男</label>
+                                            </p>
+                                            <p>
+                                                <input name="gender" type="radio" value="2" id="test2" />
+                                                <label for="test2">女</label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            民族:<input id="national" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            职位:<input id="position" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            手机号:<input id="phone" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            邮箱:<input id="email" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            住址:<input id="address" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            学历:<input id="school" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="btn " role="group" aria-label="..." onclick="addMaster()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script type="text/javascript">
+        function addMaster() {
+            var name = $("#name").val();
+            var nickname = $("#nickname").val();
+            var gender = $('input[name="gender"]:checked').val();
+            var national = $("#national").val();
+            var position = $("#position").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+            var address = $("#address").val();
+            var school = $("#school").val();
+            if(!name) {
+                layer.msg("姓名不能为空");return;
+            }
+            if(!phone) {
+                layer.msg("手机号不能为空");return;
+            }
+            var data = {name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school};
+            $.post("{:U('User/addUser')}",data,function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('User/index')}";
+                }
+            });
+        }
+    </script>
+</block>
