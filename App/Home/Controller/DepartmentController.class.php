@@ -43,6 +43,7 @@ class DepartmentController extends CommonController {
         $this->display();
     }
 
+
     //定义一个空的数组
     static public $treeList = array();
     //接收$data二维数组,$pid默认为0，$level级别默认为1
