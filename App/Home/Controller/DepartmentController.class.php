@@ -32,15 +32,13 @@ class DepartmentController extends CommonController {
             }
             $v['rules_id'] = implode(',',$v['rules']);
             unset($v['rules']);
-        }//die;
+        }
 
-        $res=self::tree($data);
-        //print_r($res);die;
-        //$this->cate=$res;
+        //$res=self::tree($data);
 
 
         //print_r($data);die;
-        $this->assign('res',$res);
+        //$this->assign('res',$res);
         $this->assign('data',$data);
         $this->display();
     }
