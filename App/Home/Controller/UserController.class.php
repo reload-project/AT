@@ -115,6 +115,7 @@ class UserController extends CommonController {
                 $data = array('err'=>0,'msg'=>"删除失败");
             }
             $this->ajaxReturn($data);
+            
         }
     }
 

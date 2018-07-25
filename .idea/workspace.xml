@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76373229-281a-4eb2-98ad-fb83fa5b53a9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Logs/Home/18_07_24.log" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Logs/Home/18_07_24.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Home/Controller/UserController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/Controller/UserController.class.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,8 +51,8 @@
       <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App/Home/Controller/UserController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="113" column="20" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
+            <state relative-caret-position="455">
+              <caret line="117" column="12" selection-start-line="117" selection-start-column="12" selection-end-line="117" selection-end-column="12" />
               <folding>
                 <element signature="e#123#141#0#PHP" expanded="true" />
               </folding>
@@ -257,12 +258,12 @@
       <workItem from="1532046626008" duration="9530000" />
       <workItem from="1532306411102" duration="27189000" />
       <workItem from="1532392612635" duration="22771000" />
-      <workItem from="1532478673338" duration="1299000" />
+      <workItem from="1532478673338" duration="1574000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122279000" />
+    <option name="totallyTimeSpent" value="122554000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -601,8 +602,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App/Home/Controller/UserController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="113" column="20" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
+        <state relative-caret-position="455">
+          <caret line="117" column="12" selection-start-line="117" selection-start-column="12" selection-end-line="117" selection-end-column="12" />
           <folding>
             <element signature="e#123#141#0#PHP" expanded="true" />
           </folding>
