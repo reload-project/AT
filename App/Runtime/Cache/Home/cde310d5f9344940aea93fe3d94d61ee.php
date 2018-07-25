@@ -49,9 +49,9 @@
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+        </li>-->
+        <li><a href="<?php echo U('User/checkPass');?>"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
         </li>
-        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-        </li> -->
         <li><a href="<?php echo U('Admin/outLogin');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
     </ul>
@@ -222,15 +222,18 @@
                 <!--<li>
                     <a class=" <?php if(CONTROLLER_NAME == 'Master'): ?>active-menu<?php endif; ?>  waves-effect waves-dark" href="<?php echo U('Master/index');?>"><i class="fa fa-dashboard"></i> 管理员</a>
                 </li>-->
-                <li>
+                <?php if((in_array('User',$rr))): ?><li>
                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工管理</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Levels',$rr))): ?><li>
                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工级别</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Department',$rr))): ?><li>
                     <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 部门管理</a>
-                </li>
+                </li><?php endif; ?>
+                <?php if((in_array('Rules',$rr))): ?><li>
+                    <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
+                </li><?php endif; ?>
 
                  <!--                   <li>
                                         <a href="tab-panel.html" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> Tabs & Panels</a>

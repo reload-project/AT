@@ -222,7 +222,7 @@
                 <!--<li>
                     <a class=" <?php if(CONTROLLER_NAME == 'Master'): ?>active-menu<?php endif; ?>  waves-effect waves-dark" href="<?php echo U('Master/index');?>"><i class="fa fa-dashboard"></i> 管理员</a>
                 </li>-->
-                <?php if((in_array('User',$rr))): ?><li>
+<!--                <?php if((in_array('User',$rr))): ?><li>
                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工管理</a>
                 </li><?php endif; ?>
                 <?php if((in_array('Levels',$rr))): ?><li>
@@ -233,8 +233,24 @@
                 </li><?php endif; ?>
                 <?php if((in_array('Rules',$rr))): ?><li>
                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
-                </li><?php endif; ?>
-
+                </li><?php endif; ?>-->
+                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Department',$rr)) || (in_array('Rules',$rr))): ?><li>
+                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <?php if((in_array('User',$rr))): ?><li>
+                                    <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工资料</a>
+                                </li><?php endif; ?>
+                            <?php if((in_array('Levels',$rr))): ?><li>
+                                    <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工级别</a>
+                                </li><?php endif; ?>
+                            <?php if((in_array('Department',$rr))): ?><li>
+                                    <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 部门管理</a>
+                                </li><?php endif; ?>
+                            <?php if((in_array('Rules',$rr))): ?><li>
+                                    <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
+                                </li><?php endif; ?>
+                        </ul>
+                    </li><?php endif; ?>
                  <!--                   <li>
                                         <a href="tab-panel.html" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
                                     </li>
@@ -375,7 +391,14 @@
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="/App/Home/Common/assets/js/jquery-1.10.2.js"></script>
-
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="/App/Home/Common/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="/App/Home/Common/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
     <!-- Bootstrap Js -->
     <script src="/App/Home/Common/assets/js/bootstrap.min.js"></script>
 
@@ -398,15 +421,15 @@
 
     
     <!-- jQuery Js -->
-    <script src="/App/Home/Common/assets/js/jquery-1.10.2.js"></script>
+    <!--<script src="/App/Home/Common/assets/js/jquery-1.10.2.js"></script>-->
     <!-- DATA TABLE SCRIPTS -->
-    <script src="/App/Home/Common/assets/js/dataTables/jquery.dataTables.js"></script>
+<!--    <script src="/App/Home/Common/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="/App/Home/Common/assets/js/dataTables/dataTables.bootstrap.js"></script>
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable();
         });
-    </script>
+    </script>-->
 
 
     <script type="text/javascript">
