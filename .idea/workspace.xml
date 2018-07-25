@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76373229-281a-4eb2-98ad-fb83fa5b53a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Home/Controller/DepartmentController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/Controller/DepartmentController.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Home/Model/DepartmentModel.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/Model/DepartmentModel.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Home/View/Department/addDepart.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/View/Department/addDepart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Home/View/Department/editDepart.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/View/Department/editDepart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Home/View/Department/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/View/Department/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/9a6b5eee07658305a798fdd0bda18b0c.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/9a6b5eee07658305a798fdd0bda18b0c.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/9c53e6b8620f08c11851d64bd0d8033f.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/9c53e6b8620f08c11851d64bd0d8033f.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/cd9625820d5fc4d4fdb4705825bf382b.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/cd9625820d5fc4d4fdb4705825bf382b.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,16 +32,16 @@
         <entry file="file://$PROJECT_DIR$/App/Home/Controller/CommonController.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="76">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DepartmentController.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DepartmentController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Home/Controller/DepartmentController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="30" column="39" lean-forward="true" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+            <state relative-caret-position="95">
+              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -64,29 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App/Home/View/Department/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="28" column="60" lean-forward="true" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addDepart.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Home/View/Department/addDepart.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="80" column="102" lean-forward="true" selection-start-line="80" selection-start-column="82" selection-end-line="80" selection-end-column="102" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editDepart.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Home/View/Department/editDepart.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
-              <caret line="81" column="109" selection-start-line="81" selection-start-column="109" selection-end-line="81" selection-end-column="109" />
+            <state relative-caret-position="-154">
+              <caret line="29" column="57" selection-start-line="29" selection-start-column="57" selection-end-line="29" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -138,8 +114,8 @@
         <option value="$PROJECT_DIR$/App/Home/View/Department/addDepart.html" />
         <option value="$PROJECT_DIR$/App/Home/View/Department/editDepart.html" />
         <option value="$PROJECT_DIR$/App/Home/Model/DepartmentModel.class.php" />
-        <option value="$PROJECT_DIR$/App/Home/View/Department/index.html" />
         <option value="$PROJECT_DIR$/App/Home/Controller/DepartmentController.class.php" />
+        <option value="$PROJECT_DIR$/App/Home/View/Department/index.html" />
       </list>
     </option>
   </component>
@@ -271,21 +247,21 @@
       <workItem from="1532046626008" duration="9530000" />
       <workItem from="1532306411102" duration="27189000" />
       <workItem from="1532392612635" duration="22771000" />
-      <workItem from="1532478673338" duration="13578000" />
+      <workItem from="1532478673338" duration="18469000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134558000" />
+    <option name="totallyTimeSpent" value="139449000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16875" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32908705" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32837406" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -416,6 +392,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="569">
           <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+          <folding>
+            <element signature="e#6#145#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -580,6 +559,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../att/App/Home/Controller/DepartmentController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Home/Controller/CommonController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/App/Home/View/Department/editDepart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="741">
@@ -594,20 +587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../att/App/Home/Controller/DepartmentController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" selection-start-line="11" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/Controller/CommonController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Home/Model/DepartmentModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -618,17 +597,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/View/Department/index.html">
+    <entry file="file://$PROJECT_DIR$/App/Home/Controller/DepartmentController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="28" column="60" lean-forward="true" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
+        <state relative-caret-position="95">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/Controller/DepartmentController.class.php">
+    <entry file="file://$PROJECT_DIR$/App/Home/View/Department/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="30" column="39" lean-forward="true" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+        <state relative-caret-position="-154">
+          <caret line="29" column="57" selection-start-line="29" selection-start-column="57" selection-end-line="29" selection-end-column="57" />
         </state>
       </provider>
     </entry>

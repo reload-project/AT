@@ -314,6 +314,16 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
+                                        <!--<thead>
+                                        <ul class="list-inline">
+                                            &lt;!&ndash;<th>#id</th>&ndash;&gt;
+                                            <li>部门名称</li>
+                                            <li>上级</li>
+                                            <li>拥有权限</li>
+                                            <li>添加时间</li>
+                                            <li>操作</li>
+                                        </ul>
+                                        </thead>-->
                                         <tbody>
                                             <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr class="odd gradeX">
                                                     <td><?php echo ($v['id']); ?></td>
@@ -330,6 +340,21 @@
                                                         </div>
                                                     </td>
                                                 </tr><?php endforeach; endif; ?>
+                                           <!-- <?php if(is_array($res)): foreach($res as $key=>$v): ?><ul  class="list-inline" style="padding-left:<?php echo ($v['level']*40); ?>px">
+                                                    &lt;!&ndash;<td><?php echo ($v['id']); ?></td>&ndash;&gt;
+                                                    <li  ><?php echo ($v['depart']); ?></li>
+                                                    <li  ><?php echo ($v['parent_id']); ?></li>
+                                                    <li  ><?php echo ($v['rules_id']); ?></li>
+                                                    <li  ><?php echo ($v['add_time']); ?></li>
+                                                    <li  >
+                                                        <div class="btn " role="group" aria-label="..." >
+                                                            <a  href='<?php echo U("Department/editDepart?id=$v[id]" );?>' style="color: #0D47A1;">编辑</a>
+                                                        </div>
+                                                        <div class="btn " role="group" aria-label="..." onclick='delDepart("<?php echo ($v[id]); ?>")'>
+                                                            <a  href="javascript:" style="color: #843534;">删除</a>
+                                                        </div>
+                                                    </li>
+                                                </ul><?php endforeach; endif; ?>-->
                                         </tbody>
                                     </table>
                                 </div>

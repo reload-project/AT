@@ -16,8 +16,7 @@ class DepartmentController extends CommonController {
         $rules = array_column($rules,'rules','id');
         foreach($data as &$v) {
             $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
-
-            $map = array();
+/*            $map = array();
             if($v['parent_id']==0) {
                 $v['parent_id']="顶级";
             } else {
@@ -25,9 +24,7 @@ class DepartmentController extends CommonController {
                 $de = D('Department')->get_one($map);
                 print_r($map);
                 $v['parent_id'] = $de['depart'];
-            }
-
-
+            }*/
             $rulesId = explode(',',$v['rules_id']);
             foreach($rulesId as &$vv) {
                 $r = $rules[$vv];
@@ -37,12 +34,31 @@ class DepartmentController extends CommonController {
             unset($v['rules']);
         }//die;
 
-       // $data=$this->find_level($data);
+        $res=self::tree($data);
+        //print_r($res);die;
+        //$this->cate=$res;
+
 
         //print_r($data);die;
+        $this->assign('res',$res);
         $this->assign('data',$data);
         $this->display();
     }
+
+    //定义一个空的数组
+    static public $treeList = array();
+    //接收$data二维数组,$pid默认为0，$level级别默认为1
+    static public function tree($data,$pid=0,$level = 1){
+        foreach($data as $v){
+            if($v['parent_id']==$pid){
+                $v['level']=$level;
+                self::$treeList[]=$v;//将结果装到$treeList中
+                self::tree($data,$v['id'],$level+1);
+            }
+        }
+        return self::$treeList ;
+    }
+
 
 
 

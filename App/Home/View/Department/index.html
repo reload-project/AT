@@ -34,6 +34,16 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
+                                        <!--<thead>
+                                        <ul class="list-inline">
+                                            &lt;!&ndash;<th>#id</th>&ndash;&gt;
+                                            <li>部门名称</li>
+                                            <li>上级</li>
+                                            <li>拥有权限</li>
+                                            <li>添加时间</li>
+                                            <li>操作</li>
+                                        </ul>
+                                        </thead>-->
                                         <tbody>
                                             <foreach name="data" item="v">
                                                 <tr class="odd gradeX">
@@ -52,6 +62,23 @@
                                                     </td>
                                                 </tr>
                                             </foreach>
+                                           <!-- <foreach name="res" item="v">
+                                                <ul  class="list-inline" style="padding-left:{$v['level']*40}px">
+                                                    &lt;!&ndash;<td>{$v['id']}</td>&ndash;&gt;
+                                                    <li  >{$v['depart']}</li>
+                                                    <li  >{$v['parent_id']}</li>
+                                                    <li  >{$v['rules_id']}</li>
+                                                    <li  >{$v['add_time']}</li>
+                                                    <li  >
+                                                        <div class="btn " role="group" aria-label="..." >
+                                                            <a  href='{:U("Department/editDepart?id=$v[id]" )}' style="color: #0D47A1;">编辑</a>
+                                                        </div>
+                                                        <div class="btn " role="group" aria-label="..." onclick='delDepart("{$v[id]}")'>
+                                                            <a  href="javascript:" style="color: #843534;">删除</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </foreach>-->
                                         </tbody>
                                     </table>
                                 </div>
