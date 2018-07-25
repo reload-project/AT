@@ -10,11 +10,24 @@ namespace Home\Controller;
 use Think\Controller;
 class DepartmentController extends CommonController {
     public function index() {
-        $data = D('Department')->get_all($map='',$field='*',$page=1,$pagenum=999999);
+        $data = D('Department')->get_all($map='',$field='*',$page=1,$pagenum=999999,$order="add_time desc");
+        //echo D('Department')->_sql();die;
         $rules = D('Rules')->get_all($map='',$field='id,rules',$page=1,$pagenum=999999);
         $rules = array_column($rules,'rules','id');
         foreach($data as &$v) {
             $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
+
+            $map = array();
+            if($v['parent_id']==0) {
+                $v['parent_id']="顶级";
+            } else {
+                $map['id'] = $v['parent_id'];
+                $de = D('Department')->get_one($map);
+                print_r($map);
+                $v['parent_id'] = $de['depart'];
+            }
+
+
             $rulesId = explode(',',$v['rules_id']);
             foreach($rulesId as &$vv) {
                 $r = $rules[$vv];
@@ -22,16 +35,22 @@ class DepartmentController extends CommonController {
             }
             $v['rules_id'] = implode(',',$v['rules']);
             unset($v['rules']);
-        }
+        }//die;
+
+       // $data=$this->find_level($data);
+
         //print_r($data);die;
         $this->assign('data',$data);
         $this->display();
     }
 
+
+
     //添加部门
     public function addDepart() {
         if(IS_POST) {
             $postdata = I('post.');
+            //print_r($postdata);die;
             $postdata['add_time'] = time();
             $postdata['rules_id'] = implode(',',$postdata['rules_id']);
             //print_r($postdata);die;
@@ -44,6 +63,8 @@ class DepartmentController extends CommonController {
             $this->ajaxReturn($data);
         } else {
             $rules = D('Rules')->get_all($map='',$field='id,rules',$page=1,$pagenum=999999);
+            $data = D('Department')->get_all($map='',$field='id,depart,parent_id',$page=1,$pagenum=999999);
+            $this->assign('data',$data);
             $this->assign('rules',$rules);
             $this->display();
         }
@@ -70,6 +91,8 @@ class DepartmentController extends CommonController {
             //$rules = array_column($rules,'rules','id');
             $info['rules_id'] = explode(',',$info['rules_id']);
            // print_r($info);die;
+            $data = D('Department')->get_all($map='',$field='id,depart,parent_id',$page=1,$pagenum=999999);
+            $this->assign('data',$data);
             $this->assign('rules',$rules);
             $this->assign('info',$info);
             $this->display();

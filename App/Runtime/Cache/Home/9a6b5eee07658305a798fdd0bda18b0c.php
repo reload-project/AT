@@ -308,6 +308,7 @@
                                             <tr>
                                                 <th>#id</th>
                                                 <th>部门名称</th>
+                                                <th>上级</th>
                                                 <th>拥有权限</th>
                                                 <th>添加时间</th>
                                                 <th>操作</th>
@@ -317,6 +318,7 @@
                                             <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr class="odd gradeX">
                                                     <td><?php echo ($v['id']); ?></td>
                                                     <td><?php echo ($v['depart']); ?></td>
+                                                    <td><?php echo ($v['parent_id']); ?></td>
                                                     <td><?php echo ($v['rules_id']); ?></td>
                                                     <td><?php echo ($v['add_time']); ?></td>
                                                     <td>

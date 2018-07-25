@@ -22,6 +22,17 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="select-field col s6">
+                                            上级级别:<select class="form-control" id="parent_id">
+                                            <option value="">选择上级</option>
+                                            <option value="0">顶级</option>
+                                            <foreach name="data" item="v">
+                                                <option value="{$v.id}">{$v['depart']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="input-field col s6">
                                             分配规则权限:
                                             <foreach name="rules" item="v">
@@ -54,6 +65,7 @@
     <script type="text/javascript">
         function addMaster() {
             var depart = $("#depart").val();
+            var parent_id = $("#parent_id").val();
             //获取权限
             obj = $("input[name='rules']");
             check_val = [];
@@ -66,7 +78,7 @@
             if(!depart) {
                 layer.msg("部门名称不能为空");return;
             }
-            $.post("{:U('Department/addDepart')}",{depart:depart,rules_id:rules_id},function(res) {
+            $.post("{:U('Department/addDepart')}",{depart:depart,rules_id:rules_id,parent_id:parent_id},function(res) {
                 if(res.err==1) {
 
                     location.href="{:U('Department/index')}";

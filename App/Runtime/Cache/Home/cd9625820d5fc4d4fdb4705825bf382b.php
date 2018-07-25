@@ -49,9 +49,9 @@
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+        </li>-->
+        <li><a href="<?php echo U('User/checkPass');?>"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
         </li>
-        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-        </li> -->
         <li><a href="<?php echo U('Admin/outLogin');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
     </ul>
@@ -222,18 +222,19 @@
                 <!--<li>
                     <a class=" <?php if(CONTROLLER_NAME == 'Master'): ?>active-menu<?php endif; ?>  waves-effect waves-dark" href="<?php echo U('Master/index');?>"><i class="fa fa-dashboard"></i> 管理员</a>
                 </li>-->
-                <li>
+                <?php if((in_array('User',$rr))): ?><li>
                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工管理</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Levels',$rr))): ?><li>
                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工级别</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Department',$rr))): ?><li>
                     <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 部门管理</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Rules',$rr))): ?><li>
                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
-                </li>
+                </li><?php endif; ?>
+
                  <!--                   <li>
                                         <a href="tab-panel.html" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
                                     </li>
@@ -301,6 +302,15 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="select-field col s6">
+                                            上级级别:<select class="form-control" id="parent_id">
+                                            <option value="">选择上级</option>
+                                            <option value="0">顶级</option>
+                                            <?php if(is_array($data)): foreach($data as $key=>$v): ?><option value="<?php echo ($v["id"]); ?>"><?php echo ($v['depart']); ?></option><?php endforeach; endif; ?>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="input-field col s6">
                                             分配规则权限:
                                             <?php if(is_array($rules)): foreach($rules as $key=>$v): ?><p>
@@ -357,6 +367,7 @@
     <script type="text/javascript">
         function addMaster() {
             var depart = $("#depart").val();
+            var parent_id = $("#parent_id").val();
             //获取权限
             obj = $("input[name='rules']");
             check_val = [];
@@ -369,7 +380,7 @@
             if(!depart) {
                 layer.msg("部门名称不能为空");return;
             }
-            $.post("<?php echo U('Department/addDepart');?>",{depart:depart,rules_id:rules_id},function(res) {
+            $.post("<?php echo U('Department/addDepart');?>",{depart:depart,rules_id:rules_id,parent_id:parent_id},function(res) {
                 if(res.err==1) {
 
                     location.href="<?php echo U('Department/index');?>";

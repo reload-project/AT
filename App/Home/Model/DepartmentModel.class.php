@@ -12,8 +12,8 @@ class DepartmentModel extends RelationModel {
     protected $_err = 0;
 
     //获取多条数据
-    public function get_all($map,$field='*',$page=1,$pagenum=999999) {
-        $data = $this->where($map)->limit(($page-1)*$pagenum,$pagenum)->field($field)->select();
+    public function get_all($map,$field='*',$page=1,$pagenum=999999,$order="add_time asc") {
+        $data = $this->where($map)->limit(($page-1)*$pagenum,$pagenum)->field($field)->order($order)->select();
         return $data;
     }
 

@@ -49,9 +49,9 @@
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+        </li>-->
+        <li><a href="<?php echo U('User/checkPass');?>"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
         </li>
-        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-        </li> -->
         <li><a href="<?php echo U('Admin/outLogin');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
     </ul>
@@ -299,6 +299,15 @@
                                     <div class="input-field col s6">
                                         部门名称:<input id="depart" type="text" class="validate" value="<?php echo ($info["depart"]); ?>" />
                                         <!--<label for="username">姓名</label>-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="select-field col s6">
+                                        上级级别:<select class="form-control" id="parent_id">
+                                        <option value="">选择上级</option>
+                                        <option value="0" <?php if($info[parent_id] == 0): ?>selected<?php endif; ?> >顶级</option>
+                                        <?php if(is_array($data)): foreach($data as $key=>$v): ?><option value="<?php echo ($v["id"]); ?>" <?php if($info[parent_id] == $v[id]): ?>selected<?php endif; ?> ><?php echo ($v['depart']); ?></option><?php endforeach; endif; ?>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="row">
