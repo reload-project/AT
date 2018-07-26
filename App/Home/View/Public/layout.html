@@ -249,9 +249,8 @@
                         <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
                     <if condition="$controller eq 'User' || $controller eq 'Levels' || $controller eq 'Department' || $controller eq 'Rules'">
                         <ul class="nav nav-second-level collapse in ">
-
-                                <else/>
-                            <ul class="nav nav-second-level">
+                    <else/>
+                        <ul class="nav nav-second-level">
                     </if>
                             <if  condition="(in_array('User',$rr))">
                                 <li>
@@ -277,13 +276,13 @@
                     </li>
                 </if>
                 <li>
-                    <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 测试<span class="fa arrow"></span></a>
+                    <a href="javascript:;" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Second Level Link</a>
+                            <a href="javascript:;">Second Level Link</a>
                         </li>
                         <li>
-                            <a href="#">Second Level Link</a>
+                            <a href="javascript:;">Second Level Link</a>
                         </li>
 
                     </ul>
