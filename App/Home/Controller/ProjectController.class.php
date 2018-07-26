@@ -24,8 +24,12 @@ class ProjectController extends CommonController {
             $v['create_time'] = date('Y-m-d H:i:s',$v['create_time']);
             $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
             $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
-            $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
-            $v['actual_finish_time'] = date('Y-m-d H:i:s',$v['actual_finish_time']);
+            if($v['actual_start_time']) {
+                $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
+            }
+            if($v['actual_finish_time']) {
+                $v['actual_finish_time'] = date('Y-m-d H:i:s', $v['actual_finish_time']);
+            }
             if($v['status']==1) {
                 $v['status']="新建";
             } elseif($v['status']==2) {
@@ -48,11 +52,11 @@ class ProjectController extends CommonController {
     public function addProject() {
         if(IS_POST) {
             $postdata = I('post.');
-            $postdata['create_time'] = strtotime($postdata['create_time']);
+            $postdata['number'] = mt_rand(1000,9999);
+            $postdata['create_time'] = time();
+            $postdata['status'] = 1;
             $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
             $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
-            $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
-            $postdata['actual_finish_time'] = strtotime($postdata['actual_finish_time']);
             $res = D('Project')->addPro($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"添加成功");
@@ -75,11 +79,8 @@ class ProjectController extends CommonController {
     public function editProject() {
         if(IS_POST) {
             $postdata = I('post.');
-            $postdata['create_time'] = strtotime($postdata['create_time']);
             $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
             $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
-            $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
-            $postdata['actual_finish_time'] = strtotime($postdata['actual_finish_time']);
             $res = D('Project')->editPro($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"编辑成功");
@@ -91,11 +92,8 @@ class ProjectController extends CommonController {
             $id = I('get.id');
             $map['id'] = $id;
             $info = D('Project')->get_one($map);
-            $info['create_time'] = date('Y-m-d H:i:s',$info['create_time']);
             $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
             $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
-            $info['actual_start_time'] = date('Y-m-d H:i:s',$info['actual_start_time']);
-            $info['actual_finish_time'] = date('Y-m-d H:i:s',$info['actual_finish_time']);
             $map = array();
             $map['name'] = array('neq',"admin");
             $user = D('User')->get_all($map,$field="id,name");

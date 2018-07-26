@@ -22,11 +22,6 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s6">
-                                            项目编号:<input id="number" type="text" class="validate" value="{$info.number}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="select-field col s6">
                                             项目分类:<select class="form-control" id="cate">
                                             <option value="">选择分类</option>
@@ -78,12 +73,6 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        项目创建日期
-                                        <div class="layui-inline">
-                                            <input type="text" class="layui-input" id="create_time" value="{$info.create_time}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         项目预计开始日期
                                         <div class="layui-inline">
                                             <input type="text" class="layui-input" id="expected_start_time" value="{$info.expected_start_time}">
@@ -93,18 +82,6 @@
                                         项目预计完成日期
                                         <div class="layui-inline">
                                             <input type="text" class="layui-input" id="expected_finish_time" value="{$info.expected_finish_time}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        实际开始日期
-                                        <div class="layui-inline">
-                                            <input type="text" class="layui-input" id="actual_start_time" value="{$info.actual_start_time}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        实际完成日期
-                                        <div class="layui-inline">
-                                            <input type="text" class="layui-input" id="actual_finish_time" value="{$info.actual_finish_time}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -151,15 +128,7 @@
     <!--<script src="__PUBLIC__layer/laydate.js"></script>-->
 
     <script>
-        layui.use('laydate', function(){
-            var laydate = layui.laydate;
 
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#create_time' //指定元素
-                ,type: 'datetime'
-            });
-        });
         layui.use('laydate', function(){
             var laydate = layui.laydate;
 
@@ -178,30 +147,11 @@
                 ,type: 'datetime'
             });
         });
-        layui.use('laydate', function(){
-            var laydate = layui.laydate;
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#actual_start_time' //指定元素
-                ,type: 'datetime'
-            });
-        });
-        layui.use('laydate', function(){
-            var laydate = layui.laydate;
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#actual_finish_time' //指定元素
-                ,type: 'datetime'
-            });
-        });
     </script>
     <script type="text/javascript">
         function add() {
             var id = "{$_GET['id']}";
             var name = $("#name").val();
-            var number = $("#number").val();
             var cate = $("#cate").val();
             var introduction = $("#introduction").val();
             var customer_name = $("#customer_name").val();
@@ -209,11 +159,8 @@
             var contact_phone = $("#contact_phone").val();
             var follow = $("#follow").val();
             var create = $("#create").val();
-            var create_time = $("#create_time").val();
             var expected_start_time = $("#expected_start_time").val();
             var expected_finish_time = $("#expected_finish_time").val();
-            var actual_start_time = $("#actual_start_time").val();
-            var actual_finish_time = $("#actual_finish_time").val();
             var status = $("#status").val();
             var note = $("#note").val();
 
@@ -227,7 +174,7 @@
                 layer.msg("创建人不能为空");return;
             }
 
-            var data = {id:id,name:name,number:number,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,create_time:create_time,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,actual_start_time:actual_start_time,actual_finish_time:actual_finish_time,status:status,note:note};
+            var data = {id:id,name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,status:status,note:note};
             $.post("{:U('Project/editProject')}",data,function(res) {
                 if(res.err==1) {
 
