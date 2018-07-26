@@ -29,19 +29,19 @@
                                                 <th>#id</th>
                                                 <th>项目名称</th>
                                                 <th>项目编号</th>
-                                                <th width="60px;" >项目分类</th>
+                                                <th>项目分类</th>
                                                 <th>项目简介</th>
                                                 <th>客户名称</th>
                                                 <th>联系人</th>
-                                                <th width="90px;" >联系电话</th>
-                                                <th width="90px;" >业务跟进</th>
+                                                <th>联系电话</th>
+                                                <th>业务跟进</th>
                                                 <th>创建人</th>
                                                 <th>项目创建日期</th>
                                                 <th>项目预计开始日期</th>
                                                 <th>项目预计完成日期</th>
                                                 <th>实际开始日期</th>
                                                 <th>实际完成日期</th>
-                                                <th width="60px;" >状态</th>
+                                                <th>状态</th>
                                                 <th>备注</th>
                                                 <!--<th>最后编辑时间</th>-->
                                                 <th>操作</th>
@@ -51,32 +51,33 @@
                                             <foreach name="data" item="v">
                                                 <tr class="odd gradeX">
                                                     <td>{$v['id']}</td>
-                                                    <td width="60px;" >{$v['name']}</td>
-                                                    <td>{$v['nickname']}</td>
-                                                    <td>{$v['gender']}</td>
-                                                    <td>{$v['national']}</td>
-                                                    <td width="60px;" >{$v['depart']}</td>
-                                                    <td width="90px;" >{$v['position']}</td>
-                                                    <td>{$v['relation']}</td>
-                                                    <td>{$v['level_id']}</td>
-                                                    <td>{$v['phone']}</td>
-                                                    <td>{$v['email']}</td>
-                                                    <td width="168px;" >{$v['address']}</td>
-                                                    <td>{$v['school']}</td>
-                                                    <td><img src="{$v['pic']}" width="150px;" /></td>
+                                                    <td>{$v['name']}</td>
+                                                    <td>{$v['number']}</td>
+                                                    <td>{$v['cate']}</td>
+                                                    <td>{$v['introduction']}</td>
+                                                    <td>{$v['customer_name']}</td>
+                                                    <td>{$v['contact']}</td>
+                                                    <td>{$v['contact_phone']}</td>
+                                                    <td>{$v['follow']}</td>
+                                                    <td>{$v['create']}</td>
+                                                    <td>{$v['create_time']}</td>
+                                                    <td>{$v['expected_start_time']}</td>
+                                                    <td>{$v['expected_finish_time']}</td>
+                                                    <td>{$v['actual_start_time']}</td>
+                                                    <td>{$v['actual_finish_time']}</td>
                                                     <td>{$v['status']}</td>
-                                                    <td>{$v['add_time']}</td>
+                                                    <td>{$v['note']}</td>
                                                     <!--<td>{$v['update_time']}</td>-->
                                                     <td>
                                                         <div class="btn " role="group" aria-label="..." >
-                                                            <a  href='{:U("User/editUser?id=$v[id]" )}' style="color: #0D47A1;">编辑</a>
+                                                            <a  href='{:U("Project/editProject?id=$v[id]" )}' style="color: #0D47A1;">编辑</a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." onclick='delUser("{$v[id]}")'>
+                                                        <div class="btn " role="group" aria-label="..." onclick='delProject("{$v[id]}")'>
                                                             <a  href="javascript:" style="color: #843534;">删除</a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." onclick='statusUser("{$v[id]}","{$v[status]}")'>
+                                                        <!--<div class="btn " role="group" aria-label="..." onclick='statusUser("{$v[id]}","{$v[status]}")'>
                                                             <a  href="javascript:" style="color: #0D47A1;">更改状态</a>
-                                                        </div>
+                                                        </div>-->
                                                     </td>
                                                 </tr>
                                             </foreach>
@@ -109,11 +110,11 @@
     <script type="text/javascript">
 
         //删除
-        function delUser(id) {
-            layer.confirm('是否删除该用户？', {
+        function delProject(id) {
+            layer.confirm('是否删除该项目信息？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
-                $.post('{:U("User/delUser")}',{id:id},function(res) {
+                $.post('{:U("Project/delProject")}',{id:id},function(res) {
                     if(res.err==1) {
                         location=location;
                     } else {
@@ -126,7 +127,7 @@
 
 
         //更改状态
-        function statusUser(id,status) {
+/*        function statusUser(id,status) {
             layer.confirm('是否更改状态？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
@@ -144,7 +145,7 @@
                 });
 
             });
-        }
+        }*/
 
     </script>
 </block>

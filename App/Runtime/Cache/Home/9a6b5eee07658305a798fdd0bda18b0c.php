@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="/App/Home/Common/assets/js/Lightweight-Chart/cssCharts.css">
     <script src="/App/Home/Common/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/App/Home/Common/layer/layer.js"></script>
+    <link rel="stylesheet" href="/App/Home/Common/layer/css/layui.css" media="all">
+    <link rel="stylesheet" href="/App/Home/Common/layer/css/laydate.css" media="all">
+    <script src="/App/Home/Common/layer/laydate.js"></script>
     
 
 

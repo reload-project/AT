@@ -12,7 +12,114 @@ class ProjectController extends CommonController {
 
     //项目信息
     public function index() {
-
+        $data = D('Project')->get_all();
+        $user = D('User')->get_all($map="",$field="id,name");
+        $user = array_column($user,'name','id');
+        $cate = D('ProjectCate')->get_all();
+        $cate = array_column($cate,'name','id');
+        foreach($data as &$v) {
+            $v['cate'] = $cate[$v['cate']];
+            $v['follow'] = $user[$v['follow']];
+            $v['create'] = $user[$v['create']];
+            $v['create_time'] = date('Y-m-d H:i:s',$v['create_time']);
+            $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
+            $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+            $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
+            $v['actual_finish_time'] = date('Y-m-d H:i:s',$v['actual_finish_time']);
+            if($v['status']==1) {
+                $v['status']="新建";
+            } elseif($v['status']==2) {
+                $v['status']="立项";
+            } elseif($v['status']==3) {
+                $v['status']="招标";
+            } elseif($v['status']==4) {
+                $v['status']="实施";
+            } elseif($v['status']==5) {
+                $v['status']="验收";
+            } elseif($v['status']==6) {
+                $v['status']="完结";
+            }
+        }
+        $this->assign('data',$data);
         $this->display();
+    }
+
+        //添加项目信息
+    public function addProject() {
+        if(IS_POST) {
+            $postdata = I('post.');
+            $postdata['create_time'] = strtotime($postdata['create_time']);
+            $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
+            $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
+            $postdata['actual_finish_time'] = strtotime($postdata['actual_finish_time']);
+            $res = D('Project')->addPro($postdata);
+            if($res) {
+                $data = array('err'=>1,'msg'=>"添加成功");
+            } else {
+                $data = array('err'=>0,'msg'=>"添加失败");
+            }
+            $this->ajaxReturn($data);
+        } else {
+            $map['name'] = array('neq',"admin");
+            $user = D('User')->get_all($map,$field="id,name");
+            $cate = D('ProjectCate')->get_all();
+            $this->assign('cate',$cate);
+            $this->assign('user',$user);
+            $this->display();
+        }
+
+    }
+
+    //编辑项目信息
+    public function editProject() {
+        if(IS_POST) {
+            $postdata = I('post.');
+            $postdata['create_time'] = strtotime($postdata['create_time']);
+            $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
+            $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
+            $postdata['actual_finish_time'] = strtotime($postdata['actual_finish_time']);
+            $res = D('Project')->editPro($postdata);
+            if($res) {
+                $data = array('err'=>1,'msg'=>"编辑成功");
+            } else {
+                $data = array('err'=>0,'msg'=>"编辑失败");
+            }
+            $this->ajaxReturn($data);
+        } else {
+            $id = I('get.id');
+            $map['id'] = $id;
+            $info = D('Project')->get_one($map);
+            $info['create_time'] = date('Y-m-d H:i:s',$info['create_time']);
+            $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
+            $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
+            $info['actual_start_time'] = date('Y-m-d H:i:s',$info['actual_start_time']);
+            $info['actual_finish_time'] = date('Y-m-d H:i:s',$info['actual_finish_time']);
+            $map = array();
+            $map['name'] = array('neq',"admin");
+            $user = D('User')->get_all($map,$field="id,name");
+            $cate = D('ProjectCate')->get_all();
+            $this->assign('cate',$cate);
+            $this->assign('user',$user);
+            $this->assign('info',$info);
+            $this->display();
+        }
+    }
+
+
+    //删除
+    public function delProject() {
+        if(IS_POST) {
+            $id = I('post.id');
+            $map['id'] = $id;
+            $res = D('Project')->delPro($map);
+            if($res) {
+                $data = array('err'=>1,'msg'=>"删除成功");
+            } else {
+                $data = array('err'=>0,'msg'=>"删除失败");
+            }
+            $this->ajaxReturn($data);
+        }
     }
 }

@@ -1,0 +1,240 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/laydate.css" media="all">
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                添加项目信息
+                            </div>
+                            <div class="card-content">
+                                <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            项目名称:<input id="name" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            项目编号:<input id="number" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            项目分类:<select class="form-control" id="cate">
+                                            <option value="">选择分类</option>
+                                            <foreach name="cate" item="v">
+                                                <option value="{$v.id}">{$v['name']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            项目简介:<textarea id="introduction" class="materialize-textarea"></textarea>
+                                            <!--<label for="textarea1">Textarea</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            客户名称:<input id="customer_name" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            联系人:<input id="contact" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            联系电话:<input id="contact_phone" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            业务跟进:<select class="form-control" id="follow">
+                                            <option value="">选择跟进人员</option>
+                                        <foreach name="user" item="v">
+                                            <option value="{$v.id}">{$v.name}</option>
+                                        </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            创建人:<select class="form-control" id="create">
+                                            <option value="">选择创建人</option>
+                                            <foreach name="user" item="v">
+                                                <option value="{$v.id}">{$v.name}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        项目创建日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="create_time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        项目预计开始日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="expected_start_time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        项目预计完成日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="expected_finish_time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        实际开始日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="actual_start_time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        实际完成日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="actual_finish_time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            项目状态:<select class="form-control" id="status">
+                                            <option value="">选择状态</option>
+                                            <option value="1">新建</option>
+                                            <option value="2">立项</option>
+                                            <option value="3">招标</option>
+                                            <option value="4">实施</option>
+                                            <option value="5">验收</option>
+                                            <option value="6">完结</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            备注:<textarea id="note" class="materialize-textarea"></textarea>
+                                            <!--<label for="textarea1">Textarea</label>-->
+                                        </div>
+                                    </div>
+
+
+                                    <div class="btn " role="group" aria-label="..." onclick="add()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script src="__PUBLIC__layer/layui.js"></script>
+    <!--<script src="__PUBLIC__layer/laydate.js"></script>-->
+
+    <script>
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#create_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#expected_start_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#expected_finish_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#actual_start_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#actual_finish_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function add() {
+            var name = $("#name").val();
+            var number = $("#number").val();
+            var cate = $("#cate").val();
+            var introduction = $("#introduction").val();
+            var customer_name = $("#customer_name").val();
+            var contact = $("#contact").val();
+            var contact_phone = $("#contact_phone").val();
+            var follow = $("#follow").val();
+            var create = $("#create").val();
+            var create_time = $("#create_time").val();
+            var expected_start_time = $("#expected_start_time").val();
+            var expected_finish_time = $("#expected_finish_time").val();
+            var actual_start_time = $("#actual_start_time").val();
+            var actual_finish_time = $("#actual_finish_time").val();
+            var status = $("#status").val();
+            var note = $("#note").val();
+
+            if(!name) {
+                layer.msg("项目名称不能为空");return;
+            }
+            if(!customer_name) {
+                layer.msg("客户名称不能为空");return;
+            }
+            if(!create) {
+                layer.msg("创建人不能为空");return;
+            }
+
+            var data = {name:name,number:number,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,create_time:create_time,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,actual_start_time:actual_start_time,actual_finish_time:actual_finish_time,status:status,note:note};
+            $.post("{:U('Project/addProject')}",data,function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('Project/index')}";
+                } else {
+                    layer.msg(res.msg);
+                }
+            });
+        }
+    </script>
+</block>
