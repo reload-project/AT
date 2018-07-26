@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76373229-281a-4eb2-98ad-fb83fa5b53a9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Home/Controller/ProjectCateController.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Home/Controller/ProjectController.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Home/View/Public/empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/View/Public/empty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Home/View/Public/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/View/Public/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/00e52909bed743ea261af4b6823297ff.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/00e52909bed743ea261af4b6823297ff.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/2ec02a0baa3dee7e9d4fe7d747229721.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/2ec02a0baa3dee7e9d4fe7d747229721.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/344facff50e69eeb73191550b833c1ca.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/344facff50e69eeb73191550b833c1ca.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/64032f3cba072b42246c94805e3ede75.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/64032f3cba072b42246c94805e3ede75.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/8db94fd58fbf00e620fcdc065c3a955e.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/8db94fd58fbf00e620fcdc065c3a955e.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/9a6b5eee07658305a798fdd0bda18b0c.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/9a6b5eee07658305a798fdd0bda18b0c.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/9c53e6b8620f08c11851d64bd0d8033f.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/9c53e6b8620f08c11851d64bd0d8033f.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/dcf3064203839500e5a24494c88db863.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/dcf3064203839500e5a24494c88db863.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Runtime/Cache/Home/e7856ebc3bd490aa18d066870309de08.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Runtime/Cache/Home/e7856ebc3bd490aa18d066870309de08.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Home/View/Project/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/App/Home/View/Project/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,59 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RulesController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Home/Controller/RulesController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="39" selection-start-line="39" selection-end-line="55" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ProjectCateController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/Home/Controller/ProjectCateController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editCate.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/editCate.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="19" column="109" selection-start-line="19" selection-start-column="109" selection-end-line="19" selection-end-column="109" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addCate.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/addCate.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="16" column="54" lean-forward="true" selection-end-line="56" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1235">
-              <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectCateModel.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/Home/Model/ProjectCateModel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-              <folding>
-                <element signature="e#6#147#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="988">
+              <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -109,6 +48,15 @@
               <folding>
                 <element signature="e#6#94#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/App/Home/View/Project/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="44" column="54" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -163,13 +111,13 @@
         <option value="$PROJECT_DIR$/App/Home/Controller/CommonController.class.php" />
         <option value="$PROJECT_DIR$/App/Home/View/Public/empty.html" />
         <option value="$PROJECT_DIR$/App/Home/Controller/ProjectController.class.php" />
-        <option value="$PROJECT_DIR$/App/Home/View/Project/index.html" />
         <option value="$PROJECT_DIR$/App/Home/View/Public/layout.html" />
-        <option value="$PROJECT_DIR$/App/Home/View/ProjectCate/index.html" />
         <option value="$PROJECT_DIR$/App/Home/View/ProjectCate/addCate.html" />
         <option value="$PROJECT_DIR$/App/Home/View/ProjectCate/editCate.html" />
+        <option value="$PROJECT_DIR$/App/Home/View/ProjectCate/index.html" />
         <option value="$PROJECT_DIR$/App/Home/Model/ProjectCateModel.class.php" />
         <option value="$PROJECT_DIR$/App/Home/Controller/ProjectCateController.class.php" />
+        <option value="$PROJECT_DIR$/App/Home/View/Project/index.html" />
       </list>
     </option>
   </component>
@@ -243,7 +191,7 @@
               <item name="App" type="462c0819:PsiDirectoryNode" />
               <item name="Home" type="462c0819:PsiDirectoryNode" />
               <item name="View" type="462c0819:PsiDirectoryNode" />
-              <item name="ProjectCate" type="462c0819:PsiDirectoryNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -289,15 +237,15 @@
       <workItem from="1532392612635" duration="22771000" />
       <workItem from="1532478673338" duration="20588000" />
       <workItem from="1532510949561" duration="479000" />
-      <workItem from="1532565168824" duration="10353000" />
+      <workItem from="1532565168824" duration="11131000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155404000" />
+    <option name="totallyTimeSpent" value="156182000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16875" />
@@ -602,23 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/View/Project/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/Controller/ProjectController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-          <folding>
-            <element signature="e#6#94#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Home/View/Public/layout.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -632,41 +563,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/Home/Controller/RulesController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="39" selection-start-line="39" selection-end-line="55" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/addCate.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="16" column="54" lean-forward="true" selection-end-line="56" selection-end-column="8" />
+        <state relative-caret-position="511">
+          <caret line="58" selection-start-line="58" selection-end-line="71" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/Home/Model/ProjectCateModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+        <state relative-caret-position="682">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
           <folding>
             <element signature="e#6#147#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/Home/Controller/ProjectCateController.class.php">
+    <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+        <state relative-caret-position="530">
+          <caret line="85" column="42" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Home/View/ProjectCate/addCate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="16" column="54" selection-end-line="56" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -674,6 +598,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="19" column="109" selection-start-line="19" selection-start-column="109" selection-end-line="19" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Home/Controller/ProjectCateController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="988">
+          <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Home/Controller/ProjectController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <folding>
+            <element signature="e#6#94#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/Home/View/Project/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="44" column="54" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
         </state>
       </provider>
     </entry>
