@@ -239,9 +239,8 @@
                         <li><?php endif; ?>
                         <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
                     <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
-
-                                <?php else: ?>
-                            <ul class="nav nav-second-level"><?php endif; ?>
+                    <?php else: ?>
+                        <ul class="nav nav-second-level"><?php endif; ?>
                             <?php if((in_array('User',$rr))): ?><li>
                                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  "> 员工资料</a>
                                 </li><?php endif; ?>
@@ -256,60 +255,20 @@
                                 </li><?php endif; ?>
                         </ul>
                     </li><?php endif; ?>
+
                 <li>
                     <a href="javascript:;" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Second Level Link</a>
+                            <a href="javascript:;">测试1</a>
                         </li>
                         <li>
-                            <a href="#">Second Level Link</a>
+                            <a href="javascript:;">测试栏目2</a>
                         </li>
 
                     </ul>
                 </li>
-                 <!--                   <li>
-                                        <a href="tab-panel.html" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
-                                    </li>
 
-                                    <li>
-                                        <a href="table.html" class="waves-effect waves-dark"><i class="fa fa-table"></i> Responsive Tables</a>
-                                </li>
-                                    <li>
-                                        <a href="form.html" class="waves-effect waves-dark"><i class="fa fa-edit"></i> Forms </a>
-                                    </li>
-
-
-                                    <li>
-                                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="#">Second Level Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Second Level Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                                <ul class="nav nav-third-level">
-                                                    <li>
-                                                        <a href="#">Third Level Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Third Level Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Third Level Link</a>
-                                                    </li>
-
-                                                </ul>
-
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="empty.html" class="waves-effect waves-dark"><i class="fa fa-fw fa-file"></i> Empty Page</a>
-                                    </li>-->
             </ul>
 
         </div>

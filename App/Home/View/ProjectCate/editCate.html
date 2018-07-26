@@ -1,0 +1,58 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+
+</block>
+<block name="main">
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-action">
+                            编辑项目分类
+                        </div>
+                        <div class="card-content">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        分类名称:<input id="name" type="text" class="validate" value="{$info.name}"/>
+                                        <!--<label for="username">姓名</label>-->
+                                    </div>
+                                </div>
+                                <div class="btn " role="group" aria-label="..." onclick="editCate()">
+                                    提交
+
+                                </div>
+                            </form>
+                            <div class="clearBoth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+
+
+</block>
+<block name="js">
+
+    <script type="text/javascript">
+        function editCate() {
+            var id = "{$_GET['id']}";
+            var name = $("#name").val();
+            if(!name) {
+                layer.msg("分类名称不能为空");return;
+            }
+            $.post("{:U('ProjectCate/editCate')}",{id:id,name:name},function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('ProjectCate/index')}";
+                }
+            });
+        }
+    </script>
+</block>
