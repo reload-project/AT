@@ -120,4 +120,66 @@ class ProjectController extends CommonController {
             $this->ajaxReturn($data);
         }
     }
+
+    //启动项目
+    public function startUp() {
+        if(IS_POST) {
+            $postdata = I('post.');
+            if(!$postdata['actual_start_time']) {
+                $postdata['actual_start_time'] = time();
+            } else {
+                $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
+            }
+            $postdata['line'] = 1;
+            //print_r($postdata);die;
+            $res = D('Project')->editPro($postdata);
+            if($res) {
+                $data = array('err'=>1,'msg'=>"结束成功");
+            } else {
+                $data = array('err'=>0,'msg'=>"结束失败");
+            }
+            $this->ajaxReturn($data);
+        }
+    }
+
+    //结束项目
+    public function ending() {
+        if(IS_POST) {
+            $postdata = I('post.');
+            if(!$postdata['actual_finish_time']) {
+                $postdata['actual_finish_time'] = time();
+            } else {
+                $postdata['actual_finish_time'] = strtotime($postdata['actual_finish_time']);
+            }
+            $postdata['line'] = 2;
+            $postdata['status'] = 6;
+           // print_r($postdata);die;
+            $res = D('Project')->editPro($postdata);
+            if ($res) {
+                $data = array('err' => 1, 'msg' => "结束成功");
+            } else {
+                $data = array('err' => 0, 'msg' => "结束失败");
+            }
+            $this->ajaxReturn($data);
+        }
+    }
+
+
+    //更改状态
+    public function checkStatus() {
+        if(IS_POST) {
+            $id = I('post.id');
+            $status = I('post.status');
+            $map['id'] = $id;
+            $data['status'] = $status;
+            $res = D('Project')->checkStatus($map,$data);
+            if($res) {
+                $data = array('err'=>1,'msg'=>"状态更改成功");
+            } else {
+                $data = array('err'=>0,'msg'=>"状态更改失败");
+            }
+            $this->ajaxReturn($data);
+        }
+    }
+
 }

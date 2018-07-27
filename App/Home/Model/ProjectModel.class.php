@@ -47,4 +47,11 @@ class ProjectModel extends RelationModel {
         return $res;
     }
 
+
+    //更改状态
+    public function checkStatus($map,$data) {
+        $res = $this->where($map)->data($data)->save();
+        return $res;
+    }
+
 }

@@ -1,5 +1,7 @@
 ﻿<extend name="Public/layout" />
 <block name="head">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/laydate.css" media="all">
 
 </block>
 <block name="main">
@@ -69,21 +71,21 @@
                                                     <td>{$v['note']}</td>
                                                     <!--<td>{$v['update_time']}</td>-->
                                                     <td>
+                                                        <div class='btn <if condition="$v.line eq 2 || $v.line eq 1">disabled</if>' role="group" aria-label="..." onclick='startUp("{$v[id]}","{$v[name]}")'>
+                                                            <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">启动</font></a>
+                                                        </div>
+                                                        <div class='btn <if condition="$v.line eq 0 || $v.line eq 2">disabled</if>' role="group" aria-label="..." onclick='ending("{$v[id]}","{$v[name]}")'>
+                                                            <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">结束</font></a>
+                                                        </div>
                                                         <div class="btn " role="group" aria-label="..." >
                                                             <a  href='{:U("Project/editProject?id=$v[id]" )}' style="color: #0D47A1;">编辑</a>
                                                         </div>
                                                         <div class="btn " role="group" aria-label="..." onclick='delProject("{$v[id]}")'>
                                                             <a  href="javascript:" style="color: #843534;">删除</a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." onclick='delProject("{$v[id]}")'>
-                                                            <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">启动</font></a>
+                                                        <div class='btn  <if condition="$v.status eq 完结">disabled</if>' role="group" aria-label="..." onclick='checkStatus("{$v[id]}","{$v[name]}","{$v[status]}")'>
+                                                            <a  href="javascript:" style="color: black;">更改状态</a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." onclick='delProject("{$v[id]}")'>
-                                                            <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">结束</font></a>
-                                                        </div>
-                                                        <!--<div class="btn " role="group" aria-label="..." onclick='statusUser("{$v[id]}","{$v[status]}")'>
-                                                            <a  href="javascript:" style="color: #0D47A1;">更改状态</a>
-                                                        </div>-->
                                                     </td>
                                                 </tr>
                                             </foreach>
@@ -112,12 +114,12 @@
         });
     </script>-->
 
-
+    <script src="__PUBLIC__layer/layui.js"></script>
     <script type="text/javascript">
 
         //删除
         function delProject(id) {
-            layer.confirm('是否删除该项目信息？', {
+            layer.confirm('是否删除该项目信息', {
                 btn: ['确定','取消'] //按钮
             }, function(){
                 $.post('{:U("Project/delProject")}',{id:id},function(res) {
@@ -131,27 +133,168 @@
             });
         }
 
+        //启动
+        function startUp(id,name) {
+            var sh = '';
+            sh += '<div class="layui-collapse">';
+            sh += '<div class="layui-colla-item">';
+            sh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp启动项目('+name+')？</h2>';
+            sh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_start_time" style="width: 300px;" placeholder="戳我选择启动日期，不选则默认当前时间！"></div>';
+            sh += '</div>';
+            sh += '</div>';
+            sh += '<br>';
+            sh += '<br>';
+            sh += '&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="subUp('+id+')" class="layui-btn layui-btn-danger" style="width: 300px;">确认启动</button>';
+
+            var index=layer.open({
+                type: 1,
+                area: ['18%','280px'],
+                title: '是否启动该项目',
+                shadeClose: true,
+                content: sh
+            });
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#actual_start_time' //指定元素
+                    ,type: 'datetime'
+                });
+            });
+
+
+        }
+
+        function subUp(id) {
+            var actual_start_time = $("#actual_start_time").val();
+            $.post("{:U('Project/startUp')}",{id:id,actual_start_time:actual_start_time},function(res) {
+                if(res.err==1) {
+                    layer.closeAll();
+                    location=location;
+                } else {
+                    layer.msg("操作失败");
+                }
+            });
+        }
+
+
+        function ending(id,name){
+            var eh = '';
+            eh += '<div class="layui-collapse">';
+            eh += '<div class="layui-colla-item">';
+            eh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp结束项目('+name+')？</h2>';
+            eh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_finish_time" style="width: 300px;" placeholder="戳我选择结束日期，不选则默认当前时间！"></div>';
+            eh += '</div>';
+            eh += '</div>';
+            eh += '<br>';
+            eh += '<br>';
+            eh += '&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="sub('+id+')" class="layui-btn layui-btn-danger" style="width: 300px;">确认结束</button>';
+
+            var index=layer.open({
+                type: 1,
+                area: ['18%','280px'],
+                title: '是否结束该项目',
+                shadeClose: true,
+                content: eh
+                //content: ['/Home/Project/ending?id='+id,'no'],
+               /* success: function(res) {
+                    if(res.err==1) {
+                        layer.close(index);
+                    } else {
+                        layer.msg("操作失败");
+                    }
+                }*/
+            });
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#actual_finish_time' //指定元素
+                    ,type: 'datetime'
+                });
+            });
+
+
+        }
+
+        function sub(id) {
+            var actual_finish_time = $("#actual_finish_time").val();
+            $.post("{:U('Project/ending')}",{id:id,actual_finish_time:actual_finish_time},function(res) {
+                if(res.err==1) {
+                    layer.closeAll();
+                    location=location;
+                } else {
+                    layer.msg("操作失败");
+                }
+            });
+        }
 
         //更改状态
-/*        function statusUser(id,status) {
-            layer.confirm('是否更改状态？', {
-                btn: ['确定','取消'] //按钮
-            }, function(){
-                if(status=='正常') {
-                    status = 1;
-                } else if(status=='禁用') {
-                    status = 0;
-                }
-                $.post('{:U("User/userStatus")}',{id:id,status:status},function(res) {
-                    if(res.err==1) {
-                        location=location;
-                    } else {
-                        layer.msg('更改失败', {icon: 1});
-                    }
-                });
+        function checkStatus(id,name,status){
+            if(status=='新建') {
+                status = 1;
+            } else if(status=='立项') {
+                status = 2;
+            } else if(status=='招标') {
+                status = 3;
+            } else if(status=='实施') {
+                status = 4;
+            } else if(status=='验收') {
+                status = 5;
+            } else if(status=='完结') {
+                status = 6;
+            }
+            var ch = '';
+            ch += '<div class="layui-collapse">';
+            ch += '<label>选择('+name+')状态</label>';
+            ch += '<div class="layui-colla-item">';
+            ch += '<select id="checkStatus" class="form-control" style="width: 240px;" lay-verify="required">';
+            ch += '<option value="">请选择状态</option>';
+            ch += '<option value="2">立项</option>';
+            ch += '<option value="3">招标</option>';
+            ch += '<option value="4">实施</option>';
+            ch += '<option value="5">验收</option>';
+            ch += '</select>';
+            ch += '</div>';
+            ch += '</div>';
+            ch += '<br>';
+            ch += '<br>';
+            ch += '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="checkSt('+id+')" class="layui-btn layui-btn-danger" style="width: 150px;">更新</button>';
 
+            var index=layer.open({
+                type: 1,
+                area: ['13%','180px'],
+                title: '更新项目状态',
+                shadeClose: true,
+                content: ch
+                //content: ['/Home/Project/ending?id='+id,'no'],
+                /* success: function(res) {
+                     if(res.err==1) {
+                         layer.close(index);
+                     } else {
+                         layer.msg("操作失败");
+                     }
+                 }*/
             });
-        }*/
+        }
+
+        function checkSt(id) {
+            var status = $("#checkStatus").val();
+            if(!status) {
+                layer.msg("不能提交空状态");return
+            }
+            $.post("{:U('Project/checkStatus')}",{id:id,status:status},function(res) {
+                if(res.err==1) {
+                    layer.closeAll();
+                    location=location;
+                } else {
+                    layer.msg("操作失败");
+                }
+            });
+        }
 
     </script>
+
 </block>

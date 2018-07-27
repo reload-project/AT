@@ -84,7 +84,7 @@
                                             <input type="text" class="layui-input" id="expected_finish_time" value="{$info.expected_finish_time}">
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <!--<div class="row">
                                         <div class="select-field col s6">
                                             项目状态:<select class="form-control" id="status">
                                             <option value="">选择状态</option>
@@ -96,7 +96,7 @@
                                             <option value="6" <if condition="$info[status] eq 6">selected</if> >完结</option>
                                         </select>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="row">
                                         <div class="input-field col s12">
                                             备注:<textarea id="note" class="materialize-textarea">{$info.note}</textarea>
@@ -161,7 +161,7 @@
             var create = $("#create").val();
             var expected_start_time = $("#expected_start_time").val();
             var expected_finish_time = $("#expected_finish_time").val();
-            var status = $("#status").val();
+            //var status = $("#status").val();
             var note = $("#note").val();
 
             if(!name) {
@@ -174,7 +174,7 @@
                 layer.msg("创建人不能为空");return;
             }
 
-            var data = {id:id,name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,status:status,note:note};
+            var data = {id:id,name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,note:note};
             $.post("{:U('Project/editProject')}",data,function(res) {
                 if(res.err==1) {
 
