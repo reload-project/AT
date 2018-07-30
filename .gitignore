@@ -6,6 +6,8 @@
 .idea
 *.iml
 *.xml
-App/Runtime
+App/Runtime/Cache/Home
+App/Runtime/Logs/Common
+App/Runtime/Logs/Home
 out
 gen
