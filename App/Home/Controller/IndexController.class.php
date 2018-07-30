@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Reload
+ * Date: 2018/7/16
+ * Time: 10:20
+ */
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends CommonController {

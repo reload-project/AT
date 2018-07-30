@@ -1,0 +1,81 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                添加任务名称
+                            </div>
+                            <div class="card-content">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            任务名称:<input id="name" type="text" class="validate" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            选择分类:<select class="form-control" id="cate">
+                                            <option value="">所属分类</option>
+                                            <foreach name="cate" item="v">
+                                                <option value="{$v.id}">{$v['name']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            选择项目:<select class="form-control" id="project">
+                                            <option value="">所属项目</option>
+                                            <foreach name="project" item="v">
+                                                <option value="{$v.id}">{$v['name']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="btn " role="group" aria-label="..." onclick="addTask()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script type="text/javascript">
+        function addTask() {
+            var name = $("#name").val();
+            var project = $("#project").val();
+            var cate = $("#cate").val();
+            if(!name) {
+                layer.msg("任务名称不能为空");return;
+            }
+            if(!project) {
+                layer.msg("所属项目不能为空");return;
+            }
+            $.post("{:U('Task/addTask')}",{name:name,cate:cate,project_id:project},function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('Task/index')}";
+                }
+            });
+        }
+    </script>
+</block>
