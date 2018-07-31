@@ -1,0 +1,158 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/laydate.css" media="all">
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                编辑任务信息
+                            </div>
+                            <div class="card-content">
+                                <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            任务信息:<input id="name" type="text" class="validate" value="{$info.name}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            所属任务:<select class="form-control" id="task_num_id">
+                                            <option value="">选择任务</option>
+                                            <foreach name="tasks" item="v">
+                                                <option value="{$v.id}" <if condition="$info[task_num_id] eq $v[number]">selected</if> >{$v['name']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            数量:<input id="amount" type="text" class="validate" value="{$info.amount}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            单位:<select class="form-control" id="unit">
+                                            <option value="">选择单位</option>
+                                            <option value="1" <if condition="$info[unit] eq 1">selected</if> >页</option>
+                                            <option value="2" <if condition="$info[unit] eq 2">selected</if> >件</option>
+                                            <option value="3" <if condition="$info[unit] eq 3">selected</if> >卷</option>
+                                            <option value="4" <if condition="$info[unit] eq 4">selected</if> >盒</option>
+                                            <option value="5" <if condition="$info[unit] eq 5">selected</if> >户</option>
+                                            <option value="6" <if condition="$info[unit] eq 6">selected</if> >张</option>
+                                            <option value="7" <if condition="$info[unit] eq 7">selected</if> >册</option>
+                                            <option value="8" <if condition="$info[unit] eq 8">selected</if> >天</option>
+                                            <option value="9" <if condition="$info[unit] eq 9">selected</if> >箱</option>
+                                            <option value="10" <if condition="$info[unit] eq 10">selected</if> >套</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            计件单价:<input id="piece" type="text" class="validate" value="{$info.piece}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            产值单价:<input id="production" type="text" class="validate" value="{$info.production}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            预计投入数:<input id="inputs" type="text" class="validate" value="{$info.inputs}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        项目预计开始日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="expected_start_time" value="{$info.expected_start_time}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        项目预计完成日期
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" id="expected_finish_time" value="{$info.expected_finish_time}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="btn " role="group" aria-label="..." onclick="add()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script src="__PUBLIC__layer/layui.js"></script>
+    <!--<script src="__PUBLIC__layer/laydate.js"></script>-->
+
+    <script>
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#expected_start_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#expected_finish_time' //指定元素
+                ,type: 'datetime'
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function add() {
+            var id = "{$_GET['id']}";
+            var name = $("#name").val();
+            var task_num_id = $("#task_num_id").val();
+            var amount = $("#amount").val();
+            var unit = $("#unit").val();
+            var piece = $("#piece").val();
+            var production = $("#production").val();
+            var inputs = $("#inputs").val();
+            var expected_start_time = $("#expected_start_time").val();
+            var expected_finish_time = $("#expected_finish_time").val();
+
+            if(!name) {
+                layer.msg("任务名称不能为空");return;
+            }
+            if(!task_num_id) {
+                layer.msg("所属任务不能为空");return;
+            }
+
+            var data = {id:id,name:name,task_num_id:task_num_id,amount:amount,unit:unit,piece:piece,production:production,inputs:inputs,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time};
+            $.post("{:U('TaskInfo/editTask')}",data,function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('TaskInfo/index')}";
+                } else {
+                    layer.msg(res.msg);
+                }
+            });
+        }
+    </script>
+</block>
