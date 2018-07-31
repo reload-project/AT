@@ -62,7 +62,6 @@ class TaskInfoController extends CommonController {
         $this->display();
     }
 
-    
     public function addTask() {
         if(IS_POST) {
             $postdata = I('post.');
