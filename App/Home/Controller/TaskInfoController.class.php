@@ -10,7 +10,16 @@ namespace Home\Controller;
 class TaskInfoController extends CommonController {
     public function index() {
         $data = D('TaskInfo')->get_all();
+        $user = D('User')->get_all($map,$field="id,name");
+        $user = array_column($user,'name','id');
+        $task = D('Task')->get_all($map,$field="id,number");
+        $task = array_column($task,'number','id');
+        $project = D('Project')->get_all($map,$field="id,number");
+        $project = array_column($project,'number','id');
         foreach($data as &$v) {
+            $v['user_id'] = $user[$v['user_id']];
+            $v['task_num_id'] = $task[$v['task_num_id']];
+            $v['pro_num_id'] = $project[$v['pro_num_id']];
             if($v['unit']==1) {
                 $v['unit'] = "页";
             } else if($v['unit']==2) {
@@ -65,13 +74,13 @@ class TaskInfoController extends CommonController {
     public function addTask() {
         if(IS_POST) {
             $postdata = I('post.');
-            $map['id'] = $postdata['task_num_id'];
+/*            $map['id'] = $postdata['task_num_id'];
             $task = D('Task')->get_one($map);
             $postdata['task_num_id'] = $task['number'];
             $map = array();
-            $map['id'] = $task['project_id'];
+            $map['id'] = $postdata['pro_num_id'];
             $project = D('Project')->get_one($map);
-            $postdata['pro_num_id'] = $project['number'];
+            $postdata['pro_num_id'] = $project['number'];*/
             $postdata['number'] = mt_rand(1000,9999);
             if($postdata['expected_start_time']) {
                 $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
@@ -80,19 +89,21 @@ class TaskInfoController extends CommonController {
                 $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
             }
             $postdata['add_time'] = time();
+            //print_r($postdata);die;
             $res = D('TaskInfo')->addTask($postdata);
             //$res = 1;
             if($res) {
                 //完成数量自增1
-                $map = array();
+/*                $map = array();
                 $map['id'] = $task['id'];
                 $map['project_id'] = $project['id'];
                 $tasks = D('Task')->get_one($map);
+                print_r($tasks);die;
                 if($tasks) {
                     $datas['id'] = $tasks['id'];
                     $datas['finish_count'] = $tasks['finish_count']+1;
                 }
-                D('Task')->editTask($datas);
+                D('Task')->editTask($datas);*/
                 //print_r($tasks);die;
                 $data = array('err'=>1,'msg'=>"添加成功");
             } else {
@@ -100,8 +111,13 @@ class TaskInfoController extends CommonController {
             }
             $this->ajaxReturn($data);
         } else {
+            $project = D('Project')->get_all($map,$field="id,name");
+            $map['name'] = array('neq',"admin");
+            $user = D('User')->get_all($map,$field="id,name");
             $tasks = D('Task')->get_all();
+            $this->assign('project',$project);
             $this->assign('tasks',$tasks);
+            $this->assign('user',$user);
             $this->display();
         }
     }
@@ -109,15 +125,19 @@ class TaskInfoController extends CommonController {
     public function editTask() {
         if(IS_POST) {
             $postdata = I('post.');
-            $map['id'] = $postdata['task_num_id'];
+/*            $map['id'] = $postdata['task_num_id'];
             $task = D('Task')->get_one($map);
             $postdata['task_num_id'] = $task['number'];
             $map = array();
-            $map['id'] = $task['project_id'];
+            $map['id'] = $postdata['pro_num_id'];
             $project = D('Project')->get_one($map);
-            $postdata['pro_num_id'] = $project['number'];
-            $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
-            $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            $postdata['pro_num_id'] = $project['number'];*/
+            if($postdata['expected_start_time']) {
+                $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
+            }
+            if($postdata['expected_finish_time']) {
+                $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            }
             $res = D('TaskInfo')->editTask($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"编辑成功");
@@ -139,9 +159,16 @@ class TaskInfoController extends CommonController {
             } else {
                 $info['expected_finish_time'] = '';
             }
+            $map = array();
+            $project = D('Project')->get_all($map,$field="id,name");
+            $map = array();
+            $map['name'] = array('neq',"admin");
+            $user = D('User')->get_all($map,$field="id,name");
+            $this->assign('user',$user);
             $this->assign('info',$info);
             $tasks = D('Task')->get_all();
             $this->assign('tasks',$tasks);
+            $this->assign('project',$project);
             $this->display();
         }
     }
@@ -198,6 +225,19 @@ class TaskInfoController extends CommonController {
                 $data = array('err' => 0, 'msg' => "结束失败");
             }
             $this->ajaxReturn($data);
+        }
+    }
+
+    //任务提交数量页面
+    public function taskNumber() {
+        if(IS_POST) {
+
+        } else {
+            $userId = $_SESSION['admin']['id'];
+            $map['user_id'] = $userId;
+            $tasks = D('TaskInfo')->get_all($map,$field="id,number,pro_num_id");
+            print_r($userId);
+            $this->display();
         }
     }
 }

@@ -17,8 +17,28 @@
                             <div class="card-content">
                                 <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
                                     <div class="row">
+                                        <div class="select-field col s6">
+                                            负责人:<select class="form-control" id="user_id">
+                                            <option value="">选择负责人</option>
+                                            <foreach name="user" item="v">
+                                                <option value="{$v.id}" <if condition="$v[id] eq $info[user_id]">selected</if> >{$v.name}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="input-field col s6">
                                             任务信息:<input id="name" type="text" class="validate" value="{$info.name}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            所属项目:<select class="form-control" id="pro_num_id">
+                                            <option value="">选择项目</option>
+                                            <foreach name="project" item="v">
+                                                <option value="{$v.id}" <if condition="$info[pro_num_id] eq $v[id]">selected</if> >{$v['name']}</option>
+                                            </foreach>
+                                        </select>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -26,7 +46,7 @@
                                             所属任务:<select class="form-control" id="task_num_id">
                                             <option value="">选择任务</option>
                                             <foreach name="tasks" item="v">
-                                                <option value="{$v.id}" <if condition="$info[task_num_id] eq $v[number]">selected</if> >{$v['name']}</option>
+                                                <option value="{$v.id}" <if condition="$info[task_num_id] eq $v[id]">selected</if> >{$v['name']}</option>
                                             </foreach>
                                         </select>
                                         </div>
@@ -129,6 +149,7 @@
             var id = "{$_GET['id']}";
             var name = $("#name").val();
             var task_num_id = $("#task_num_id").val();
+            var pro_num_id = $("#pro_num_id").val();
             var amount = $("#amount").val();
             var unit = $("#unit").val();
             var piece = $("#piece").val();
@@ -136,7 +157,10 @@
             var inputs = $("#inputs").val();
             var expected_start_time = $("#expected_start_time").val();
             var expected_finish_time = $("#expected_finish_time").val();
-
+            var user_id = $("#user_id").val();
+            if(!user_id) {
+                layer.msg("负责人不能为空");return;
+            }
             if(!name) {
                 layer.msg("任务名称不能为空");return;
             }
@@ -144,7 +168,7 @@
                 layer.msg("所属任务不能为空");return;
             }
 
-            var data = {id:id,name:name,task_num_id:task_num_id,amount:amount,unit:unit,piece:piece,production:production,inputs:inputs,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time};
+            var data = {user_id:user_id,id:id,name:name,task_num_id:task_num_id,pro_num_id:pro_num_id,amount:amount,unit:unit,piece:piece,production:production,inputs:inputs,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time};
             $.post("{:U('TaskInfo/editTask')}",data,function(res) {
                 if(res.err==1) {
 

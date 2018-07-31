@@ -29,6 +29,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#id</th>
+                                                <th>负责人</th>
+                                                <th>完成数量</th>
                                                 <th>信息名称</th>
                                                 <th>信息编号</th>
                                                 <th>项目编号</th>
@@ -51,6 +53,8 @@
                                             <foreach name="data" item="v">
                                                 <tr class="odd gradeX">
                                                     <td>{$v['id']}</td>
+                                                    <td>{$v['user_id']}</td>
+                                                    <td>{$v['finish_count']}</td>
                                                     <td>{$v['name']}</td>
                                                     <td width="67px;">{$v['number']}</td>
                                                     <td width="67px;">{$v['pro_num_id']}</td>
