@@ -33,8 +33,17 @@ class TaskInfoController extends CommonController {
                 $v['unit'] = "套";
             }
             $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
-            $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
-            $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+            if($v['expected_start_time']>0) {
+                $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
+            } else {
+                $v['expected_start_time'] = "";
+            }
+            if($v['expected_finish_time']>0) {
+                $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+            } else {
+                $v['expected_finish_time'] = "";
+            }
+
             if($v['actual_start_time']) {
                 $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
             }
@@ -64,11 +73,27 @@ class TaskInfoController extends CommonController {
             $project = D('Project')->get_one($map);
             $postdata['pro_num_id'] = $project['number'];
             $postdata['number'] = mt_rand(1000,9999);
-            $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
-            $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            if($postdata['expected_start_time']) {
+                $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
+            }
+            if($postdata['expected_finish_time']) {
+                $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            }
             $postdata['add_time'] = time();
             $res = D('TaskInfo')->addTask($postdata);
+            //$res = 1;
             if($res) {
+                //完成数量自增1
+                $map = array();
+                $map['id'] = $task['id'];
+                $map['project_id'] = $project['id'];
+                $tasks = D('Task')->get_one($map);
+                if($tasks) {
+                    $datas['id'] = $tasks['id'];
+                    $datas['finish_count'] = $tasks['finish_count']+1;
+                }
+                D('Task')->editTask($datas);
+                //print_r($tasks);die;
                 $data = array('err'=>1,'msg'=>"添加成功");
             } else {
                 $data = array('err'=>0,'msg'=>"添加失败");
