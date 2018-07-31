@@ -67,10 +67,10 @@
                                                     <td>{$v['status']}</td>
                                                     <td width="80px;">{$v['add_time']}</td>
                                                     <td>
-                                                        <div class='btn <if condition="$v.line eq 2 || $v.line eq 1">disabled</if>' role="group" aria-label="..." onclick='startUp("{$v[id]}","{$v[name]}")'>
+                                                        <div class='btn <if condition="$v[status] eq 结束 || $v[status] eq 启动">disabled</if>' role="group" aria-label="..." onclick='startUp("{$v[id]}","{$v[name]}")'>
                                                             <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">启动</font></a>
                                                         </div>
-                                                        <div class='btn <if condition="$v.line eq 0 || $v.line eq 2">disabled</if>' role="group" aria-label="..." onclick='ending("{$v[id]}","{$v[name]}")'>
+                                                        <div class='btn <if condition="$v.status eq 未启动 || $v.status eq 结束">disabled</if>' role="group" aria-label="..." onclick='ending("{$v[id]}","{$v[name]}")'>
                                                             <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">结束</font></a>
                                                         </div>
                                                         <div class="btn " role="group" aria-label="..." >
@@ -121,7 +121,7 @@
             var sh = '';
             sh += '<div class="layui-collapse">';
             sh += '<div class="layui-colla-item">';
-            sh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp启动项目('+name+')？</h2>';
+            sh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp启动任务('+name+')？</h2>';
             sh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_start_time" style="width: 300px;" placeholder="戳我选择启动日期，不选则默认当前时间！"></div>';
             sh += '</div>';
             sh += '</div>';
@@ -132,7 +132,7 @@
             var index=layer.open({
                 type: 1,
                 area: ['18%','280px'],
-                title: '是否启动该项目',
+                title: '是否启动该任务',
                 shadeClose: true,
                 content: sh
             });
@@ -151,7 +151,7 @@
 
         function subUp(id) {
             var actual_start_time = $("#actual_start_time").val();
-            $.post("{:U('Project/startUp')}",{id:id,actual_start_time:actual_start_time},function(res) {
+            $.post("{:U('TaskInfo/startUp')}",{id:id,actual_start_time:actual_start_time},function(res) {
                 if(res.err==1) {
                     layer.closeAll();
                     location=location;
@@ -166,7 +166,7 @@
             var eh = '';
             eh += '<div class="layui-collapse">';
             eh += '<div class="layui-colla-item">';
-            eh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp结束项目('+name+')？</h2>';
+            eh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp结束任务('+name+')？</h2>';
             eh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_finish_time" style="width: 300px;" placeholder="戳我选择结束日期，不选则默认当前时间！"></div>';
             eh += '</div>';
             eh += '</div>';
@@ -177,7 +177,7 @@
             var index=layer.open({
                 type: 1,
                 area: ['18%','280px'],
-                title: '是否结束该项目',
+                title: '是否结束该任务',
                 shadeClose: true,
                 content: eh
             });
@@ -196,7 +196,7 @@
 
         function sub(id) {
             var actual_finish_time = $("#actual_finish_time").val();
-            $.post("{:U('Project/ending')}",{id:id,actual_finish_time:actual_finish_time},function(res) {
+            $.post("{:U('TaskInfo/ending')}",{id:id,actual_finish_time:actual_finish_time},function(res) {
                 if(res.err==1) {
                     layer.closeAll();
                     location=location;

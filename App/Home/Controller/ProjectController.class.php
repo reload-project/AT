@@ -134,9 +134,9 @@ class ProjectController extends CommonController {
             //print_r($postdata);die;
             $res = D('Project')->editPro($postdata);
             if($res) {
-                $data = array('err'=>1,'msg'=>"结束成功");
+                $data = array('err'=>1,'msg'=>"启动成功");
             } else {
-                $data = array('err'=>0,'msg'=>"结束失败");
+                $data = array('err'=>0,'msg'=>"启动失败");
             }
             $this->ajaxReturn($data);
         }

@@ -35,6 +35,12 @@ class TaskInfoController extends CommonController {
             $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
             $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
             $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+            if($v['actual_start_time']) {
+                $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
+            }
+            if($v['actual_finish_time']) {
+                $v['actual_finish_time'] = date('Y-m-d H:i:s', $v['actual_finish_time']);
+            }
             if($v['status']==0) {
                 $v['status'] = "未启动";
             } else if($v['status']==1) {
@@ -116,6 +122,47 @@ class TaskInfoController extends CommonController {
                 $data = array('err'=>1,'msg'=>"删除成功");
             } else {
                 $data = array('err'=>0,'msg'=>"删除失败");
+            }
+            $this->ajaxReturn($data);
+        }
+    }
+
+    //启动
+    public function startUp() {
+        if(IS_POST) {
+            $postdata = I('post.');
+            if(!$postdata['actual_start_time']) {
+                $postdata['actual_start_time'] = time();
+            } else {
+                $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
+            }
+            $postdata['status'] = 1;
+            //print_r($postdata);die;
+            $res = D('TaskInfo')->editTask($postdata);
+            if($res) {
+                $data = array('err'=>1,'msg'=>"启动成功");
+            } else {
+                $data = array('err'=>0,'msg'=>"启动失败");
+            }
+            $this->ajaxReturn($data);
+        }
+    }
+
+    //结束
+    public function ending() {
+        if(IS_POST) {
+            $postdata = I('post.');
+            if(!$postdata['actual_finish_time']) {
+                $postdata['actual_finish_time'] = time();
+            } else {
+                $postdata['actual_finish_time'] = strtotime($postdata['actual_finish_time']);
+            }
+            $postdata['status'] = 2;
+            $res = D('TaskInfo')->editTask($postdata);
+            if ($res) {
+                $data = array('err' => 1, 'msg' => "结束成功");
+            } else {
+                $data = array('err' => 0, 'msg' => "结束失败");
             }
             $this->ajaxReturn($data);
         }
