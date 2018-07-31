@@ -12,7 +12,7 @@ return array(
     'DB_CHARSET'            => 'utf8',
     "URL_MODEL"             => 2,
 
-    'DOMAIN'=>"http://www.atadmin.com/",
+    'DOMAIN'=>"http://www.at.local/",
 
     /******************************************样式js文件路径***************************************************/
     'TMPL_PARSE_STRING'  =>array(

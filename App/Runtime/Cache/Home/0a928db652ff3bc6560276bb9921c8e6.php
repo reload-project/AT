@@ -49,9 +49,9 @@
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+        </li>-->
+        <li><a href="<?php echo U('User/checkPass');?>"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
         </li>
-        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-        </li> -->
         <li><a href="<?php echo U('Admin/outLogin');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
     </ul>
@@ -222,58 +222,61 @@
                 <!--<li>
                     <a class=" <?php if(CONTROLLER_NAME == 'Master'): ?>active-menu<?php endif; ?>  waves-effect waves-dark" href="<?php echo U('Master/index');?>"><i class="fa fa-dashboard"></i> 管理员</a>
                 </li>-->
-                <li>
+<!--                <?php if((in_array('User',$rr))): ?><li>
                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工管理</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Levels',$rr))): ?><li>
                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-desktop"></i> 员工级别</a>
-                </li>
-                <li>
+                </li><?php endif; ?>
+                <?php if((in_array('Department',$rr))): ?><li>
                     <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 部门管理</a>
-                </li>
+                </li><?php endif; ?>
+                <?php if((in_array('Rules',$rr))): ?><li>
+                    <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
+                </li><?php endif; ?>-->
+                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Department',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><li class="active">
+                        <?php else: ?>
+                        <li><?php endif; ?>
+                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
+                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
+                    <?php else: ?>
+                        <ul class="nav nav-second-level"><?php endif; ?>
+                            <?php if((in_array('User',$rr))): ?><li>
+                                    <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  "> 员工资料</a>
+                                </li><?php endif; ?>
+                            <?php if((in_array('Levels',$rr))): ?><li>
+                                    <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
+                                </li><?php endif; ?>
+                            <?php if((in_array('Department',$rr))): ?><li>
+                                    <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>"> 部门管理</a>
+                                </li><?php endif; ?>
+                            <?php if((in_array('Rules',$rr))): ?><li>
+                                    <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>"> 规则管理</a>
+                                </li><?php endif; ?>
+                        </ul>
+                    </li><?php endif; ?>
+            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr))): if($controller == 'Project' || $controller == 'ProjectCate'): ?><li class="active">
+                        <?php else: ?>
+                    <li><?php endif; ?>
+                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
+                <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><ul class="nav nav-second-level collapse in ">
+                <?php else: ?>
+                    <ul class="nav nav-second-level"><?php endif; ?>
+                    <?php if((in_array('Project',$rr))): ?><li>
+                            <a href="<?php echo U('Project/index');?>" class=" <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?> " >项目信息</a>
+                        </li><?php endif; ?>
+                    <?php if((in_array('ProjectCate',$rr))): ?><li>
+                            <a href="<?php echo U('ProjectCate/index');?>" class=" <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> " >项目分类</a>
+                        </li><?php endif; ?>
+                    <?php if((in_array('Task',$rr))): ?><li>
+                            <a href="<?php echo U('Task/index');?>" class=" <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?> " >任务名称</a>
+                        </li><?php endif; ?>
+                <?php if((in_array('TaskInfo',$rr))): ?><li>
+                        <a href="<?php echo U('TaskInfo/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> " >任务信息</a>
+                    </li><?php endif; ?>
+                    </ul>
 
-                 <!--                   <li>
-                                        <a href="tab-panel.html" class="waves-effect waves-dark"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="table.html" class="waves-effect waves-dark"><i class="fa fa-table"></i> Responsive Tables</a>
-                                </li>
-                                    <li>
-                                        <a href="form.html" class="waves-effect waves-dark"><i class="fa fa-edit"></i> Forms </a>
-                                    </li>
-
-
-                                    <li>
-                                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="#">Second Level Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Second Level Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                                <ul class="nav nav-third-level">
-                                                    <li>
-                                                        <a href="#">Third Level Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Third Level Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Third Level Link</a>
-                                                    </li>
-
-                                                </ul>
-
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="empty.html" class="waves-effect waves-dark"><i class="fa fa-fw fa-file"></i> Empty Page</a>
-                                    </li>-->
+                </li><?php endif; ?>
             </ul>
 
         </div>
@@ -350,7 +353,14 @@
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="/App/Home/Common/assets/js/jquery-1.10.2.js"></script>
-
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="/App/Home/Common/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="/App/Home/Common/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
     <!-- Bootstrap Js -->
     <script src="/App/Home/Common/assets/js/bootstrap.min.js"></script>
 
@@ -370,6 +380,7 @@
 
     <!-- Custom Js -->
     <script src="/App/Home/Common/assets/js/custom-scripts.js"></script>
+
 
     
 
