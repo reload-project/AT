@@ -22,8 +22,16 @@ class ProjectController extends CommonController {
             $v['follow'] = $user[$v['follow']];
             $v['create'] = $user[$v['create']];
             $v['create_time'] = date('Y-m-d H:i:s',$v['create_time']);
-            $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
-            $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+            if($v['expected_start_time']>0) {
+                $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
+            } else {
+                $v['expected_start_time'] = "";
+            }
+            if($v['expected_finish_time']>0) {
+                $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+            } else {
+                $v['expected_finish_time'] = "";
+            }
             if($v['actual_start_time']) {
                 $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
             }
@@ -55,8 +63,12 @@ class ProjectController extends CommonController {
             $postdata['number'] = mt_rand(1000,9999);
             $postdata['create_time'] = time();
             $postdata['status'] = 1;
-            $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
-            $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            if($postdata['expected_start_time']) {
+                $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
+            }
+            if($postdata['expected_finish_time']) {
+                $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            }
             $res = D('Project')->addPro($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"添加成功");
@@ -92,8 +104,16 @@ class ProjectController extends CommonController {
             $id = I('get.id');
             $map['id'] = $id;
             $info = D('Project')->get_one($map);
-            $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
-            $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
+            if($info['expected_start_time']){
+                $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
+            } else {
+                $info['expected_start_time'] = '';
+            }
+            if($info['expected_finish_time']) {
+                $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
+            } else {
+                $info['expected_finish_time'] = '';
+            }
             $map = array();
             $map['name'] = array('neq',"admin");
             $user = D('User')->get_all($map,$field="id,name");

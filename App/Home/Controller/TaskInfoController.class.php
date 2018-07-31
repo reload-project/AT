@@ -129,8 +129,16 @@ class TaskInfoController extends CommonController {
             $id = $_GET['id'];
             $map['id'] = $id;
             $info = D('TaskInfo')->get_one($map);
-            $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
-            $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
+            if($info['expected_start_time']){
+                $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
+            } else {
+                $info['expected_start_time'] = '';
+            }
+            if($info['expected_finish_time']) {
+                $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
+            } else {
+                $info['expected_finish_time'] = '';
+            }
             $this->assign('info',$info);
             $tasks = D('Task')->get_all();
             $this->assign('tasks',$tasks);
