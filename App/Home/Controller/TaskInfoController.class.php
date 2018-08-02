@@ -231,12 +231,42 @@ class TaskInfoController extends CommonController {
     //任务提交数量页面
     public function taskNumber() {
         if(IS_POST) {
+            $userId = $_SESSION['admin']['id'];
+            $postdata = I('post.');
+            $data = array();
+            foreach($postdata['result'] as $k=>$v) {
+                $data[$k]['pro_num_id'] = $postdata['pro_num_id'];
+                $data[$k]['result'] = $v;
+                $data[$k]['number'] = $postdata['number'][$k];
+            }
+            $map['user_id'] = $userId;
+            $tasks = D('TaskInfo')->get_all($map,$field="id,name");
+            $tasks = array_column($tasks,'id','name');
+            foreach($data as $k=>$v) {
+                $datas['user_id'] = $userId;
+                $datas['pro_num_id'] = $v['pro_num_id'];
+                $datas['task_num_id'] = $tasks[$v['number']];
+                $datas['amount'] = $v['result'];
+                $datas['add_time'] = time();
+                $res = D('TaskNumber')->addNumber($datas);
+            }
+            if($res) {
+                $datasss = array('err'=>1,'msg'=>"添加成功");
+            } else {
+                $datasss = array('err'=>0,'msg'=>"添加失败");
+            }
+            $this->ajaxReturn($datasss);
+
 
         } else {
             $userId = $_SESSION['admin']['id'];
             $map['user_id'] = $userId;
-            $tasks = D('TaskInfo')->get_all($map,$field="id,number,pro_num_id");
-            print_r($userId);
+            $tasks = D('TaskInfo')->get_all($map,$field="id,name,number,pro_num_id");
+            $map = array();
+            $map['director'] = $userId;
+            $project = D('Project')->get_all($map,$field="id,name,number");
+            $this->assign('project',$project);
+            $this->assign('tasks',$tasks);
             $this->display();
         }
     }

@@ -15,6 +15,7 @@
      <script type="text/javascript" src="__PUBLIC__layer/layer.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="__PUBLIC__assets/css/signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/layui.css" media="all">
 
 </head>
 
@@ -24,67 +25,38 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card" style="text-align:center; margin-top: 100px;">
                     <div class="card-action">
-                        添加任务信息
+                        <h3>添加完成数量</h3>
                     </div>
                     <div class="card-content">
                         <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="select-field col s6">
-                                    负责人:<select class="form-control" id="user_id">
-                                    <option value="">选择负责人</option>
-                                    <foreach name="user" item="v">
+                            <div class="row" style="margin-top: 38px;">
+                                <div class="" style="width: 520px; margin: auto;">
+                                    <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">项目名称:</p><select class="form-control"  style="width: 310px;" id="pro_num_id">
+                                    <option value="">选择项目</option>
+                                    <foreach name="project" item="v">
                                         <option value="{$v.id}">{$v.name}</option>
                                     </foreach>
                                 </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    任务信息:<input id="name" type="text" class="validate">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="select-field col s6">
-                                    所属任务:<select class="form-control" id="task_num_id">
-                                    <option value="">选择任务</option>
-                                    <foreach name="tasks" item="v">
-                                        <option value="{$v.id}">{$v['name']}</option>
-                                    </foreach>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    数量:<input id="amount" type="text" class="validate">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    计件单价:<input id="piece" type="text" class="validate">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    产值单价:<input id="production" type="text" class="validate">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    预计投入数:<input id="inputs" type="text" class="validate">
-                                </div>
-                            </div>
-                            <div class="row">
-                                项目预计完成日期
-                                <div class="layui-inline">
-                                    <input type="text" class="layui-input" id="expected_finish_time">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="select-field col s6"  style="width: 520px; margin: auto;">
+                                    <p style="width: 80px; float: left; font-size: 18px;">任务名称:</p>
+                                    <br>
+                                    <br>
+                                        <foreach name="tasks" item="v">
+                                            <h3 name="number" style="width: 80px; margin-top: 10px; font-size: 18px;">{$v.name}</h3>
+                                            <!--<h4 style="width: 70px; float: left; margin-top: -20px; margin-left: 80px;">完成数量:</h4>-->
+                                            <input name="task_num_id" id="task_num_id" type="text" style="  width: 300px; height: 30px;" >
+                                        </foreach>
+
                                 </div>
                             </div>
 
-
-                            <div class="btn " role="group" aria-label="..." onclick="add()">
-                                提交
+                            <div style="margin-top: 20px; " onclick="add()">
+                                <a href="javascript:;" class="layui-btn" style="width: 180px;">提交</a>
 
                             </div>
                         </form>
@@ -97,8 +69,28 @@
     </div>
     <!-- /. PAGE INNER  -->
 </div>
-    <script type="text/javascript">
 
+
+    <script type="text/javascript">
+        function add() {
+            var result = [];
+            $("input[name='task_num_id']").each(function(i,v){
+                result.push($(v).val())
+            });
+            var number = [];
+            $('h3[name="number"]').each(function(i,v){
+                number.push($(v).text())
+            });
+            var pro_num_id = $("#pro_num_id").val();
+
+            $.post("{:U('TaskInfo/taskNumber')}",{pro_num_id:pro_num_id,result:result,number:number},function(res) {
+                if(res.err==1) {
+                    location.href = "/TaskInfo/index";
+                }
+            });
+
+
+        }
 
     </script>
 </body>
