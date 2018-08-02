@@ -17,6 +17,16 @@
                             <div class="card-content">
                                 <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
                                     <div class="row">
+                                        <div class="select-field col s6">
+                                            项目主管:<select class="form-control" id="director">
+                                            <option value="">选择主管</option>
+                                            <foreach name="user" item="v">
+                                                <option value="{$v.id}"  <if condition="$v[id] eq $info[director]">selected</if>  >{$v.name}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="input-field col s6">
                                             项目名称:<input id="name" type="text" class="validate" value="{$info.name}">
                                         </div>
@@ -151,6 +161,7 @@
     <script type="text/javascript">
         function add() {
             var id = "{$_GET['id']}";
+            var director = $("#director").val();
             var name = $("#name").val();
             var cate = $("#cate").val();
             var introduction = $("#introduction").val();
@@ -163,7 +174,9 @@
             var expected_finish_time = $("#expected_finish_time").val();
             //var status = $("#status").val();
             var note = $("#note").val();
-
+            if(!director) {
+                layer.msg("项目主管不能为空");return;
+            }
             if(!name) {
                 layer.msg("项目名称不能为空");return;
             }
@@ -174,7 +187,7 @@
                 layer.msg("创建人不能为空");return;
             }
 
-            var data = {id:id,name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,note:note};
+            var data = {director:director,id:id,name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,note:note};
             $.post("{:U('Project/editProject')}",data,function(res) {
                 if(res.err==1) {
 
