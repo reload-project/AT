@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>亚齐信息管理系统</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="/App/Home/Common/assets/css/material-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
     <link href="/App/Home/Common/assets/css/bootstrap.css" rel="stylesheet" />
@@ -15,7 +16,8 @@
     <!-- Custom Styles-->
     <link href="/App/Home/Common/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
+    <link href="/App/Home/Common/assets/css/open-sans.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/js/Lightweight-Chart/cssCharts.css">
     <script src="/App/Home/Common/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/App/Home/Common/layer/layer.js"></script>
@@ -255,10 +257,10 @@
                                 </li><?php endif; ?>
                         </ul>
                     </li><?php endif; ?>
-            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr))): if($controller == 'Project' || $controller == 'ProjectCate'): ?><li class="active">
+            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr))): if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><li class="active">
                         <?php else: ?>
                     <li><?php endif; ?>
-                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
+                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
                 <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><ul class="nav nav-second-level collapse in ">
                 <?php else: ?>
                     <ul class="nav nav-second-level"><?php endif; ?>

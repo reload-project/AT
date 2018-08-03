@@ -17,8 +17,14 @@
                             <div class="card-action">
                                 任务信息列表
                                 <a  href="{:U('TaskInfo/addTask')}" style="margin-left: 10px;">
-                                    <div class="btn " role="group" aria-label="..." >
+                                    <div class="btn " role="group" aria-label="..." <if condition=" $depart eq 2">style="display:none;" </if> >
                                     添加任务信息
+
+                                    </div>
+                                </a>
+                                <a  href="{:U('TaskInfo/taskNumber')}" style="margin-left: 10px;">
+                                    <div class="btn " role="group" aria-label="..." >
+                                        添加完成任务数量
 
                                     </div>
                                 </a>
@@ -46,7 +52,7 @@
                                                 <th>实际结束日期</th>
                                                 <th>状态</th>
                                                 <th>添加时间</th>
-                                                <th>操作</th>
+                                                <th <if condition=" $depart eq 2">style="display:none;" </if>>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,7 +76,7 @@
                                                     <td width="92px;">{$v['actual_finish_time']}</td>
                                                     <td>{$v['status']}</td>
                                                     <td width="80px;">{$v['add_time']}</td>
-                                                    <td>
+                                                    <td <if condition=" $depart eq 2">style="display:none;" </if> >
                                                         <div class='btn <if condition="$v[status] eq 结束 || $v[status] eq 启动">disabled</if>' role="group" aria-label="..." onclick='startUp("{$v[id]}","{$v[name]}")'>
                                                             <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">启动</font></a>
                                                         </div>
@@ -207,6 +213,13 @@
                 } else {
                     layer.msg("操作失败");
                 }
+            });
+        }
+
+        function refreshAmount() {
+            var userId = "{$_SESSION['admin']['id']}";
+            $.post("{:U('TaskInfo/refreshAmount')}",{userId:userId},function() {
+
             });
         }
 

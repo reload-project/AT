@@ -73,6 +73,10 @@
 
     <script type="text/javascript">
         function add() {
+            var pro_num_id = $("#pro_num_id").val();
+            if(!pro_num_id) {
+                layer.msg("项目名称不能为空");return;
+            }
             var result = [];
             $("input[name='task_num_id']").each(function(i,v){
                 result.push($(v).val())
@@ -81,8 +85,6 @@
             $('h3[name="number"]').each(function(i,v){
                 number.push($(v).text())
             });
-            var pro_num_id = $("#pro_num_id").val();
-
             $.post("{:U('TaskInfo/taskNumber')}",{pro_num_id:pro_num_id,result:result,number:number},function(res) {
                 if(res.err==1) {
                     location.href = "/TaskInfo/index";

@@ -9,7 +9,13 @@ namespace Home\Controller;
 
 class TaskInfoController extends CommonController {
     public function index() {
-        $data = D('TaskInfo')->get_all();
+        $userId = $_SESSION['admin']['id'];
+        $depart = $_SESSION['admin']['depart'];
+        if($userId != 1 && $depart == 2) {
+            $map['user_id'] = $userId;
+        }
+        $data = D('TaskInfo')->get_all($map);
+        $map = array();
         $user = D('User')->get_all($map,$field="id,name");
         $user = array_column($user,'name','id');
         $task = D('Task')->get_all($map,$field="id,number");
@@ -67,6 +73,7 @@ class TaskInfoController extends CommonController {
                 $v['status'] = "结束";
             }
         }
+        $this->assign('depart',$depart);
         $this->assign('data',$data);
         $this->display();
     }
@@ -248,6 +255,12 @@ class TaskInfoController extends CommonController {
                 $datas['task_num_id'] = $tasks[$v['number']];
                 $datas['amount'] = $v['result'];
                 $datas['add_time'] = time();
+                $map['id'] = $datas['task_num_id'];
+                $map['pro_num_id'] = $datas['pro_num_id'];
+                $taskInfo = D('TaskInfo')->get_one($map);
+                $da['id'] = $taskInfo['id'];
+                $da['finish_count'] = $taskInfo['finish_count']+$datas['amount'];
+                D('TaskInfo')->editTask($da);
                 $res = D('TaskNumber')->addNumber($datas);
             }
             if($res) {
@@ -270,4 +283,5 @@ class TaskInfoController extends CommonController {
             $this->display();
         }
     }
+
 }
