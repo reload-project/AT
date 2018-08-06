@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>亚齐信息管理系统</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="/App/Home/Common/assets/css/material-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
     <link href="/App/Home/Common/assets/css/bootstrap.css" rel="stylesheet" />
@@ -15,7 +16,8 @@
     <!-- Custom Styles-->
     <link href="/App/Home/Common/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
+    <link href="/App/Home/Common/assets/css/open-sans.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/js/Lightweight-Chart/cssCharts.css">
     <script src="/App/Home/Common/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/App/Home/Common/layer/layer.js"></script>
@@ -255,22 +257,28 @@
                                 </li><?php endif; ?>
                         </ul>
                     </li><?php endif; ?>
-
-                <li>
-                    <a href="javascript:;" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
-
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="<?php echo U('Project/index');?>">项目信息</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">项目分类</a>
-                        </li>
-
+            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr))): if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><li class="active">
+                        <?php else: ?>
+                    <li><?php endif; ?>
+                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
+                <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><ul class="nav nav-second-level collapse in ">
+                <?php else: ?>
+                    <ul class="nav nav-second-level"><?php endif; ?>
+                    <?php if((in_array('Project',$rr))): ?><li>
+                            <a href="<?php echo U('Project/index');?>" class=" <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?> " >项目信息</a>
+                        </li><?php endif; ?>
+                    <?php if((in_array('ProjectCate',$rr))): ?><li>
+                            <a href="<?php echo U('ProjectCate/index');?>" class=" <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> " >项目分类</a>
+                        </li><?php endif; ?>
+                    <?php if((in_array('Task',$rr))): ?><li>
+                            <a href="<?php echo U('Task/index');?>" class=" <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?> " >任务名称</a>
+                        </li><?php endif; ?>
+                <?php if((in_array('TaskInfo',$rr))): ?><li>
+                        <a href="<?php echo U('TaskInfo/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> " >任务信息</a>
+                    </li><?php endif; ?>
                     </ul>
 
-                </li>
-
+                </li><?php endif; ?>
             </ul>
 
         </div>
