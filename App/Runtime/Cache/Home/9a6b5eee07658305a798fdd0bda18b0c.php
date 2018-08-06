@@ -250,7 +250,7 @@
                                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
                                 </li><?php endif; ?>
                             <?php if((in_array('Department',$rr))): ?><li>
-                                    <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>"> 部门管理</a>
+                                    <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>"> 角色管理</a>
                                 </li><?php endif; ?>
                             <?php if((in_array('Rules',$rr))): ?><li>
                                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>"> 规则管理</a>
@@ -298,10 +298,10 @@
                         <!-- Advanced Tables -->
                         <div class="card">
                             <div class="card-action">
-                                部门列表
+                                角色列表
                                 <a  href="<?php echo U('Department/addDepart');?>"  style="margin-left: 10px;">
                                     <div class="btn " role="group" aria-label="..." >
-                                    添加部门
+                                    添加角色
 
                                     </div>
                                 </a>
@@ -312,7 +312,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#id</th>
-                                                <th>部门名称</th>
+                                                <th>角色名称</th>
                                                 <th>上级</th>
                                                 <th>拥有权限</th>
                                                 <th>添加时间</th>
@@ -424,7 +424,7 @@
 
         //删除
         function delDepart(id) {
-            layer.confirm('是否删除该部门？', {
+            layer.confirm('是否删除该角色？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
                 $.post('<?php echo U("Department/delDepart");?>',{id:id},function(res) {

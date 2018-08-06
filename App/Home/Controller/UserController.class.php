@@ -21,7 +21,7 @@ class UserController extends CommonController {
             $map['name'] = array('neq',"admin");
         }
         $data = D('User')->get_all($map,$field='*',$page=1,$pagenum=999999);
-        $depart = D('Department')->get_all($map='',$field='id,depart',$page=1,$pagenum=999999);
+        $depart = D('Role')->get_all($map='',$field='id,depart',$page=1,$pagenum=999999);
         $depart = array_column($depart,'depart','id');
         $levels = D('Levels')->get_all($map='',$field='id,level');
         $levels = array_column($levels,'level','id');
@@ -65,7 +65,7 @@ class UserController extends CommonController {
             $this->ajaxReturn($data);
         } else {
             $levels = D('Levels')->get_all($map,$field='id,level');
-            $depart = D('Department')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
+            $depart = D('Role')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
             $this->assign('depart',$depart);
             $this->assign('levels',$levels);
             $this->display();
@@ -95,7 +95,7 @@ class UserController extends CommonController {
         $id = I('get.id');
         $map['id'] = $id;
         $info = D('User')->get_one($map);
-        $depart = D('Department')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
+        $depart = D('Role')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
         $levels = D('Levels')->get_all($map='',$field='id,level');
         $this->assign('levels',$levels);
         $this->assign('depart',$depart);

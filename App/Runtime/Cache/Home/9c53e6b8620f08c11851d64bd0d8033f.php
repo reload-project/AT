@@ -296,13 +296,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-action">
-                            编辑部门
+                            编辑角色
                         </div>
                         <div class="card-content">
                             <form class="col s12">
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        部门名称:<input id="depart" type="text" class="validate" value="<?php echo ($info["depart"]); ?>" />
+                                        角色名称:<input id="depart" type="text" class="validate" value="<?php echo ($info["depart"]); ?>" />
                                         <!--<label for="username">姓名</label>-->
                                     </div>
                                 </div>
@@ -392,7 +392,7 @@
             }
             var rules_id = check_val;
             if(!depart) {
-                layer.msg("部门名称不能为空");return;
+                layer.msg("角色名称不能为空");return;
             }
             $.post("<?php echo U('Department/editDepart');?>",{id:id,depart:depart,rules_id:rules_id,parent_id:parent_id},function(res) {
                 if(res.err==1) {

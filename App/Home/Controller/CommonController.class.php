@@ -17,7 +17,7 @@ class CommonController extends Controller {
         session_start();
         $admin = $_SESSION['admin'];
         $map['id'] = $admin['depart'];
-        $department = D('Department')->get_one($map);
+        $department = D('Role')->get_one($map);
         $arr = explode(',',$department['rules_id']);
         foreach($arr as &$v) {
             $map['id'] = $v;

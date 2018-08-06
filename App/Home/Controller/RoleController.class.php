@@ -4,13 +4,13 @@
  * User: reload
  * Date: 2018/7/23
  * Time: 9:16
- * 部门管理控制
+ * 角色管理控制
  */
 namespace Home\Controller;
 use Think\Controller;
-class DepartmentController extends CommonController {
+class RoleController extends CommonController {
     public function index() {
-        $data = D('Department')->get_all($map='',$field='*',$page=1,$pagenum=999999,$order="add_time desc");
+        $data = D('Role')->get_all($map='',$field='*',$page=1,$pagenum=999999,$order="add_time desc");
         //echo D('Department')->_sql();die;
         $rules = D('Rules')->get_all($map='',$field='id,rules',$page=1,$pagenum=999999);
         $rules = array_column($rules,'rules','id');
@@ -69,7 +69,7 @@ class DepartmentController extends CommonController {
             $postdata['add_time'] = time();
             $postdata['rules_id'] = implode(',',$postdata['rules_id']);
             //print_r($postdata);die;
-            $res = D('Department')->addDepart($postdata);
+            $res = D('Role')->addDepart($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"添加成功");
             } else {
@@ -78,7 +78,7 @@ class DepartmentController extends CommonController {
             $this->ajaxReturn($data);
         } else {
             $rules = D('Rules')->get_all($map='',$field='id,rules',$page=1,$pagenum=999999);
-            $data = D('Department')->get_all($map='',$field='id,depart,parent_id',$page=1,$pagenum=999999);
+            $data = D('Role')->get_all($map='',$field='id,depart,parent_id',$page=1,$pagenum=999999);
             $this->assign('data',$data);
             $this->assign('rules',$rules);
             $this->display();
@@ -91,7 +91,7 @@ class DepartmentController extends CommonController {
             $postdata = I('post.');
             $postdata['rules_id'] = implode(',',$postdata['rules_id']);
            // print_r($postdata);die;
-            $res = D('Department')->editDepart($postdata);
+            $res = D('Role')->editDepart($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"编辑成功");
             } else {
@@ -101,12 +101,12 @@ class DepartmentController extends CommonController {
         } else {
             $id = I('get.id');
             $map['id'] = $id;
-            $info = D('Department')->get_one($map);
+            $info = D('Role')->get_one($map);
             $rules = D('Rules')->get_all($map='',$field='id,rules',$page=1,$pagenum=999999);
             //$rules = array_column($rules,'rules','id');
             $info['rules_id'] = explode(',',$info['rules_id']);
            // print_r($info);die;
-            $data = D('Department')->get_all($map='',$field='id,depart,parent_id',$page=1,$pagenum=999999);
+            $data = D('Role')->get_all($map='',$field='id,depart,parent_id',$page=1,$pagenum=999999);
             $this->assign('data',$data);
             $this->assign('rules',$rules);
             $this->assign('info',$info);
@@ -119,7 +119,7 @@ class DepartmentController extends CommonController {
         if(IS_POST) {
             $id = I('post.id');
             $map['id'] = $id;
-            $res = D('Department')->delDepart($map);
+            $res = D('Role')->delDepart($map);
             if($res) {
                 $data = array('err'=>1,'msg'=>"删除成功");
             } else {

@@ -1,13 +1,13 @@
 <?php
 /*************************************************
 
-部门模型 - the
+角色模型 - the
 Author: reload <18-7-23>
 
 *************************************************/
 namespace Home\Model;
 use Think\Model\RelationModel;
-class DepartmentModel extends RelationModel {
+class RoleModel extends RelationModel {
     protected $_msg;
     protected $_err = 0;
 

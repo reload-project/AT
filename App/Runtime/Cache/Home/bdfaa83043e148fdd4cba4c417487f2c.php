@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>亚齐信息管理系统</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="/App/Home/Common/assets/css/material-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
     <link href="/App/Home/Common/assets/css/bootstrap.css" rel="stylesheet" />
@@ -15,7 +16,8 @@
     <!-- Custom Styles-->
     <link href="/App/Home/Common/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
+    <link href="/App/Home/Common/assets/css/open-sans.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/js/Lightweight-Chart/cssCharts.css">
     <script src="/App/Home/Common/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/App/Home/Common/layer/layer.js"></script>
@@ -234,11 +236,11 @@
                 <?php if((in_array('Rules',$rr))): ?><li>
                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
                 </li><?php endif; ?>-->
-                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Department',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><li class="active">
+                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><li class="active">
                         <?php else: ?>
                         <li><?php endif; ?>
                         <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
-                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
+                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
                     <?php else: ?>
                         <ul class="nav nav-second-level"><?php endif; ?>
                             <?php if((in_array('User',$rr))): ?><li>
@@ -247,19 +249,19 @@
                             <?php if((in_array('Levels',$rr))): ?><li>
                                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
                                 </li><?php endif; ?>
-                            <?php if((in_array('Department',$rr))): ?><li>
-                                    <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>"> 部门管理</a>
+                            <?php if((in_array('Role',$rr))): ?><li>
+                                    <a href="<?php echo U('Role/index');?>" class=" <?php if(CONTROLLER_NAME == 'Role'): ?>active-menu<?php endif; ?>"> 角色管理</a>
                                 </li><?php endif; ?>
                             <?php if((in_array('Rules',$rr))): ?><li>
                                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>"> 规则管理</a>
                                 </li><?php endif; ?>
                         </ul>
                     </li><?php endif; ?>
-            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr))): if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><li class="active">
+            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr)) || (in_array('TaskNumber',$rr))): if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo' || $controller == 'TaskNumber'): ?><li class="active">
                         <?php else: ?>
                     <li><?php endif; ?>
-                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
-                <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><ul class="nav nav-second-level collapse in ">
+                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'TaskNumber'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
+                <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo' || $controller == 'TaskNumber'): ?><ul class="nav nav-second-level collapse in ">
                 <?php else: ?>
                     <ul class="nav nav-second-level"><?php endif; ?>
                     <?php if((in_array('Project',$rr))): ?><li>
@@ -273,6 +275,9 @@
                         </li><?php endif; ?>
                 <?php if((in_array('TaskInfo',$rr))): ?><li>
                         <a href="<?php echo U('TaskInfo/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> " >任务信息</a>
+                    </li><?php endif; ?>
+                <?php if((in_array('TaskNumber',$rr))): ?><li>
+                        <a href="<?php echo U('TaskNumber/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskNumber'): ?>active-menu<?php endif; ?> " >完成数量</a>
                     </li><?php endif; ?>
                     </ul>
 
@@ -330,8 +335,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            部门:<select class="form-control" id="depart">
-                                            <option value="">选择部门</option>
+                                            角色:<select class="form-control" id="depart">
+                                            <option value="">选择角色</option>
                                             <?php if(is_array($depart)): foreach($depart as $key=>$v): ?><option <?php if($v[id] == $info[depart]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['depart']); ?></option><?php endforeach; endif; ?>
                                         </select>
                                         </div>
@@ -484,9 +489,9 @@
             if(!phone) {
                 layer.msg("手机号不能为空");return;
             }
-            if(!depart) {
+            /*if(!depart) {
                 layer.msg("部门不能为空");return;
-            }
+            }*/
             if(!upPod) {
                 var pic = $("#pic").attr('src');
                 var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels};

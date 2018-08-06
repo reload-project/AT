@@ -236,11 +236,11 @@
                 <?php if((in_array('Rules',$rr))): ?><li>
                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
                 </li><?php endif; ?>-->
-                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Department',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><li class="active">
+                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><li class="active">
                         <?php else: ?>
                         <li><?php endif; ?>
                         <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
-                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Department' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
+                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
                     <?php else: ?>
                         <ul class="nav nav-second-level"><?php endif; ?>
                             <?php if((in_array('User',$rr))): ?><li>
@@ -250,18 +250,18 @@
                                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
                                 </li><?php endif; ?>
                             <?php if((in_array('Department',$rr))): ?><li>
-                                    <a href="<?php echo U('Department/index');?>" class=" <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>"> 部门管理</a>
+                                    <a href="<?php echo U('Role/index');?>" class=" <?php if(CONTROLLER_NAME == 'Role'): ?>active-menu<?php endif; ?>"> 角色管理</a>
                                 </li><?php endif; ?>
                             <?php if((in_array('Rules',$rr))): ?><li>
                                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>"> 规则管理</a>
                                 </li><?php endif; ?>
                         </ul>
                     </li><?php endif; ?>
-            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr))): if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><li class="active">
+            <?php if((in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr)) || (in_array('TaskNumber',$rr))): if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo' || $controller == 'TaskNumber'): ?><li class="active">
                         <?php else: ?>
                     <li><?php endif; ?>
-                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
-                <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo'): ?><ul class="nav nav-second-level collapse in ">
+                    <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'TaskNumber'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Project'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 项目管理<span class="fa arrow"></span></a>
+                <?php if($controller == 'Project' || $controller == 'ProjectCate' || $controller == 'Task' || $controller == 'TaskInfo' || $controller == 'TaskNumber'): ?><ul class="nav nav-second-level collapse in ">
                 <?php else: ?>
                     <ul class="nav nav-second-level"><?php endif; ?>
                     <?php if((in_array('Project',$rr))): ?><li>
@@ -275,6 +275,9 @@
                         </li><?php endif; ?>
                 <?php if((in_array('TaskInfo',$rr))): ?><li>
                         <a href="<?php echo U('TaskInfo/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> " >任务信息</a>
+                    </li><?php endif; ?>
+                <?php if((in_array('TaskNumber',$rr))): ?><li>
+                        <a href="<?php echo U('TaskNumber/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskNumber'): ?>active-menu<?php endif; ?> " >完成数量</a>
                     </li><?php endif; ?>
                     </ul>
 
