@@ -1,46 +1,46 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="app">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
     <title>广东亚齐信息后台系统登录页</title>
-    <meta name="description" content="这是一个 index 页面">
-    <meta name="keywords" content="index">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="/App/Home/Common/assets/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/App/Home/Common/assets/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/App/Home/Common/assets/css/app.css" type="text/css" />
     <script src="/App/Home/Common/assets/js/jquery.min.js"></script>
-     <script type="text/javascript" src="/App/Home/Common/common/js/jquery.md5.js"></script>
-     <script type="text/javascript" src="/App/Home/Common/layer/layer.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/App/Home/Common/assets/css/signin.css" rel="stylesheet">
-
+    <script type="text/javascript" src="/App/Home/Common/common/js/jquery.md5.js"></script>
+    <script type="text/javascript" src="/App/Home/Common/layer/layer.js"></script>
 </head>
+<body background="/App/Home/Common/assets/images/bodybg.jpg">
+<section id="content" class="m-t-lg wrapper-md animated fadeInUp ">
+    <div class="container aside-xl" style="margin-top: 48px;">
+        <a class="navbar-brand block"><span class="h1 font-bold" style="color: #ffffff">亚齐信息后台登录</span></a>
+        <section class="m-b-lg">
+            <header class="wrapper text-center">
+                <strong class="text-sucess">用户登录/User>
+            </header>
+            <form action="javascript:;" method="post" >
+                <div class="form-group">
+                    <input type="username" name="username" id="user-name" placeholder="UserName" class="form-control  input-lg text-center no-border">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" placeholder="PassWord" class="form-control  input-lg text-center no-border">
+                </div>
 
-<body data-type="login">
-<div class="" style="text-align:center; margin-top: 300px;">
-    <h3 >亚齐信息后台管理系统</h3>
-    <form class="" style="margin-top: 40px;">
-        <div class="">
-            用户名：<input type="text" class="" id="user-name" placeholder="UserName" style="border-radius: 3px;">
+                <button type="submit" class="btn btn-lg btn-danger lt b-white b-2x btn-block am-btn" id="validate-submit">
+                    <i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
+            </form>
+        </section>
+    </div>
+</section>
+<!-- footer -->
+<footer id="footer">
+    <div class="text-center padder">
 
-        </div>
-
-        <div class="" style="margin-top: 10px;">
-            密&nbsp&nbsp&nbsp&nbsp码：<input type="password" class="" id="password" placeholder="PassWord" style="border-radius: 3px;">
-
-        </div>
-
-
-        <div class=""style="margin-top: 10px;">
-
-            <button type="button" style="border-radius: 3px; " class="am-btn">登录</button>
-
-        </div>
-    </form>
-
-</div>
+    </div>
+</footer>
+<!-- / footer -->
     <script type="text/javascript">
 
     $(function(){
@@ -83,5 +83,4 @@
             })
     </script>
 </body>
-
 </html>
