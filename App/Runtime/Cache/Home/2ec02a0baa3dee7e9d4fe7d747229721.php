@@ -236,16 +236,19 @@
                 <?php if((in_array('Rules',$rr))): ?><li>
                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
                 </li><?php endif; ?>-->
-                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><li class="active">
+                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr)) || (in_array('Depart',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules' || $controller == 'Depart'): ?><li class="active">
                         <?php else: ?>
                         <li><?php endif; ?>
-                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
-                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
+                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'Role'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Depart'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
+                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules' || $controller == 'Depart'): ?><ul class="nav nav-second-level collapse in ">
                     <?php else: ?>
                         <ul class="nav nav-second-level"><?php endif; ?>
                             <?php if((in_array('User',$rr))): ?><li>
                                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  "> 员工资料</a>
                                 </li><?php endif; ?>
+                    <?php if((in_array('Depart',$rr))): ?><li>
+                            <a href="<?php echo U('Depart/index');?>" class=" <?php if(CONTROLLER_NAME == 'Depart'): ?>active-menu<?php endif; ?> "> 部门管理</a>
+                        </li><?php endif; ?>
                             <?php if((in_array('Levels',$rr))): ?><li>
                                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
                                 </li><?php endif; ?>

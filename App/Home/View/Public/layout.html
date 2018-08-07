@@ -242,14 +242,14 @@
                     <a href="{:U('Rules/index')}" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
                 </li>
                 </if>-->
-                <if  condition="(in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr))">
-                    <if condition="$controller eq 'User' || $controller eq 'Levels' || $controller eq 'Role' || $controller eq 'Rules'">
+                <if  condition="(in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr)) || (in_array('Depart',$rr))">
+                    <if condition="$controller eq 'User' || $controller eq 'Levels' || $controller eq 'Role' || $controller eq 'Rules' || $controller eq 'Depart'">
                     <li class="active">
                         <else/>
                         <li>
                     </if>
-                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
-                    <if condition="$controller eq 'User' || $controller eq 'Levels' || $controller eq 'Role' || $controller eq 'Rules'">
+                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'Role'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Depart'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
+                    <if condition="$controller eq 'User' || $controller eq 'Levels' || $controller eq 'Role' || $controller eq 'Rules' || $controller eq 'Depart'">
                         <ul class="nav nav-second-level collapse in ">
                     <else/>
                         <ul class="nav nav-second-level">
@@ -259,6 +259,11 @@
                                     <a href="{:U('User/index')}" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  "> 员工资料</a>
                                 </li>
                             </if>
+                    <if  condition="(in_array('Depart',$rr))">
+                        <li>
+                            <a href="{:U('Depart/index')}" class=" <?php if(CONTROLLER_NAME == 'Depart'): ?>active-menu<?php endif; ?> "> 部门管理</a>
+                        </li>
+                    </if>
                             <if  condition="(in_array('Levels',$rr))">
                                 <li>
                                     <a href="{:U('Levels/index')}" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
