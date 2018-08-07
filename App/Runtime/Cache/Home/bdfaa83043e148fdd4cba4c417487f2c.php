@@ -373,7 +373,7 @@
                                         <div class="select-field col s6">
                                             员工级别:<select class="form-control" id="level">
                                             <option value="">选择级别</option>
-                                            <?php if(is_array($levels)): foreach($levels as $key=>$v): ?><option <?php if($v[id] == $info[level]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['level']); ?>级</option><?php endforeach; endif; ?>
+                                            <?php if(is_array($levels)): foreach($levels as $key=>$v): ?><option <?php if($v[id] == $info[level_id]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['level']); ?>级</option><?php endforeach; endif; ?>
                                         </select>
                                         </div>
                                     </div>
@@ -397,6 +397,16 @@
                                             学历:<input id="school" type="text" class="validate" value="<?php echo ($info["school"]); ?>">
                                         </div>
                                     </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        可查看项目:
+                                        <?php if(is_array($project)): foreach($project as $key=>$v): ?><p>
+                                                <input name="project" type="checkbox" class="filled-in"  id="project<?php echo ($v["id"]); ?>" value="<?php echo ($v["id"]); ?>"
+                                                <?php if(in_array($v['id'],$info['have_project'])){echo "checked=checked";} ?>  />
+                                                <label for="project<?php echo ($v["id"]); ?>"><?php echo ($v["name"]); ?></label>
+                                            </p><?php endforeach; endif; ?>
+                                    </div>
+                                </div>
                                     <div class="row">
                                         <div class="input-field col s6">
 
@@ -492,9 +502,15 @@
             var department = $("#department").val();
             var levels = $("#level").val();
             var upPod = $("#pic").attr('pod');
-            //console.log(upPod);return
 
-            //console.log(pic);return
+            obj = $("input[name='project']");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            var have_project = check_val;
+
             if(!name) {
                 layer.msg("姓名不能为空");return;
             }
@@ -506,9 +522,9 @@
             }*/
             if(!upPod) {
                 var pic = $("#pic").attr('src');
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
             } else {
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
             }
             $.post("<?php echo U('User/editUser');?>",data,function(res) {
                 if(res.err==1) {

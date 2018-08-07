@@ -45,6 +45,7 @@ class UserController extends CommonController {
     public function addUser() {
         if(IS_POST) {
             $postdata = I('post.');
+            $postdata['have_project'] = implode(',',$postdata['have_project']);
             if($postdata['password']) {
                 $postdata['mixs'] = mt_rand(1,999999);
                 $postdata['password'] = md5($postdata['password'].$postdata['mixs']);
@@ -70,6 +71,8 @@ class UserController extends CommonController {
             $levels = D('Levels')->get_all($map,$field='id,level');
             $depart = D('Role')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
             $department = D('Depart')->get_all($map='',$field="id,name");
+            $project = D('Project')->get_all($map,$field="id,name");
+            $this->assign('project',$project);
             $this->assign('department',$department);
             $this->assign('depart',$depart);
             $this->assign('levels',$levels);
@@ -82,6 +85,7 @@ class UserController extends CommonController {
     public function editUser() {
         if(IS_POST) {
             $postdata = I('post.');
+            $postdata['have_project'] = implode(',',$postdata['have_project']);
             if($postdata['pic']) {
                 $res = R("Common/upload",array($postdata['pic']));
                 if($res['err']==1) {
@@ -100,9 +104,12 @@ class UserController extends CommonController {
         $id = I('get.id');
         $map['id'] = $id;
         $info = D('User')->get_one($map);
+        $info['have_project'] = explode(',',$info['have_project']);
         $depart = D('Role')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
         $levels = D('Levels')->get_all($map='',$field='id,level');
         $department = D('Depart')->get_all($map='',$field="id,name");
+        $project = D('Project')->get_all($map,$field="id,name");
+        $this->assign('project',$project);
         $this->assign('department',$department);
         $this->assign('levels',$levels);
         $this->assign('depart',$depart);

@@ -400,6 +400,15 @@
 
                                     <div class="row">
                                         <div class="input-field col s6">
+                                            可查看项目:
+                                            <?php if(is_array($project)): foreach($project as $key=>$v): ?><p>
+                                                    <input name="project" type="checkbox" class="filled-in"  id="project<?php echo ($v["id"]); ?>" value="<?php echo ($v["id"]); ?>" />
+                                                    <label for="project<?php echo ($v["id"]); ?>"><?php echo ($v["name"]); ?></label>
+                                                </p><?php endforeach; endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
 
                                                         <div id="img">
                                                             <img id="pic" src="" width="200px;">
@@ -503,10 +512,16 @@
                 layer.msg("密码不能为空");return;
             }
             password = $.md5(password);
-            /*if(!depart) {
-                layer.msg("部门不能为空");return;
-            }*/
-            var data = {name:name,nickname:nickname,password:password,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department};
+
+            obj = $("input[name='project']");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            var have_project = check_val;
+
+            var data = {name:name,nickname:nickname,password:password,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
             $.post("<?php echo U('User/addUser');?>",data,function(res) {
                 if(res.err==1) {
 

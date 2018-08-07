@@ -90,7 +90,7 @@
                                             员工级别:<select class="form-control" id="level">
                                             <option value="">选择级别</option>
                                             <foreach name="levels" item="v">
-                                                <option <if condition="$v[id] eq $info[level]">selected</if> value="{$v.id}">{$v['level']}级</option>
+                                                <option <if condition="$v[id] eq $info[level_id]">selected</if> value="{$v.id}">{$v['level']}级</option>
                                             </foreach>
                                         </select>
                                         </div>
@@ -115,6 +115,18 @@
                                             学历:<input id="school" type="text" class="validate" value="{$info.school}">
                                         </div>
                                     </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        可查看项目:
+                                        <foreach name="project" item="v">
+                                            <p>
+                                                <input name="project" type="checkbox" class="filled-in"  id="project{$v.id}" value="{$v.id}"
+                                                <php>if(in_array($v['id'],$info['have_project'])){echo "checked=checked";}</php>  />
+                                                <label for="project{$v.id}">{$v.name}</label>
+                                            </p>
+                                        </foreach>
+                                    </div>
+                                </div>
                                     <div class="row">
                                         <div class="input-field col s6">
 
@@ -176,9 +188,15 @@
             var department = $("#department").val();
             var levels = $("#level").val();
             var upPod = $("#pic").attr('pod');
-            //console.log(upPod);return
 
-            //console.log(pic);return
+            obj = $("input[name='project']");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            var have_project = check_val;
+
             if(!name) {
                 layer.msg("姓名不能为空");return;
             }
@@ -190,9 +208,9 @@
             }*/
             if(!upPod) {
                 var pic = $("#pic").attr('src');
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
             } else {
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
             }
             $.post("{:U('User/editUser')}",data,function(res) {
                 if(res.err==1) {
