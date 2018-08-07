@@ -236,16 +236,19 @@
                 <?php if((in_array('Rules',$rr))): ?><li>
                     <a href="<?php echo U('Rules/index');?>" class=" <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?> waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> 规则管理</a>
                 </li><?php endif; ?>-->
-                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><li class="active">
+                <?php if((in_array('User',$rr)) || (in_array('Levels',$rr)) || (in_array('Role',$rr)) || (in_array('Rules',$rr)) || (in_array('Depart',$rr))): if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules' || $controller == 'Depart'): ?><li class="active">
                         <?php else: ?>
                         <li><?php endif; ?>
-                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Department'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
-                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules'): ?><ul class="nav nav-second-level collapse in ">
+                        <a href="javascript:;" class="  <?php if(CONTROLLER_NAME == 'Role'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Depart'): ?>active-menu<?php endif; ?>  <?php if(CONTROLLER_NAME == 'Rules'): ?>active-menu<?php endif; ?>  waves-effect waves-dark"><i class="fa fa-sitemap"></i> 员工管理<span class="fa arrow"></span></a>
+                    <?php if($controller == 'User' || $controller == 'Levels' || $controller == 'Role' || $controller == 'Rules' || $controller == 'Depart'): ?><ul class="nav nav-second-level collapse in ">
                     <?php else: ?>
                         <ul class="nav nav-second-level"><?php endif; ?>
                             <?php if((in_array('User',$rr))): ?><li>
                                     <a href="<?php echo U('User/index');?>" class=" <?php if(CONTROLLER_NAME == 'User'): ?>active-menu<?php endif; ?>  "> 员工资料</a>
                                 </li><?php endif; ?>
+                    <?php if((in_array('Depart',$rr))): ?><li>
+                            <a href="<?php echo U('Depart/index');?>" class=" <?php if(CONTROLLER_NAME == 'Depart'): ?>active-menu<?php endif; ?> "> 部门管理</a>
+                        </li><?php endif; ?>
                             <?php if((in_array('Levels',$rr))): ?><li>
                                     <a href="<?php echo U('Levels/index');?>" class=" <?php if(CONTROLLER_NAME == 'Levels'): ?>active-menu<?php endif; ?> "> 员工级别</a>
                                 </li><?php endif; ?>
@@ -310,6 +313,14 @@
                                             昵称:<input id="nickname" type="text" class="validate" value="<?php echo ($info["nickname"]); ?>">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            角色:<select class="form-control" id="depart">
+                                            <option value="">选择角色</option>
+                                            <?php if(is_array($depart)): foreach($depart as $key=>$v): ?><option <?php if($v[id] == $info[depart]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['depart']); ?></option><?php endforeach; endif; ?>
+                                        </select>
+                                        </div>
+                                    </div>
 <!--                                    <div class="row">
                                         <div class="input-field col s6">
                                             性别:<input id="gender" type="text" class="validate">
@@ -335,9 +346,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            角色:<select class="form-control" id="depart">
-                                            <option value="">选择角色</option>
-                                            <?php if(is_array($depart)): foreach($depart as $key=>$v): ?><option <?php if($v[id] == $info[depart]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['depart']); ?></option><?php endforeach; endif; ?>
+                                            部门:<select class="form-control" id="department">
+                                            <option value="">选择部门</option>
+                                            <?php if(is_array($department)): foreach($department as $key=>$v): ?><option <?php if($v[id] == $info[department]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['name']); ?></option><?php endforeach; endif; ?>
                                         </select>
                                         </div>
                                     </div>
@@ -478,6 +489,7 @@
             var school = $("#school").val();
             var depart = $("#depart").val();
             var relation = $("#relation").val();
+            var department = $("#department").val();
             var levels = $("#level").val();
             var upPod = $("#pic").attr('pod');
             //console.log(upPod);return
@@ -494,9 +506,9 @@
             }*/
             if(!upPod) {
                 var pic = $("#pic").attr('src');
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department};
             } else {
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department};
             }
             $.post("<?php echo U('User/editUser');?>",data,function(res) {
                 if(res.err==1) {

@@ -25,12 +25,15 @@ class UserController extends CommonController {
         $depart = array_column($depart,'depart','id');
         $levels = D('Levels')->get_all($map='',$field='id,level');
         $levels = array_column($levels,'level','id');
+        $department = D('Depart')->get_all($map='',$field="id,name");
+        $department = array_column($department,'name','id');
         //print_r($depart);die;
         foreach($data as &$v) {
             $v['gender'] = $v['gender']==1?"男":"女";
             $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
             $v['update_time'] = $v['update_time']?date('Y-m-d H:i:s',$v['update_time']):"未编辑";
             $v['depart'] = $depart[$v['depart']];
+            $v['department'] = $department[$v['department']];
             if($v['level_id']) $v['level_id'] = $levels[$v['level_id']]."级";
             $v['status'] = $v['status']==1?"正常":"禁用";
         }
@@ -66,6 +69,8 @@ class UserController extends CommonController {
         } else {
             $levels = D('Levels')->get_all($map,$field='id,level');
             $depart = D('Role')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
+            $department = D('Depart')->get_all($map='',$field="id,name");
+            $this->assign('department',$department);
             $this->assign('depart',$depart);
             $this->assign('levels',$levels);
             $this->display();
@@ -97,6 +102,8 @@ class UserController extends CommonController {
         $info = D('User')->get_one($map);
         $depart = D('Role')->get_all($map='',$field="id,depart",$page=1,$pagenum=999999);
         $levels = D('Levels')->get_all($map='',$field='id,level');
+        $department = D('Depart')->get_all($map='',$field="id,name");
+        $this->assign('department',$department);
         $this->assign('levels',$levels);
         $this->assign('depart',$depart);
         $this->assign('info',$info);

@@ -25,6 +25,16 @@
                                             昵称:<input id="nickname" type="text" class="validate" value="{$info.nickname}">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            角色:<select class="form-control" id="depart">
+                                            <option value="">选择角色</option>
+                                            <foreach name="depart" item="v">
+                                                <option <if condition="$v[id] eq $info[depart]">selected</if> value="{$v.id}">{$v['depart']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
 <!--                                    <div class="row">
                                         <div class="input-field col s6">
                                             性别:<input id="gender" type="text" class="validate">
@@ -50,10 +60,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            角色:<select class="form-control" id="depart">
-                                            <option value="">选择角色</option>
-                                            <foreach name="depart" item="v">
-                                                <option <if condition="$v[id] eq $info[depart]">selected</if> value="{$v.id}">{$v['depart']}</option>
+                                            部门:<select class="form-control" id="department">
+                                            <option value="">选择部门</option>
+                                            <foreach name="department" item="v">
+                                                <option <if condition="$v[id] eq $info[department]">selected</if> value="{$v.id}">{$v['name']}</option>
                                             </foreach>
                                         </select>
                                         </div>
@@ -163,6 +173,7 @@
             var school = $("#school").val();
             var depart = $("#depart").val();
             var relation = $("#relation").val();
+            var department = $("#department").val();
             var levels = $("#level").val();
             var upPod = $("#pic").attr('pod');
             //console.log(upPod);return
@@ -179,9 +190,9 @@
             }*/
             if(!upPod) {
                 var pic = $("#pic").attr('src');
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department};
             } else {
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department};
             }
             $.post("{:U('User/editUser')}",data,function(res) {
                 if(res.err==1) {

@@ -31,6 +31,16 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="select-field col s6">
+                                            角色:<select class="form-control" id="depart">
+                                                <option value="">选择角色</option>
+                                                <foreach name="depart" item="v">
+                                                <option value="{$v.id}">{$v['depart']}</option>
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="input-field col s6">
                                             性别:
                                             <p>
@@ -50,10 +60,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            角色:<select class="form-control" id="depart">
-                                                <option value="">选择角色</option>
-                                                <foreach name="depart" item="v">
-                                                <option value="{$v.id}">{$v['depart']}</option>
+                                            部门:<select class="form-control" id="department">
+                                                <option value="">选择部门</option>
+                                                <foreach name="department" item="v">
+                                                <option value="{$v.id}">{$v['name']}</option>
                                                 </foreach>
                                             </select>
                                         </div>
@@ -159,6 +169,7 @@
             var address = $("#address").val();
             var school = $("#school").val();
             var depart = $("#depart").val();
+            var department = $("#department").val();
             var relation = $("#relation").val();
             var password = $("#password").val();
             var levels = $("#level").val();
@@ -179,7 +190,7 @@
             /*if(!depart) {
                 layer.msg("部门不能为空");return;
             }*/
-            var data = {name:name,nickname:nickname,password:password,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels};
+            var data = {name:name,nickname:nickname,password:password,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department};
             $.post("{:U('User/addUser')}",data,function(res) {
                 if(res.err==1) {
 
