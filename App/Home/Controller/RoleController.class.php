@@ -16,15 +16,14 @@ class RoleController extends CommonController {
         $rules = array_column($rules,'rules','id');
         foreach($data as &$v) {
             $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
-/*            $map = array();
+            $map = array();
             if($v['parent_id']==0) {
                 $v['parent_id']="顶级";
             } else {
                 $map['id'] = $v['parent_id'];
-                $de = D('Department')->get_one($map);
-                print_r($map);
+                $de = D('Role')->get_one($map);
                 $v['parent_id'] = $de['depart'];
-            }*/
+            }
             $rulesId = explode(',',$v['rules_id']);
             foreach($rulesId as &$vv) {
                 $r = $rules[$vv];
