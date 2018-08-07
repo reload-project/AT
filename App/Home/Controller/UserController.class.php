@@ -30,7 +30,12 @@ class UserController extends CommonController {
         //print_r($depart);die;
         foreach($data as &$v) {
             $v['gender'] = $v['gender']==1?"男":"女";
-            $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
+            if($v['add_time']) {
+                $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
+            } else {
+                $v['add_time'] = '';
+            }
+            
             $v['update_time'] = $v['update_time']?date('Y-m-d H:i:s',$v['update_time']):"未编辑";
             $v['depart'] = $depart[$v['depart']];
             $v['department'] = $department[$v['department']];
