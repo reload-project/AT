@@ -16,7 +16,7 @@
                             </div>
                             <div class="card-content">
                                 <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="select-field col s6">
                                             项目主管:<select class="form-control" id="director">
                                             <option value="">选择主管</option>
@@ -25,7 +25,7 @@
                                             </foreach>
                                         </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         <div class="input-field col s6">
                                             项目名称:<input id="name" type="text" class="validate">
@@ -68,6 +68,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="input-field col s6">
+                                            业务跟进人员:<input id="follow" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <!--<div class="row">
                                         <div class="select-field col s6">
                                             业务跟进:<select class="form-control" id="follow">
                                             <option value="">选择跟进人员</option>
@@ -77,7 +82,7 @@
                                         </select>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                     <div class="row">
                                         <div class="select-field col s6">
                                             创建人:<select class="form-control" id="create">
                                             <option value="">选择创建人</option>
@@ -86,7 +91,7 @@
                                             </foreach>
                                         </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         项目预计开始日期
                                         <div class="layui-inline">
@@ -164,7 +169,7 @@
     </script>
     <script type="text/javascript">
         function add() {
-            var director = $("#director").val();
+            // var director = $("#director").val();
             var name = $("#name").val();
             var cate = $("#cate").val();
             var introduction = $("#introduction").val();
@@ -172,25 +177,25 @@
             var contact = $("#contact").val();
             var contact_phone = $("#contact_phone").val();
             var follow = $("#follow").val();
-            var create = $("#create").val();
+            // var create = $("#create").val();
             var expected_start_time = $("#expected_start_time").val();
             var expected_finish_time = $("#expected_finish_time").val();
             // var status = $("#status").val();
             var note = $("#note").val();
-            if(!director) {
+            /*if(!director) {
                 layer.msg("项目主管不能为空");return;
-            }
+            }*/
             if(!name) {
                 layer.msg("项目名称不能为空");return;
             }
             if(!customer_name) {
                 layer.msg("客户名称不能为空");return;
             }
-            if(!create) {
+            /*if(!create) {
                 layer.msg("创建人不能为空");return;
-            }
+            }*/
 
-            var data = {director:director,name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,create:create,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,note:note};
+            var data = {name:name,cate:cate,introduction:introduction,customer_name:customer_name,contact:contact,contact_phone:contact_phone,follow:follow,expected_start_time:expected_start_time,expected_finish_time:expected_finish_time,note:note};
             $.post("{:U('Project/addProject')}",data,function(res) {
                 if(res.err==1) {
 

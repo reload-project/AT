@@ -19,7 +19,7 @@ class ProjectController extends CommonController {
         $cate = array_column($cate,'name','id');
         foreach($data as &$v) {
             $v['cate'] = $cate[$v['cate']];
-            $v['follow'] = $user[$v['follow']];
+            // $v['follow'] = $user[$v['follow']];
             $v['create'] = $user[$v['create']];
             $v['create_time'] = date('Y-m-d',$v['create_time']);
             if($v['expected_start_time']>0) {
@@ -60,6 +60,8 @@ class ProjectController extends CommonController {
     public function addProject() {
         if(IS_POST) {
             $postdata = I('post.');
+            $create = $_SESSION['admin']['id'];
+            $postdata['create'] = $create;
             $postdata['number'] = mt_rand(1000,9999);
             $postdata['create_time'] = time();
             $postdata['status'] = 1;
@@ -91,8 +93,12 @@ class ProjectController extends CommonController {
     public function editProject() {
         if(IS_POST) {
             $postdata = I('post.');
-            $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
-            $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            if($postdata['expected_start_time']) {
+                $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
+            }
+            if($postdata['expected_finish_time']) {
+                $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+            }
             $res = D('Project')->editPro($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"编辑成功");
