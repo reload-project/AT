@@ -18,14 +18,14 @@ class TaskInfoController extends CommonController {
         // echo D('TaskInfo')->_sql();die;
         //print_r($data);die;
         $map = array();
-        $user = D('User')->get_all($map,$field="id,name");
-        $user = array_column($user,'name','id');
+        /*$user = D('User')->get_all($map,$field="id,name");
+        $user = array_column($user,'name','id');*/
         $task = D('Task')->get_all($map,$field="id,number");
         $task = array_column($task,'number','id');
         $project = D('Project')->get_all($map,$field="id,name");
         $project = array_column($project,'name','id');
         foreach($data as &$v) {
-            $v['user_id'] = $user[$v['user_id']];
+            // $v['user_id'] = $user[$v['user_id']];
             $v['task_num_id'] = $task[$v['task_num_id']];
             $v['pro_num_id'] = $project[$v['pro_num_id']];
             if($v['unit']==1) {

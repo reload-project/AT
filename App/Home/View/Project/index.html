@@ -267,7 +267,7 @@
             }
             var ch = '';
             ch += '<div class="layui-collapse">';
-            ch += '<label>选择('+name+')状态</label>';
+            ch += '<label>'+name+'</label>';
             ch += '<div class="layui-colla-item">';
             ch += '<select id="checkStatus" class="form-control" style="width: 240px;" lay-verify="required">';
             ch += '<option value="">请选择状态</option>';
@@ -284,7 +284,7 @@
 
             var index=layer.open({
                 type: 1,
-                area: ['13%','180px'],
+                area: ['16%','230px'],
                 title: '更新项目状态',
                 shadeClose: true,
                 content: ch

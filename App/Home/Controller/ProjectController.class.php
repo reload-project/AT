@@ -168,6 +168,7 @@ class ProjectController extends CommonController {
                 $postdata['actual_start_time'] = strtotime($postdata['actual_start_time']);
             }
             $postdata['line'] = 1;
+            $postdata['status'] = 4;
             //print_r($postdata);die;
             $res = D('Project')->editPro($postdata);
             if($res) {
