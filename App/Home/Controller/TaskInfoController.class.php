@@ -47,23 +47,23 @@ class TaskInfoController extends CommonController {
             } else if($v['unit']==10) {
                 $v['unit'] = "套";
             }
-            $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
+            $v['add_time'] = date('Y-m-d',$v['add_time']);
             if($v['expected_start_time']>0) {
-                $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
+                $v['expected_start_time'] = date('Y-m-d',$v['expected_start_time']);
             } else {
                 $v['expected_start_time'] = "";
             }
             if($v['expected_finish_time']>0) {
-                $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+                $v['expected_finish_time'] = date('Y-m-d',$v['expected_finish_time']);
             } else {
                 $v['expected_finish_time'] = "";
             }
 
             if($v['actual_start_time']) {
-                $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
+                $v['actual_start_time'] = date('Y-m-d',$v['actual_start_time']);
             }
             if($v['actual_finish_time']) {
-                $v['actual_finish_time'] = date('Y-m-d H:i:s', $v['actual_finish_time']);
+                $v['actual_finish_time'] = date('Y-m-d', $v['actual_finish_time']);
             }
             if($v['status']==0) {
                 $v['status'] = "未启动";
@@ -157,12 +157,12 @@ class TaskInfoController extends CommonController {
             $map['id'] = $id;
             $info = D('TaskInfo')->get_one($map);
             if($info['expected_start_time']){
-                $info['expected_start_time'] = date('Y-m-d H:i:s',$info['expected_start_time']);
+                $info['expected_start_time'] = date('Y-m-d',$info['expected_start_time']);
             } else {
                 $info['expected_start_time'] = '';
             }
             if($info['expected_finish_time']) {
-                $info['expected_finish_time'] = date('Y-m-d H:i:s',$info['expected_finish_time']);
+                $info['expected_finish_time'] = date('Y-m-d',$info['expected_finish_time']);
             } else {
                 $info['expected_finish_time'] = '';
             }
