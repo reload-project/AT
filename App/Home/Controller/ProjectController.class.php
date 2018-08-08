@@ -20,6 +20,7 @@ class ProjectController extends CommonController {
         foreach($data as &$v) {
             $v['cate'] = $cate[$v['cate']];
             // $v['follow'] = $user[$v['follow']];
+            $v['area_manager'] = $user[$v['area_manager']];
             $v['create'] = $user[$v['create']];
             $v['create_time'] = date('Y-m-d',$v['create_time']);
             if($v['expected_start_time']>0) {
@@ -52,6 +53,15 @@ class ProjectController extends CommonController {
                 $v['status']="完结";
             }
         }
+        $map = array();
+        $map['name'] = array('neq',"admin");
+        $map['position'] = array(array('eq',"总经理"),array('eq',"副总"),array('eq',"总监"),array('eq',"区域经理"),array('eq',"项目经理"),array('eq',"项目组长"),'or');
+        $director = D('User')->get_all($map,$field="id,name");
+        //echo D('User')->_sql();die;
+        $map['position'] = array(array('eq',"总经理"),array('eq',"副总"),array('eq',"总监"),array('eq',"区域经理"),'or');
+        $manager = D('User')->get_all($map,$field="id,name");
+        $this->assign('director',$director);
+        $this->assign('manager',$manager);
         $this->assign('data',$data);
         $this->display();
     }
@@ -151,6 +161,7 @@ class ProjectController extends CommonController {
     public function startUp() {
         if(IS_POST) {
             $postdata = I('post.');
+            //print_r($postdata);die;
             if(!$postdata['actual_start_time']) {
                 $postdata['actual_start_time'] = time();
             } else {

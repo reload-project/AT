@@ -142,15 +142,30 @@
             sh += '<div class="layui-colla-item">';
             sh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp启动项目('+name+')？</h2>';
             sh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_start_time" style="width: 300px;" placeholder="戳我选择启动日期，不选则默认当前时间！"></div>';
+
+            sh += '项目主管:<select class="form-control" id="director"  style="width: 300px; margin-bottom: 30px; " >';
+            sh += '<option value="">选择主管</option>';
+            sh += '<foreach name="director" item="v">'                              
+            sh += '<option value="{$v.id}">{$v.name}</option>'                                  
+            sh += '</foreach>'                              
+            sh += '</select>'                         
+
+            sh += '区域经理:<select class="form-control" id="area_manager"  style="width: 300px;" >';
+            sh += '<option value="">选择主管</option>';
+            sh += '<foreach name="manager" item="v">'                              
+            sh += '<option value="{$v.id}">{$v.name}</option>'                                  
+            sh += '</foreach>'                              
+            sh += '</select>'  
+
             sh += '</div>';
             sh += '</div>';
             sh += '<br>';
             sh += '<br>';
-            sh += '&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="subUp('+id+')" class="layui-btn layui-btn-danger" style="width: 300px;">确认启动</button>';
+            sh += '&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="subUp('+id+')" class="layui-btn layui-btn-danger" style="width: 300px; margin-top: 30px; ">确认启动</button>';
 
             var index=layer.open({
                 type: 1,
-                area: ['18%','280px'],
+                area: ['18%','480px'],
                 title: '是否启动该项目',
                 shadeClose: true,
                 content: sh
@@ -161,7 +176,7 @@
                 //执行一个laydate实例
                 laydate.render({
                     elem: '#actual_start_time' //指定元素
-                    ,type: 'datetime'
+                    //,type: 'datetime'
                 });
             });
 
@@ -170,7 +185,9 @@
 
         function subUp(id) {
             var actual_start_time = $("#actual_start_time").val();
-            $.post("{:U('Project/startUp')}",{id:id,actual_start_time:actual_start_time},function(res) {
+            var director = $("#director").val();
+            var area_manager = $("#area_manager").val();
+            $.post("{:U('Project/startUp')}",{id:id,actual_start_time:actual_start_time,director:director,area_manager:area_manager},function(res) {
                 if(res.err==1) {
                     layer.closeAll();
                     location=location;
@@ -214,7 +231,7 @@
                 //执行一个laydate实例
                 laydate.render({
                     elem: '#actual_finish_time' //指定元素
-                    ,type: 'datetime'
+                   // ,type: 'datetime'
                 });
             });
 
