@@ -68,9 +68,9 @@
             if(!name) {
                 layer.msg("任务名称不能为空");return;
             }
-            if(!project) {
+            /*if(!project) {
                 layer.msg("所属项目不能为空");return;
-            }
+            }*/
             $.post("{:U('Task/editTask')}",{id:id,name:name,cate:cate},function(res) {
                 if(res.err==1) {
 
