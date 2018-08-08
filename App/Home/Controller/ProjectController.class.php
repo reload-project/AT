@@ -21,22 +21,22 @@ class ProjectController extends CommonController {
             $v['cate'] = $cate[$v['cate']];
             $v['follow'] = $user[$v['follow']];
             $v['create'] = $user[$v['create']];
-            $v['create_time'] = date('Y-m-d H:i:s',$v['create_time']);
+            $v['create_time'] = date('Y-m-d',$v['create_time']);
             if($v['expected_start_time']>0) {
-                $v['expected_start_time'] = date('Y-m-d H:i:s',$v['expected_start_time']);
+                $v['expected_start_time'] = date('Y-m-d',$v['expected_start_time']);
             } else {
                 $v['expected_start_time'] = "";
             }
             if($v['expected_finish_time']>0) {
-                $v['expected_finish_time'] = date('Y-m-d H:i:s',$v['expected_finish_time']);
+                $v['expected_finish_time'] = date('Y-m-d',$v['expected_finish_time']);
             } else {
                 $v['expected_finish_time'] = "";
             }
             if($v['actual_start_time']) {
-                $v['actual_start_time'] = date('Y-m-d H:i:s',$v['actual_start_time']);
+                $v['actual_start_time'] = date('Y-m-d',$v['actual_start_time']);
             }
             if($v['actual_finish_time']) {
-                $v['actual_finish_time'] = date('Y-m-d H:i:s', $v['actual_finish_time']);
+                $v['actual_finish_time'] = date('Y-m-d', $v['actual_finish_time']);
             }
             if($v['status']==1) {
                 $v['status']="新建";
