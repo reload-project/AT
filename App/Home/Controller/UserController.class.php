@@ -90,6 +90,12 @@ class UserController extends CommonController {
     public function editUser() {
         if(IS_POST) {
             $postdata = I('post.');
+            if(!$postdata['level_id']) {
+                $postdata['level_id'] = 0;
+            }
+            if(!$postdata['depart']) {
+                $postdata['depart'] = 0;
+            }
             $postdata['have_project'] = implode(',',$postdata['have_project']);
             if($postdata['pic']) {
                 $res = R("Common/upload",array($postdata['pic']));
