@@ -1,0 +1,77 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                修改密码
+                            </div>
+                            <div class="card-content">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            新密码:<input id="pass1" type="password" class="validate" />
+                                            <!--<label for="username">姓名</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            确认密码:<input id="pass2" type="password" class="validate" />
+                                            <!--<label for="username">姓名</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="btn " role="group" aria-label="..." onclick="checkPass()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+
+    <script src="__PUBLIC__assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__common/js/jquery.md5.js"></script>
+    <script type="text/javascript">
+        function checkPass() {
+            var passOne = $('#pass1').val();
+            var passTwo = $('#pass2').val();
+            if(passOne && passTwo) {
+                passOne = $.md5(passOne);
+                passTwo = $.md5(passTwo);
+                if(passOne === passTwo) {
+                    $.post("{:U('Index/checkPass')}",{passOne:passOne},function(res) {
+                        if(res.err==1) {
+                            layer.msg("修改密码成功，即将跳转登录页...",{time:2*1000},function() {
+                                //回调
+                                location.href="{:U('Admin/login')}";
+                            })
+                            
+                        }
+                    });
+                } else {
+                    layer.msg("两次密码输入不一致");return;
+                }
+
+            } else {
+                layer.msg("密码不能为空");return;
+            }
+
+        }
+    </script>
+</block>
