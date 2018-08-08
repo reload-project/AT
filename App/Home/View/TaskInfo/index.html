@@ -35,23 +35,23 @@
                                         <thead>
                                             <tr>
                                                 <th>#id</th>
-                                                <th>负责人</th>
-                                                <th>完成数量</th>
-                                                <th>信息名称</th>
-                                                <th>信息编号</th>
-                                                <th>项目编号</th>
-                                                <th>任务编号</th>
+                                                <th>工作人员</th>
+                                                <!-- <th>完成数量</th> -->
+                                                <th>任务名称</th>
+                                                <!-- <th>信息编号</th> -->
+                                                <th>所属项目</th>
+                                                <!-- <th>任务编号</th> -->
                                                 <th>数量</th>
                                                 <th>单位</th>
                                                 <th>计件单价</th>
                                                 <th>产值单价</th>
-                                                <th>预计投入数</th>
-                                                <th>预计开始日期</th>
+                                                <!-- <th>预计投入数</th> -->
+                                                <!-- <th>预计开始日期</th> -->
                                                 <th>预计结束日期</th>
                                                 <th>实际开始日期</th>
-                                                <th>实际结束日期</th>
+                                                <!-- <th>实际结束日期</th> -->
                                                 <th>状态</th>
-                                                <th>添加时间</th>
+                                                <!-- <th>添加时间</th> -->
                                                 <th <if condition=" $depart eq 2">style="display:none;" </if>>操作</th>
                                             </tr>
                                         </thead>
@@ -60,22 +60,22 @@
                                                 <tr class="odd gradeX">
                                                     <td>{$v['id']}</td>
                                                     <td>{$v['user_id']}</td>
-                                                    <td>{$v['finish_count']}</td>
+                                                    <!-- <td>{$v['finish_count']}</td> -->
                                                     <td>{$v['name']}</td>
-                                                    <td width="67px;">{$v['number']}</td>
+                                                    <!-- <td width="67px;">{$v['number']}</td> -->
                                                     <td width="67px;">{$v['pro_num_id']}</td>
-                                                    <td width="67px;">{$v['task_num_id']}</td>
+                                                    <!-- <td width="67px;">{$v['task_num_id']}</td> -->
                                                     <td>{$v['amount']}</td>
                                                     <td>{$v['unit']}</td>
                                                     <td>{$v['piece']}</td>
                                                     <td>{$v['production']}</td>
-                                                    <td>{$v['inputs']}</td>
-                                                    <td width="92px;">{$v['expected_start_time']}</td>
+                                                    <!-- <td>{$v['inputs']}</td> -->
+                                                    <!-- <td width="92px;">{$v['expected_start_time']}</td> -->
                                                     <td width="92px;">{$v['expected_finish_time']}</td>
                                                     <td width="92px;">{$v['actual_start_time']}</td>
-                                                    <td width="92px;">{$v['actual_finish_time']}</td>
+                                                    <!-- <td width="92px;">{$v['actual_finish_time']}</td> -->
                                                     <td>{$v['status']}</td>
-                                                    <td width="80px;">{$v['add_time']}</td>
+                                                    <!-- <td width="80px;">{$v['add_time']}</td> -->
                                                     <td <if condition=" $depart eq 2">style="display:none;" </if> >
                                                         <div class='btn <if condition="$v[status] eq 结束 || $v[status] eq 启动">disabled</if>' role="group" aria-label="..." onclick='startUp("{$v[id]}","{$v[name]}")'>
                                                             <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">启动</font></a>
@@ -131,8 +131,9 @@
             var sh = '';
             sh += '<div class="layui-collapse">';
             sh += '<div class="layui-colla-item">';
-            sh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp启动任务('+name+')？</h2>';
+            sh += '<h2 class="layui-colla-title">'+name+'</h2>';
             sh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_start_time" style="width: 300px;" placeholder="戳我选择启动日期，不选则默认当前时间！"></div>';
+            sh += '工作人员：<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="user_id" style="width: 300px;" placeholder="多个工作人员以英文,符号隔开！"></div>';
             sh += '</div>';
             sh += '</div>';
             sh += '<br>';
@@ -141,7 +142,7 @@
 
             var index=layer.open({
                 type: 1,
-                area: ['18%','280px'],
+                area: ['20%','380px'],
                 title: '是否启动该任务',
                 shadeClose: true,
                 content: sh
@@ -152,7 +153,7 @@
                 //执行一个laydate实例
                 laydate.render({
                     elem: '#actual_start_time' //指定元素
-                    ,type: 'datetime'
+                   // ,type: 'datetime'
                 });
             });
 
@@ -161,7 +162,8 @@
 
         function subUp(id) {
             var actual_start_time = $("#actual_start_time").val();
-            $.post("{:U('TaskInfo/startUp')}",{id:id,actual_start_time:actual_start_time},function(res) {
+            var user_id = $("#user_id").val();
+            $.post("{:U('TaskInfo/startUp')}",{id:id,actual_start_time:actual_start_time,user_id:user_id},function(res) {
                 if(res.err==1) {
                     layer.closeAll();
                     location=location;
@@ -176,7 +178,7 @@
             var eh = '';
             eh += '<div class="layui-collapse">';
             eh += '<div class="layui-colla-item">';
-            eh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp结束任务('+name+')？</h2>';
+            eh += '<h2 class="layui-colla-title">'+name+'</h2>';
             eh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_finish_time" style="width: 300px;" placeholder="戳我选择结束日期，不选则默认当前时间！"></div>';
             eh += '</div>';
             eh += '</div>';
@@ -197,7 +199,7 @@
                 //执行一个laydate实例
                 laydate.render({
                     elem: '#actual_finish_time' //指定元素
-                    ,type: 'datetime'
+                   // ,type: 'datetime'
                 });
             });
 

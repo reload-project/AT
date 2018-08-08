@@ -9,19 +9,21 @@ namespace Home\Controller;
 
 class TaskInfoController extends CommonController {
     public function index() {
-        $userId = $_SESSION['admin']['id'];
+        $name = $_SESSION['admin']['name'];
         $depart = $_SESSION['admin']['depart'];
-        if($userId != 1 && $depart == 2) {
-            $map['user_id'] = $userId;
+        if($name != 'admin' && $depart == 2) {
+            $map['user_id'] = array('like','%'.$name.'%');
         }
         $data = D('TaskInfo')->get_all($map);
+        // echo D('TaskInfo')->_sql();die;
+        //print_r($data);die;
         $map = array();
         $user = D('User')->get_all($map,$field="id,name");
         $user = array_column($user,'name','id');
         $task = D('Task')->get_all($map,$field="id,number");
         $task = array_column($task,'number','id');
-        $project = D('Project')->get_all($map,$field="id,number");
-        $project = array_column($project,'number','id');
+        $project = D('Project')->get_all($map,$field="id,name");
+        $project = array_column($project,'name','id');
         foreach($data as &$v) {
             $v['user_id'] = $user[$v['user_id']];
             $v['task_num_id'] = $task[$v['task_num_id']];
@@ -81,6 +83,11 @@ class TaskInfoController extends CommonController {
     public function addTask() {
         if(IS_POST) {
             $postdata = I('post.');
+            $map['id'] = $postdata['name'];
+            $postdata['task_num_id'] = $postdata['name'];
+            $tasks = D('Task')->get_one($map);
+            $postdata['name'] = $tasks['name'];
+            //print_r($postdata);die;
 /*            $map['id'] = $postdata['task_num_id'];
             $task = D('Task')->get_one($map);
             $postdata['task_num_id'] = $task['number'];
@@ -132,6 +139,10 @@ class TaskInfoController extends CommonController {
     public function editTask() {
         if(IS_POST) {
             $postdata = I('post.');
+            $map['id'] = $postdata['name'];
+            $postdata['task_num_id'] = $postdata['name'];
+            $tasks = D('Task')->get_one($map);
+            $postdata['name'] = $tasks['name'];
 /*            $map['id'] = $postdata['task_num_id'];
             $task = D('Task')->get_one($map);
             $postdata['task_num_id'] = $task['number'];
@@ -238,7 +249,7 @@ class TaskInfoController extends CommonController {
     //任务提交数量页面
     public function taskNumber() {
         if(IS_POST) {
-            $userId = $_SESSION['admin']['id'];
+            $name = $_SESSION['admin']['name'];
             $postdata = I('post.');
             $data = array();
             foreach($postdata['result'] as $k=>$v) {
@@ -246,11 +257,11 @@ class TaskInfoController extends CommonController {
                 $data[$k]['result'] = $v;
                 $data[$k]['number'] = $postdata['number'][$k];
             }
-            $map['user_id'] = $userId;
+            $map['user_id'] = array('like','%'.$name.'%');
             $tasks = D('TaskInfo')->get_all($map,$field="id,name");
             $tasks = array_column($tasks,'id','name');
             foreach($data as $k=>$v) {
-                $datas['user_id'] = $userId;
+                $datas['user_id'] = $name;
                 $datas['pro_num_id'] = $v['pro_num_id'];
                 $datas['task_num_id'] = $tasks[$v['number']];
                 $datas['amount'] = $v['result'];
@@ -273,7 +284,8 @@ class TaskInfoController extends CommonController {
 
         } else {
             $userId = $_SESSION['admin']['id'];
-            $map['user_id'] = $userId;
+            $name = $_SESSION['admin']['name'];
+            $map['user_id'] = array('like','%'.$name.'%');
             $tasks = D('TaskInfo')->get_all($map,$field="id,name,number,pro_num_id");
             $map = array();
             $map['director'] = $userId;
