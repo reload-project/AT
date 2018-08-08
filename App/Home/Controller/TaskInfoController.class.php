@@ -48,6 +48,8 @@ class TaskInfoController extends CommonController {
                 $v['unit'] = "箱";
             } else if($v['unit']==10) {
                 $v['unit'] = "套";
+            } else if($v['unit']==11) {
+                $v['unit'] = "条";
             }
             $v['add_time'] = date('Y-m-d',$v['add_time']);
             if($v['expected_start_time']>0) {
