@@ -12,7 +12,16 @@ class ProjectController extends CommonController {
 
     //项目信息
     public function index() {
-        $data = D('Project')->get_all();
+        $userId = $_SESSION['admin']['id'];
+        if($userId!=1) {
+            $where['director'] = $userId;
+            $where['area_manager'] = $userId;
+            $where['_logic'] = 'or';
+            $map['_complex'] = $where;
+        }
+        $data = D('Project')->get_all($map);
+        //echo D('Project')->_sql();
+        //print_r($data);die;
         $user = D('User')->get_all($map="",$field="id,name");
         $user = array_column($user,'name','id');
         $cate = D('ProjectCate')->get_all();

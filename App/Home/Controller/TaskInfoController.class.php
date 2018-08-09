@@ -9,12 +9,23 @@ namespace Home\Controller;
 
 class TaskInfoController extends CommonController {
     public function index() {
-        $name = $_SESSION['admin']['name'];
         $depart = $_SESSION['admin']['depart'];
-        if($name != 'admin' && $depart == 2) {
-            $map['user_id'] = array('like','%'.$name.'%');
+        $userId = $_SESSION['admin']['id'];
+        if($userId!=1) {
+            $where['director'] = $userId;
+            $where['area_manager'] = $userId;
+            $where['_logic'] = 'or';
+            $map['_complex'] = $where;
         }
+        $project = D('Project')->get_all($map);
+        $projectId = array_column($project,'id');
+        $map = array();
+        $map['pro_num_id'] = array('in',$projectId);
         $data = D('TaskInfo')->get_all($map);
+
+        //if($name != 'admin' && $depart == 2) {
+        //    $map['user_id'] = array('like','%'.$name.'%');
+        //}
         // echo D('TaskInfo')->_sql();die;
         //print_r($data);die;
         $map = array();
@@ -22,7 +33,7 @@ class TaskInfoController extends CommonController {
         $user = array_column($user,'name','id');*/
         $task = D('Task')->get_all($map,$field="id,number");
         $task = array_column($task,'number','id');
-        $project = D('Project')->get_all($map,$field="id,name");
+        //$project = D('Project')->get_all($map,$field="id,name");
         $project = array_column($project,'name','id');
         foreach($data as &$v) {
             // $v['user_id'] = $user[$v['user_id']];
