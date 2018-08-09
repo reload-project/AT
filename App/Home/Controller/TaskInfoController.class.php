@@ -243,32 +243,30 @@ class TaskInfoController extends CommonController {
 
     //任务提交数量页面
     public function taskNumber() {
+        $userId = $_SESSION['admin']['id'];
         if(IS_POST) {
-            $name = $_SESSION['admin']['name'];
             $postdata = I('post.');
             $data = array();
             foreach($postdata['result'] as $k=>$v) {
-                $data[$k]['pro_num_id'] = $postdata['pro_num_id'];
+                //$data[$k]['pro_num_id'] = $postdata['pro_num_id'];
                 $data[$k]['result'] = $v;
                 $data[$k]['number'] = $postdata['number'][$k];
             }
-            $map['user_id'] = array('like','%'.$name.'%');
+            $map['pro_num_id'] = $postdata['pro_num_id'];
             $tasks = D('TaskInfo')->get_all($map,$field="id,name");
             $tasks = array_column($tasks,'id','name');
             foreach($data as $k=>$v) {
-                $datas['user_id'] = $name;
-                $datas['pro_num_id'] = $v['pro_num_id'];
-                $datas['task_num_id'] = $tasks[$v['number']];
-                $datas['amount'] = $v['result'];
-                $datas['add_time'] = time();
-                $map['id'] = $datas['task_num_id'];
-                $map['pro_num_id'] = $datas['pro_num_id'];
+                $map['id'] = $tasks[$v['number']];
                 $taskInfo = D('TaskInfo')->get_one($map);
                 $da['id'] = $taskInfo['id'];
-                $da['finish_count'] = $taskInfo['finish_count']+$datas['amount'];
+                $da['finish_count'] = $taskInfo['finish_count']+$v['result'];
                 D('TaskInfo')->editTask($da);
-                $res = D('TaskNumber')->addNumber($datas);
             }
+            $datas['user_id'] = $userId;
+            $datas['number_str'] = json_encode($data);
+            $datas['pro_num_id'] = $postdata['pro_num_id'];
+            $datas['add_time'] = time();
+            $res = D('TaskNumber')->addNumber($datas);
             if($res) {
                 $datasss = array('err'=>1,'msg'=>"添加成功");
             } else {
@@ -278,17 +276,89 @@ class TaskInfoController extends CommonController {
 
 
         } else {
-            $userId = $_SESSION['admin']['id'];
-            $name = $_SESSION['admin']['name'];
-            $map['user_id'] = array('like','%'.$name.'%');
-            $tasks = D('TaskInfo')->get_all($map,$field="id,name,number,pro_num_id");
-            $map = array();
-            $map['director'] = $userId;
-            $project = D('Project')->get_all($map,$field="id,name,number");
+            if($userId!=1) {
+                $where['director'] = $userId;
+                $where['area_manager'] = $userId;
+                $where['_logic'] = 'or';
+                $map['_complex'] = $where;
+            }
+            $project = D('Project')->get_all($map);
+
             $this->assign('project',$project);
-            $this->assign('tasks',$tasks);
+
             $this->display();
         }
+    }
+
+
+
+
+
+
+//     public function taskNumber() {
+//         if(IS_POST) {
+//             //$name = $_SESSION['admin']['name'];
+//             $postdata = I('post.');
+//             $data = array();
+//             foreach($postdata['result'] as $k=>$v) {
+//                 $data[$k]['pro_num_id'] = $postdata['pro_num_id'];
+//                 $data[$k]['result'] = $v;
+//                 $data[$k]['number'] = $postdata['number'][$k];
+//             }
+//             print_r($data);die;
+//             //$map['user_id'] = array('like','%'.$name.'%');
+//             $tasks = D('TaskInfo')->get_all($map,$field="id,name");
+//             $tasks = array_column($tasks,'id','name');
+//             foreach($data as $k=>$v) {
+//                 $datas['user_id'] = $name;
+//                 $datas['pro_num_id'] = $v['pro_num_id'];
+//                 $datas['task_num_id'] = $tasks[$v['number']];
+//                 $datas['amount'] = $v['result'];
+//                 $datas['add_time'] = time();
+//                 $map['id'] = $datas['task_num_id'];
+//                 $map['pro_num_id'] = $datas['pro_num_id'];
+//                 $taskInfo = D('TaskInfo')->get_one($map);
+//                 $da['id'] = $taskInfo['id'];
+//                 $da['finish_count'] = $taskInfo['finish_count']+$datas['amount'];
+//                 D('TaskInfo')->editTask($da);
+//                 $res = D('TaskNumber')->addNumber($datas);
+//             }
+//             if($res) {
+//                 $datasss = array('err'=>1,'msg'=>"添加成功");
+//             } else {
+//                 $datasss = array('err'=>0,'msg'=>"添加失败");
+//             }
+//             $this->ajaxReturn($datasss);
+
+
+//         } else {
+//             $userId = $_SESSION['admin']['id'];
+//             if($userId!=2) {
+//                 $where['director'] = $userId;
+//                 $where['area_manager'] = $userId;
+//                 $where['_logic'] = 'or';
+//                 $map['_complex'] = $where;
+//             }
+//             $project = D('Project')->get_all($map);
+// /*            $projectId = array_column($project,'id');
+//             $map = array();
+//             $map['pro_num_id'] = array('in',$projectId);
+//             $tasks = D('TaskInfo')->get_all($map,$field="id,name,number,pro_num_id");*/
+//             //print_r($tasks);die;
+//             $this->assign('project',$project);
+//            // $this->assign('tasks',$tasks);
+//             $this->display();
+//         }
+//     }
+
+
+    //选择项目时自动获取相应任务信息
+    public function checkTask() {
+        $projectId = I('post.pro_num_id');
+        $map['pro_num_id'] = $projectId;
+        $tasks = D('TaskInfo')->get_all($map,$field="id,name,number,pro_num_id");
+        $this->ajaxReturn($tasks);
+
     }
 
 }

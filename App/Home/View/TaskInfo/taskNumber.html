@@ -33,7 +33,7 @@
                         <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
                             <div class="row" style="margin-top: 38px;">
                                 <div class="" style="width: 520px; margin: auto;">
-                                    <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">项目名称:</p><select class="form-control"  style="width: 310px;" id="pro_num_id">
+                                    <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">项目名称:</p><select onchange="checkTask()"  class="form-control"  style="width: 310px;" id="pro_num_id">
                                     <option value="">选择项目</option>
                                     <foreach name="project" item="v">
                                         <option value="{$v.id}">{$v.name}</option>
@@ -46,11 +46,11 @@
                                     <p style="width: 80px; float: left; font-size: 18px;">任务名称:</p>
                                     <br>
                                     <br>
-                                        <foreach name="tasks" item="v">
-                                            <h3 name="number" style="width: 200px; margin-top: 18px; font-size: 18px;">{$v.name}</h3>
+                                        <div id="number">
+                                            <!-- <h3 name="number" style="width: 200px; margin-top: 18px; font-size: 18px;"></h3> -->
                                             <!--<h4 style="width: 70px; float: left; margin-top: -20px; margin-left: 80px;">完成数量:</h4>-->
-                                            <input name="task_num_id" id="task_num_id" type="text" style="  width: 300px; height: 30px;" >
-                                        </foreach>
+                                            <!-- <input name="task_num_id" id="task_num_id" type="text" style="  width: 300px; height: 30px;" > -->
+                                        </div>
 
                                 </div>
                             </div>
@@ -94,7 +94,32 @@
 
         }
 
+
+
     </script>
+    <script type="text/javascript">
+        
+        //选择项目就列出相应的任务
+        function checkTask() {
+            var pro_num_id = $("#pro_num_id").val();
+            $.post("{:U('TaskInfo/checkTask')}",{pro_num_id:pro_num_id},function(res) {
+                $("#number").html('');
+                for(v in res) {
+                    name = res[v].name
+                    // var h = name+"<input type='text' name='"+name+"'>"
+                    var h = '<h3 name="number" style="width: 300px; margin-top: 18px; font-size: 18px;">'+name+'</h3>'+
+                    '<input name="task_num_id" id="task_num_id" type="text" style="  width: 300px; height: 30px;" >'
+                    //console.log(h);
+                    $("#number").append(h);
+                } 
+
+            });
+
+        }
+
+    </script>
+
+
 </body>
 
 </html>
