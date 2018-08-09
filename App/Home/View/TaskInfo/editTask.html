@@ -33,20 +33,20 @@
                                     </div>-->
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            任务信息名称:<select class="form-control" id="name">
-                                            <option value="">选择任务</option>
-                                            <foreach name="tasks" item="v">
-                                                <option value="{$v.id}" <if condition="$info[task_num_id] eq $v[id]">selected</if> >{$v['name']}</option>
+                                            所属项目:<select class="form-control" id="pro_num_id">
+                                            <option value="">选择项目</option>
+                                            <foreach name="project" item="v">
+                                                <option value="{$v.id}" <if condition="$info[pro_num_id] eq $v[id]">selected</if> >{$v['name']}</option>
                                             </foreach>
                                         </select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            所属项目:<select class="form-control" id="pro_num_id">
-                                            <option value="">选择项目</option>
-                                            <foreach name="project" item="v">
-                                                <option value="{$v.id}" <if condition="$info[pro_num_id] eq $v[id]">selected</if> >{$v['name']}</option>
+                                            任务信息名称:<select class="form-control" id="name">
+                                            <option value="">选择任务</option>
+                                            <foreach name="tasks" item="v">
+                                                <option value="{$v.id}" <if condition="$info[task_num_id] eq $v[id]">selected</if> >{$v['name']}</option>
                                             </foreach>
                                         </select>
                                         </div>

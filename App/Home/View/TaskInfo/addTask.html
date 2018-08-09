@@ -33,9 +33,9 @@
                                     </div>-->
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            任务信息名称:<select class="form-control" id="name">
-                                            <option value="">选择任务</option>
-                                            <foreach name="tasks" item="v">
+                                            所属项目:<select class="form-control" id="pro_num_id">
+                                            <option value="">选择项目</option>
+                                            <foreach name="project" item="v">
                                                 <option value="{$v.id}">{$v['name']}</option>
                                             </foreach>
                                         </select>
@@ -43,9 +43,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            所属项目:<select class="form-control" id="pro_num_id">
-                                            <option value="">选择项目</option>
-                                            <foreach name="project" item="v">
+                                            任务信息名称:<select class="form-control" id="name">
+                                            <option value="">选择任务</option>
+                                            <foreach name="tasks" item="v">
                                                 <option value="{$v.id}">{$v['name']}</option>
                                             </foreach>
                                         </select>

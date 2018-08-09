@@ -85,45 +85,34 @@ class TaskInfoController extends CommonController {
     public function addTask() {
         if(IS_POST) {
             $postdata = I('post.');
-            $map['id'] = $postdata['name'];
-            $postdata['task_num_id'] = $postdata['name'];
-            $tasks = D('Task')->get_one($map);
-            $postdata['name'] = $tasks['name'];
-            //print_r($postdata);die;
-/*            $map['id'] = $postdata['task_num_id'];
-            $task = D('Task')->get_one($map);
-            $postdata['task_num_id'] = $task['number'];
-            $map = array();
-            $map['id'] = $postdata['pro_num_id'];
-            $project = D('Project')->get_one($map);
-            $postdata['pro_num_id'] = $project['number'];*/
-            $postdata['number'] = mt_rand(1000,9999);
-            if($postdata['expected_start_time']) {
-                $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
-            }
-            if($postdata['expected_finish_time']) {
-                $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
-            }
-            $postdata['add_time'] = time();
-            //print_r($postdata);die;
-            $res = D('TaskInfo')->addTask($postdata);
-            //$res = 1;
-            if($res) {
-                //完成数量自增1
-/*                $map = array();
-                $map['id'] = $task['id'];
-                $map['project_id'] = $project['id'];
+            $map['task_num_id'] = $postdata['name'];
+            $map['pro_num_id'] = $postdata['pro_num_id'];
+            $taskInfo = D('TaskInfo')->get_one($map);
+            //print_r($taskInfo);die;
+            if(!$taskInfo) {
+                $map = array();
+                $map['id'] = $postdata['name'];
+                $postdata['task_num_id'] = $postdata['name'];
                 $tasks = D('Task')->get_one($map);
-                print_r($tasks);die;
-                if($tasks) {
-                    $datas['id'] = $tasks['id'];
-                    $datas['finish_count'] = $tasks['finish_count']+1;
+                $postdata['name'] = $tasks['name'];
+                $postdata['number'] = mt_rand(1000,9999);
+                if($postdata['expected_start_time']) {
+                    $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
                 }
-                D('Task')->editTask($datas);*/
-                //print_r($tasks);die;
-                $data = array('err'=>1,'msg'=>"添加成功");
+                if($postdata['expected_finish_time']) {
+                    $postdata['expected_finish_time'] = strtotime($postdata['expected_finish_time']);
+                }
+                $postdata['add_time'] = time();
+                //print_r($postdata);die;
+                $res = D('TaskInfo')->addTask($postdata);
+                //$res = 1;
+                if($res) {
+                    $data = array('err'=>1,'msg'=>"添加成功");
+                } else {
+                    $data = array('err'=>0,'msg'=>"添加失败");
+                }
             } else {
-                $data = array('err'=>0,'msg'=>"添加失败");
+                $data = array('err'=>2,'msg'=>"任务已存在，请勿重复添加！");
             }
             $this->ajaxReturn($data);
         } else {
@@ -145,13 +134,6 @@ class TaskInfoController extends CommonController {
             $postdata['task_num_id'] = $postdata['name'];
             $tasks = D('Task')->get_one($map);
             $postdata['name'] = $tasks['name'];
-/*            $map['id'] = $postdata['task_num_id'];
-            $task = D('Task')->get_one($map);
-            $postdata['task_num_id'] = $task['number'];
-            $map = array();
-            $map['id'] = $postdata['pro_num_id'];
-            $project = D('Project')->get_one($map);
-            $postdata['pro_num_id'] = $project['number'];*/
             if($postdata['expected_start_time']) {
                 $postdata['expected_start_time'] = strtotime($postdata['expected_start_time']);
             }
