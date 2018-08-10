@@ -31,8 +31,9 @@
                                                 <th>#id</th>
                                                 <th>负责人</th>
                                                 <th>项目名称</th>
-                                                <th>任务名称</th>
-                                                <th>完成数量</th>
+                                                <!-- <th>任务名称</th>
+                                                <th>完成数量</th> -->
+                                                <th style="width:300px;">任务</th>
                                                 <th>添加时间</th>
                                                 
                                             </tr>
@@ -43,8 +44,9 @@
                                                     <td>{$v['id']}</td>
                                                     <td>{$v['user_id']}</td>
                                                     <td>{$v['pro_num_id']}</td>
-                                                    <td>{$v['task_num_id']}</td>
-                                                    <td>{$v['amount']}</td>
+                                                    <!-- <td>{$v['task_num_id']}</td>
+                                                    <td>{$v['amount']}</td> -->
+                                                    <td onclick="showInfo({$v['id']})">{$v['number_str']}...</td>
                                                     <td>{$v['add_time']}</td>
                                                     
                                                 </tr>
@@ -83,100 +85,14 @@
             });
         }
 
-        //启动
-        function startUp(id,name) {
-            var sh = '';
-            sh += '<div class="layui-collapse">';
-            sh += '<div class="layui-colla-item">';
-            sh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp启动任务('+name+')？</h2>';
-            sh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_start_time" style="width: 300px;" placeholder="戳我选择启动日期，不选则默认当前时间！"></div>';
-            sh += '</div>';
-            sh += '</div>';
-            sh += '<br>';
-            sh += '<br>';
-            sh += '&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="subUp('+id+')" class="layui-btn layui-btn-danger" style="width: 300px;">确认启动</button>';
 
-            var index=layer.open({
-                type: 1,
-                area: ['18%','280px'],
-                title: '是否启动该任务',
-                shadeClose: true,
-                content: sh
-            });
-            layui.use('laydate', function(){
-                var laydate = layui.laydate;
-
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#actual_start_time' //指定元素
-                    ,type: 'datetime'
-                });
-            });
-
-
-        }
-
-        function subUp(id) {
-            var actual_start_time = $("#actual_start_time").val();
-            $.post("{:U('TaskInfo/startUp')}",{id:id,actual_start_time:actual_start_time},function(res) {
+        function showInfo(id) {
+            return;
+            $.post("{:U('TaskNumber/showInfo')}",{id:id},function(res) {
                 if(res.err==1) {
-                    layer.closeAll();
-                    location=location;
-                } else {
-                    layer.msg("操作失败");
+
+
                 }
-            });
-        }
-
-
-        function ending(id,name){
-            var eh = '';
-            eh += '<div class="layui-collapse">';
-            eh += '<div class="layui-colla-item">';
-            eh += '<h2 class="layui-colla-title"><span class="layui-badge-dot layui-bg-cyan"></span>&nbsp&nbsp&nbsp结束任务('+name+')？</h2>';
-            eh += '<div class="layui-colla-content layui-show"><input type="text" class="layui-input" id="actual_finish_time" style="width: 300px;" placeholder="戳我选择结束日期，不选则默认当前时间！"></div>';
-            eh += '</div>';
-            eh += '</div>';
-            eh += '<br>';
-            eh += '<br>';
-            eh += '&nbsp&nbsp&nbsp&nbsp&nbsp<button onclick="sub('+id+')" class="layui-btn layui-btn-danger" style="width: 300px;">确认结束</button>';
-
-            var index=layer.open({
-                type: 1,
-                area: ['18%','280px'],
-                title: '是否结束该任务',
-                shadeClose: true,
-                content: eh
-            });
-            layui.use('laydate', function(){
-                var laydate = layui.laydate;
-
-                //执行一个laydate实例
-                laydate.render({
-                    elem: '#actual_finish_time' //指定元素
-                    ,type: 'datetime'
-                });
-            });
-
-
-        }
-
-        function sub(id) {
-            var actual_finish_time = $("#actual_finish_time").val();
-            $.post("{:U('TaskInfo/ending')}",{id:id,actual_finish_time:actual_finish_time},function(res) {
-                if(res.err==1) {
-                    layer.closeAll();
-                    location=location;
-                } else {
-                    layer.msg("操作失败");
-                }
-            });
-        }
-
-        function refreshAmount() {
-            var userId = "{$_SESSION['admin']['id']}";
-            $.post("{:U('TaskInfo/refreshAmount')}",{userId:userId},function() {
-
             });
         }
 
