@@ -22,21 +22,11 @@ class TaskNumberController extends CommonController {
             $v['pro_num_id'] = $project[$v['pro_num_id']];
             $v['add_time'] = date('Y-m-d',$v['add_time']);
             $v['number_time'] = date('Y-m-d',$v['number_time']);
-            $v['number_str'] = mb_substr($v['number_str'],0,100);
+            $v['number_str'] = json_decode($v['number_str'],true);
         }
     	$this->assign('data',$data);
     	$this->display();
 	}
 
 
-    public function showInfo() {
-        $id = I('post.id');
-        $map['id'] = $id;
-        $taskInfo = D('TaskNumber')->get_one($map);
-        if($taskInfo) {
-            $taskInfo['number_str'] = json_decode($taskInfo['number_str']);
-            $data = array('err'=>1,'data'=>$taskInfo);
-            $this->ajaxReturn($data);
-        }
-    }
 }

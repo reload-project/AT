@@ -34,7 +34,8 @@
                                                 <th>完成时间</th>
                                                 <!-- <th>任务名称</th>
                                                 <th>完成数量</th> -->
-                                                <th style="width:300px;">任务</th>
+                                                <th>任务</th>
+                                                <th>备注</th>
                                                 <th>添加时间</th>
                                                 
                                             </tr>
@@ -44,13 +45,20 @@
                                                 <tr class="odd gradeX">
                                                     <td>{$v['id']}</td>
                                                     <td>{$v['user_id']}</td>
-                                                    <td>{$v['pro_num_id']}</td>
+                                                    <td style="width: 300px;">{$v['pro_num_id']}</td>
                                                     <td>{$v['number_time']}</td>
                                                     <!-- <td>{$v['task_num_id']}</td>
                                                     <td>{$v['amount']}</td> -->
-                                                    <td onclick="showInfo({$v['id']})">{$v['number_str']}...</td>
+                                                    <td style="width: 300px;">
+                                                        <ul>
+                                                            <foreach name="v.number_str" item="vv">
+                                                                <li>任务名称:{$vv.number}</li>
+                                                                <li>完成数量:{$vv.result}</li>
+                                                            </foreach>
+                                                        </ul>
+                                                    </td>
+                                                    <td style="width: 250px;">{$v['note']}</td>
                                                     <td>{$v['add_time']}</td>
-                                                    
                                                 </tr>
                                             </foreach>
                                         </tbody>
@@ -84,17 +92,6 @@
                     }
                 });
 
-            });
-        }
-
-
-        function showInfo(id) {
-            return;
-            $.post("{:U('TaskNumber/showInfo')}",{id:id},function(res) {
-                if(res.err==1) {
-
-
-                }
             });
         }
 
