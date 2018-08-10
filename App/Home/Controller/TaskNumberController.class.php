@@ -20,7 +20,8 @@ class TaskNumberController extends CommonController {
             $v['user_id'] = $user[$v['user_id']];
             $v['task_num_id'] = $task[$v['task_num_id']];
             $v['pro_num_id'] = $project[$v['pro_num_id']];
-            $v['add_time'] = date('Y-m-d H:i:s',$v['add_time']);
+            $v['add_time'] = date('Y-m-d',$v['add_time']);
+            $v['number_time'] = date('Y-m-d',$v['number_time']);
             $v['number_str'] = mb_substr($v['number_str'],0,100);
         }
     	$this->assign('data',$data);

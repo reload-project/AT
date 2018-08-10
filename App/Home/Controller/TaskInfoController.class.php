@@ -246,12 +246,15 @@ class TaskInfoController extends CommonController {
         $userId = $_SESSION['admin']['id'];
         if(IS_POST) {
             $postdata = I('post.');
+            //print_r($postdata);die;
             $data = array();
             foreach($postdata['result'] as $k=>$v) {
                 //$data[$k]['pro_num_id'] = $postdata['pro_num_id'];
                 $data[$k]['result'] = $v;
                 $data[$k]['number'] = $postdata['number'][$k];
+                $data[$k]['note'] = $postdata['note'][$k];
             }
+            //print_r($data);die;
             $map['pro_num_id'] = $postdata['pro_num_id'];
             $tasks = D('TaskInfo')->get_all($map,$field="id,name");
             $tasks = array_column($tasks,'id','name');
@@ -265,6 +268,7 @@ class TaskInfoController extends CommonController {
             $datas['user_id'] = $userId;
             $datas['number_str'] = json_encode($data);
             $datas['pro_num_id'] = $postdata['pro_num_id'];
+            $datas['number_time'] = strtotime($postdata['number_time']);
             $datas['add_time'] = time();
             $res = D('TaskNumber')->addNumber($datas);
             if($res) {

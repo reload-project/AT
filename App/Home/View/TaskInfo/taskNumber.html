@@ -13,9 +13,10 @@
     <script src="__PUBLIC__assets/js/jquery.min.js"></script>
      <script type="text/javascript" src="__PUBLIC__common/js/jquery.md5.js"></script>
      <script type="text/javascript" src="__PUBLIC__layer/layer.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="__PUBLIC__assets/css/signin.css" rel="stylesheet">
     <link rel="stylesheet" href="__PUBLIC__layer/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/laydate.css" media="all">
 
 </head>
 
@@ -33,12 +34,20 @@
                         <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
                             <div class="row" style="margin-top: 38px;">
                                 <div class="" style="width: 520px; margin: auto;">
-                                    <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">项目名称:</p><select onchange="checkTask()"  class="form-control"  style="width: 310px;" id="pro_num_id">
+                                    <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">项目名称:</p><select onchange="checkTask()"  class="form-control"  style="width: 350px;" id="pro_num_id">
                                     <option value="">选择项目</option>
                                     <foreach name="project" item="v">
                                         <option value="{$v.id}">{$v.name}</option>
                                     </foreach>
                                 </select>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 38px;">
+                                <div class="" style="width: 520px; margin: auto;">
+                                        <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">完成时间:</p>
+                                    <div class="layui-colla-content layui-show">
+                                        <input type="text" class="layui-input" id="number_time" style="width: 300px; margin-top:-15px;" placeholder="选择完成时间！">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 20px;">
@@ -70,22 +79,54 @@
     <!-- /. PAGE INNER  -->
 </div>
 
-
+    <script src="__PUBLIC__layer/layui.js"></script>
     <script type="text/javascript">
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#number_time' //指定元素
+                   // ,type: 'datetime'
+                });
+            });
+
+
+
         function add() {
             var pro_num_id = $("#pro_num_id").val();
+            var number_time = $("#number_time").val();
             if(!pro_num_id) {
                 layer.msg("项目名称不能为空");return;
             }
+
+            var check = true;
             var result = [];
             $("input[name='task_num_id']").each(function(i,v){
-                result.push($(v).val())
+                var value = parseInt($(v).val());
+                if(value>=0 || value=== undefined || value.length == 0) {
+                            result.push(value)
+                        console.log(result)
+                     //   check = true
+                }else {
+                    check = false
+                }
             });
+            if(!check){
+                layer.msg("数值必须为大于或等于0的数字");return;
+            }
+
+            var note = [];
+            $('textarea[name="note"]').each(function(i,v){
+                note.push($(v).val())
+            });
+
             var number = [];
-            $('h3[name="number"]').each(function(i,v){
+            $('p[name="number"]').each(function(i,v){
                 number.push($(v).text())
             });
-            $.post("{:U('TaskInfo/taskNumber')}",{pro_num_id:pro_num_id,result:result,number:number},function(res) {
+
+            $.post("{:U('TaskInfo/taskNumber')}",{pro_num_id:pro_num_id,result:result,number:number,note:note,number_time:number_time},function(res) {
                 if(res.err==1) {
                     location.href = "/TaskInfo/index";
                 }
@@ -107,8 +148,10 @@
                 for(v in res) {
                     name = res[v].name
                     // var h = name+"<input type='text' name='"+name+"'>"
-                    var h = '<h3 name="number" style="width: 300px; margin-top: 18px; font-size: 18px;">'+name+'</h3>'+
-                    '<input name="task_num_id" id="task_num_id" type="text" style="  width: 300px; height: 30px;" >'
+                    var h = '<p name="number" style="font-size: 18px; margin-top:20px;">'+name+'</p>'+
+                    '完成数量：<input name="task_num_id" id="task_num_id" type="text" style="width:100px; height:30px;" >'+
+                    '<p style="font-size: 15px;">备注：</p>'+
+                    '<textarea name="note" type="text" style="width:380px; height:50px;" ></textarea>'
                     //console.log(h);
                     $("#number").append(h);
                 } 
