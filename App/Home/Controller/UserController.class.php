@@ -166,7 +166,7 @@ class UserController extends CommonController {
             $this->ajaxReturn($data);
         }
     }
-
+/*
     //修改密码
     public function checkPass() {
         if(IS_POST) {
@@ -190,6 +190,13 @@ class UserController extends CommonController {
         } else {
             $this->display();
         }
+    }*/
+
+
+    //员工信息详情
+    public function userInfo() {
+        
+        $this->display();
     }
 
 }
