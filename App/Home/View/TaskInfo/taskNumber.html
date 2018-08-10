@@ -50,6 +50,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" style="margin-top: 38px;">
+                                <div class="" style="width: 520px; margin: auto;">
+                                    <p style="width: 80px; float: left; margin-right: 10px; font-size: 18px;">备&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注:</p>
+                                    <div class="layui-colla-content layui-show">
+                                        <textarea name="note" id="note" type="text" style="width:415px; height:50px;" ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row" style="margin-top: 20px;">
                                 <div class="select-field col s6"  style="width: 520px; margin: auto;">
                                     <p style="width: 80px; float: left; font-size: 18px;">任务名称:</p>
@@ -96,6 +105,7 @@
         function add() {
             var pro_num_id = $("#pro_num_id").val();
             var number_time = $("#number_time").val();
+            var note = $("#note").val();
             if(!pro_num_id) {
                 layer.msg("项目名称不能为空");return;
             }
@@ -116,10 +126,10 @@
                 layer.msg("数值必须为大于或等于0的数字");return;
             }
 
-            var note = [];
+/*            var note = [];
             $('textarea[name="note"]').each(function(i,v){
                 note.push($(v).val())
-            });
+            });*/
 
             var number = [];
             $('p[name="number"]').each(function(i,v){
@@ -149,9 +159,9 @@
                     name = res[v].name
                     // var h = name+"<input type='text' name='"+name+"'>"
                     var h = '<p name="number" style="font-size: 18px; margin-top:20px;">'+name+'</p>'+
-                    '完成数量：<input name="task_num_id" id="task_num_id" type="text" style="width:100px; height:30px;" >'+
+                    '完成数量：<input name="task_num_id" id="task_num_id" type="text" style="width:100px; height:30px;" >'/*+
                     '<p style="font-size: 15px;">备注：</p>'+
-                    '<textarea name="note" type="text" style="width:380px; height:50px;" ></textarea>'
+                    '<textarea name="note" type="text" style="width:380px; height:50px;" ></textarea>'*/
                     //console.log(h);
                     $("#number").append(h);
                 } 
