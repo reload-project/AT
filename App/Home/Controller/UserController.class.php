@@ -52,7 +52,7 @@ class UserController extends CommonController {
             $postdata = I('post.');
             $postdata['have_project'] = implode(',',$postdata['have_project']);
             if($postdata['password']) {
-                $postdata['mixs'] = mt_rand(1,999999);
+                $postdata['mixs'] = mt_rand(100000,999999);
                 $postdata['password'] = md5($postdata['password'].$postdata['mixs']);
             } else {
                 $this->ajaxReturn(array('err'=>2,'msg'=>"密码不能为空"));
@@ -157,6 +157,8 @@ class UserController extends CommonController {
             }
             $map['id'] = $id;
             $data['status'] = $status;
+            $data['mixs'] = 123456;
+            $data['password'] = md5(md5(123456).$data['mixs']);
             $res = D('User')->check_status($map,$data);
             if($res) {
                 $data = array('err'=>1,'msg'=>"状态更改成功");
