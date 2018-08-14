@@ -54,7 +54,7 @@
                                             <foreach name="data" item="v">
                                                 <tr class="odd gradeX">
                                                     <td>{$v['id']}</td>
-                                                    <td>{$v['name']}</td>
+                                                    <td onclick="selectTask({$v['id']})">{$v['name']}</td>
                                                     <td>{$v['number']}</td>
                                                     <td>{$v['cate']}</td>
                                                     <td>{$v['introduction']}</td>
@@ -90,6 +90,29 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+
+<!--                                                 <if condition="$v['taskInfo']">
+                                                       
+                                                    <tr class="tr">
+                                                        <td  colspan="17">
+                                                        <table border="1">
+                                                            <ul>
+                                                                 <foreach name="v.taskInfo" item="vv">
+                                                                <li> {$vv.name}</li>
+                                                                 </foreach>
+                                                            </ul>
+                                                        </table>
+                                                    </td>
+                                                           
+                                                    </tr>
+                                                       
+                                                <else/>
+                                                    <tr class="tr">
+                                                        <td  colspan="17">
+                                                        暂无数据！
+                                                        </td>
+                                                    </tr>
+                                                </if> -->
                                             </foreach>
                                         </tbody>
                                     </table>
@@ -105,16 +128,7 @@
 
 </block>
 <block name="js">
-    <!-- jQuery Js -->
-    <!--<script src="__PUBLIC__assets/js/jquery-1.10.2.js"></script>-->
-    <!-- DATA TABLE SCRIPTS -->
-<!--    <script src="__PUBLIC__assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="__PUBLIC__assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#dataTables-example').dataTable();
-        });
-    </script>-->
+
 
     <script src="__PUBLIC__layer/layui.js"></script>
     <script type="text/javascript">
@@ -288,14 +302,6 @@
                 title: '更新项目状态',
                 shadeClose: true,
                 content: ch
-                //content: ['/Home/Project/ending?id='+id,'no'],
-                /* success: function(res) {
-                     if(res.err==1) {
-                         layer.close(index);
-                     } else {
-                         layer.msg("操作失败");
-                     }
-                 }*/
             });
         }
 
@@ -313,6 +319,36 @@
                 }
             });
         }
+
+
+        function selectTask(id) {
+            $.post("{:U('Project/selectTask')}",{id:id},function(res) {
+                    if(res.err==1) {
+                        var ph = '';
+                        ph += '<div class="layui-collapse">';
+                        ph += '<label>'+res.project+'</label>';
+                        ph += '<div class="layui-colla-item">';
+                        ph += '<tr>';
+                        for (v in res.data){
+                            ph += '<td>'+res.data[v].name+'：'+res.data[v].finish_count+'</td><br>';
+                        }
+                        ph += '</tr>';
+                        ph += '</div>';
+                        ph += '</div>';
+
+
+
+                        var index=layer.open({
+                            type: 1,
+                            area: ['18%','380px'],
+                            title: '项目下的任务',
+                            shadeClose: true,
+                            content: ph
+                        });
+                    }
+            });
+        }
+
 
     </script>
 

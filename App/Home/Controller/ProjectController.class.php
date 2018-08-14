@@ -21,11 +21,11 @@ class ProjectController extends CommonController {
         }
         $data = D('Project')->get_all($map);
         //echo D('Project')->_sql();
-        //print_r($data);die;
         $user = D('User')->get_all($map="",$field="id,name");
         $user = array_column($user,'name','id');
         $cate = D('ProjectCate')->get_all();
         $cate = array_column($cate,'name','id');
+        $map = array();
         foreach($data as &$v) {
             $v['cate'] = $cate[$v['cate']];
             // $v['follow'] = $user[$v['follow']];
@@ -62,6 +62,7 @@ class ProjectController extends CommonController {
                 $v['status']="完结";
             }
         }
+        //print_r($data);die;
         $map = array();
         $map['name'] = array('neq',"admin");
         $map['position'] = array(array('eq',"总经理"),array('eq',"副总"),array('eq',"总监"),array('eq',"区域经理"),array('eq',"项目经理"),array('eq',"项目组长"),'or');
@@ -227,6 +228,20 @@ class ProjectController extends CommonController {
             }
             $this->ajaxReturn($data);
         }
+    }
+
+
+    //获取任务信息
+    public function selectTask() {
+        $id = I('post.id');
+        $map['id'] = $id;
+        $project = D('Project')->get_one($map);
+        $map = array();
+        $map['pro_num_id'] = $id;
+        $taskInfo = D('TaskInfo')->get_all($map,$field="name,finish_count");
+        //$taskInfo['project'] = $project['name'];
+        //print_r($taskInfo);
+        $this->ajaxReturn(array('err'=>1,'data'=>$taskInfo,'project'=>$project['name']));
     }
 
 }
