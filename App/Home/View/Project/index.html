@@ -16,7 +16,8 @@
                         <div class="card">
                             <div class="card-action">
                                 项目信息列表
-                                <a  href="{:U('Project/addProject')}" style="margin-left: 10px;">
+
+                                <a  href="{:U('Project/addProject')}" style='margin-left: 10px; <if condition="$userId neq 1">display: none;</if> '>
                                     <div class="btn " role="group" aria-label="..." >
                                     添加项目信息
 
@@ -79,10 +80,10 @@
                                                         <div class='btn <if condition="$v.line eq 0 || $v.line eq 2">disabled</if>' role="group" aria-label="..." onclick='ending("{$v[id]}","{$v[name]}")'>
                                                             <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">结束</font></a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." >
+                                                        <div class="btn " role="group" aria-label="..."  style='<if condition="$userId neq 1">display: none;</if> '>
                                                             <a  href='{:U("Project/editProject?id=$v[id]" )}' style="color: #0D47A1;">编辑</a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." onclick='delProject("{$v[id]}")'>
+                                                        <div style='<if condition="$userId neq 1">display: none;</if> ' class="btn " role="group" aria-label="..." onclick='delProject("{$v[id]}")'>
                                                             <a  href="javascript:" style="color: #843534;">删除</a>
                                                         </div>
                                                         <div class='btn  <if condition="$v.status eq 完结">disabled</if>' role="group" aria-label="..." onclick='checkStatus("{$v[id]}","{$v[name]}","{$v[status]}")'>

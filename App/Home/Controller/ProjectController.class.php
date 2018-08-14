@@ -73,6 +73,7 @@ class ProjectController extends CommonController {
         $this->assign('director',$director);
         $this->assign('manager',$manager);
         $this->assign('data',$data);
+        $this->assign('userId',$userId);
         $this->display();
     }
 
