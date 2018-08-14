@@ -157,12 +157,7 @@
                 $("#number").html('');
                 for(v in res) {
                     name = res[v].name
-                    // var h = name+"<input type='text' name='"+name+"'>"
-                    var h = '<p name="number" style="font-size: 18px; margin-top:20px;">'+name+'</p>'+
-                    '完成数量：<input name="task_num_id" id="task_num_id" type="text" style="width:100px; height:30px;" >'/*+
-                    '<p style="font-size: 15px;">备注：</p>'+
-                    '<textarea name="note" type="text" style="width:380px; height:50px;" ></textarea>'*/
-                    //console.log(h);
+                    var h = '<br/><br/>'+name+'：<input name="task_num_id" id="task_num_id" type="text" style="width:100px; height:30px;" >'
                     $("#number").append(h);
                 } 
 
