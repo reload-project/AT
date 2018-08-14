@@ -73,5 +73,8 @@ class CommonController extends Controller {
         return $data;
     }
 
+    function _empty() {
+        $this->display("Public/empty");
+    }
 
 }
