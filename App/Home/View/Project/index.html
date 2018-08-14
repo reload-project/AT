@@ -325,8 +325,9 @@
             $.post("{:U('Project/selectTask')}",{id:id},function(res) {
                     if(res.err==1) {
                         var ph = '';
-                        ph += '<div class="layui-collapse">';
+                        ph += '<div class="layui-collapse" style="margin-left: 10px;">';
                         ph += '<label>'+res.project+'</label>';
+                        ph += '<br>'
                         ph += '<br>'
                         ph += '<div class="layui-colla-item">';
                         ph += '<tr>';
