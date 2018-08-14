@@ -16,7 +16,7 @@
                         <div class="card">
                             <div class="card-action">
                                 任务信息列表
-                                <a  href="{:U('TaskInfo/addTask')}" style="margin-left: 10px;">
+                                <a  href="{:U('TaskInfo/addTask')}" style='margin-left: 10px; <if condition="$userId neq 1">display: none;</if> '>
                                     <div class="btn " role="group" aria-label="..." <if condition=" $depart eq 2">style="display:none;" </if> >
                                     添加任务信息
 
@@ -83,10 +83,10 @@
                                                         <div class='btn <if condition="$v.status eq 未启动 || $v.status eq 结束">disabled</if>' role="group" aria-label="..." onclick='ending("{$v[id]}","{$v[name]}")'>
                                                             <a  href="javascript:" style="color: #843534;"><font color="#f0ffff">结束</font></a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." >
+                                                        <div class="btn " role="group" aria-label="..."  style='<if condition="$userId neq 1">display: none;</if> '>
                                                             <a  href='{:U("TaskInfo/editTask?id=$v[id]" )}' style="color: #0D47A1;">编辑</a>
                                                         </div>
-                                                        <div class="btn " role="group" aria-label="..." onclick='delTask("{$v[id]}")'>
+                                                        <div class="btn " role="group" aria-label="..." onclick='delTask("{$v[id]}")' style='<if condition="$userId neq 1">display: none;</if> '>
                                                             <a  href="javascript:" style="color: #843534;">删除</a>
                                                         </div>
                                                     </td>

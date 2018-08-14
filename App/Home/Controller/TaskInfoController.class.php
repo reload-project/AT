@@ -90,6 +90,7 @@ class TaskInfoController extends CommonController {
         }
         $this->assign('depart',$depart);
         $this->assign('data',$data);
+        $this->assign('userId',$userId);
         $this->display();
     }
 
