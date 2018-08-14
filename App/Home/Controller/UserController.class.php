@@ -50,6 +50,11 @@ class UserController extends CommonController {
     public function addUser() {
         if(IS_POST) {
             $postdata = I('post.');
+            $map['name'] = $postdata['name'];
+            $user = D('User')->get_one($map);
+            if($user) {
+                $this->ajaxReturn(array('err'=>3,'msg'=>"用户名称已存在"));
+            }
             $postdata['have_project'] = implode(',',$postdata['have_project']);
             if($postdata['password']) {
                 $postdata['mixs'] = mt_rand(100000,999999);
@@ -64,7 +69,6 @@ class UserController extends CommonController {
                 }
             }
             $postdata['add_time'] = time();
-            //print_r($postdata);die;
             $res = D('User')->addUser($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"添加成功");
@@ -104,6 +108,7 @@ class UserController extends CommonController {
                 }
             }
             $postdata['update_time'] = time();
+            //print_r($postdata);die;
             $res = D('User')->editUser($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"编辑成功");

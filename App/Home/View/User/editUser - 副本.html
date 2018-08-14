@@ -25,6 +25,16 @@
                                             昵称:<input id="nickname" type="text" class="validate" value="{$info.nickname}">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            角色:<select class="form-control" id="depart">
+                                            <option value="">选择角色</option>
+                                            <foreach name="depart" item="v">
+                                                <option <if condition="$v[id] eq $info[depart]">selected</if> value="{$v.id}">{$v['depart']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
 <!--                                    <div class="row">
                                         <div class="input-field col s6">
                                             性别:<input id="gender" type="text" class="validate">
@@ -49,8 +59,40 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="select-field col s6">
+                                            部门:<select class="form-control" id="department">
+                                            <option value="">选择部门</option>
+                                            <foreach name="department" item="v">
+                                                <option <if condition="$v[id] eq $info[department]">selected</if> value="{$v.id}">{$v['name']}</option>
+                                            </foreach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="input-field col s6">
                                             职位:<input id="position" type="text" class="validate" value="{$info.position}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            员工关系:<select class="form-control" id="relation">
+                                            <option value="">选择</option>
+                                            <option <if condition="$info.relation eq '全日制合同工'">selected</if> value="全日制合同工">全日制合同工</option>
+                                            <option <if condition="$info.relation eq '非全日制合同工'">selected</if> value="非全日制合同工">非全日制合同工</option>
+                                            <option <if condition="$info.relation eq '实习生'">selected</if> value="实习生">实习生</option>
+                                            <option <if condition="$info.relation eq '暑假工'">selected</if> value="暑假工">暑假工</option>
+                                            <option <if condition="$info.relation eq '劳务派遣'">selected</if> value="劳务派遣">劳务派遣</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            员工级别:<select class="form-control" id="level">
+                                            <option value="">选择级别</option>
+                                            <foreach name="levels" item="v">
+                                                <option <if condition="$v[id] eq $info[level_id]">selected</if> value="{$v.id}">{$v['level']}级</option>
+                                            </foreach>
+                                        </select>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -73,6 +115,29 @@
                                             学历:<input id="school" type="text" class="validate" value="{$info.school}">
                                         </div>
                                     </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        可查看项目:
+                                        <foreach name="project" item="v">
+                                            <p>
+                                                <input name="project" type="checkbox" class="filled-in"  id="project{$v.id}" value="{$v.id}"
+                                                <php>if(in_array($v['id'],$info['have_project'])){echo "checked=checked";}</php>  />
+                                                <label for="project{$v.id}">{$v.name}</label>
+                                            </p>
+                                        </foreach>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+
+                                            <div id="img">
+                                                <img id="pic" src="{$info.pic}" width="200px;" pod="0">
+                                            </div>
+                                            <input id="myfile" type="file" multiple="" onclick="checkPod()"/>
+
+
+                                        </div>
+                                    </div>
                                     <div class="btn " role="group" aria-label="..." onclick="editMaster()">
                                         提交
 
@@ -91,7 +156,21 @@
 
 </block>
 <block name="js">
+    <script src="__PUBLIC__assets/js/filereader.js"></script>
+    <script>
+        $('#myfile').filereader({
+            type:['jpg','jpeg','png'],
+            max_size:1024,
+            preview:$('#img'),
+            success:function(){},
+            preview_attr:{id:'pic', height:'200px'}
+        });
 
+        function checkPod() {
+            $("#pic").attr("pod","1");
+        }
+
+    </script>
     <script type="text/javascript">
         function editMaster() {
             var id = "{$_GET['id']}";
@@ -104,17 +183,41 @@
             var email = $("#email").val();
             var address = $("#address").val();
             var school = $("#school").val();
+            var depart = $("#depart").val();
+            var relation = $("#relation").val();
+            var department = $("#department").val();
+            var levels = $("#level").val();
+            var upPod = $("#pic").attr('pod');
+
+            obj = $("input[name='project']");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            var have_project = check_val;
+
             if(!name) {
                 layer.msg("姓名不能为空");return;
             }
             if(!phone) {
                 layer.msg("手机号不能为空");return;
             }
-            var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school};
+            /*if(!depart) {
+                layer.msg("部门不能为空");return;
+            }*/
+            if(!upPod) {
+                var pic = $("#pic").attr('src');
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
+            } else {
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
+            }
             $.post("{:U('User/editUser')}",data,function(res) {
                 if(res.err==1) {
 
                     location.href="{:U('User/index')}";
+                } else {
+                    layer.msg(res.msg);
                 }
             });
         }

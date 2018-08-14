@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>亚齐信息管理系统</title>
+    <title>亚齐档案管理系统</title>
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link href="/App/Home/Common/assets/css/material-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="/App/Home/Common/assets/materialize/css/materialize.min.css" media="screen,projection" />
@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand waves-effect waves-dark" href="/"><i class="large material-icons">track_changes</i> <strong>亚齐信息管理系统</strong></a>
+            <a class="navbar-brand waves-effect waves-dark" href="/"><i class="large material-icons"></i> <strong>亚齐档案管理系统</strong></a>
 
             <div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
         </div>
@@ -45,14 +45,14 @@
             <!--<li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown4"><i class="fa fa-envelope fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown3"><i class="fa fa-tasks fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>-->
-            <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> 欢迎您：<b><?php echo ($_SESSION['admin']['name']); ?></b> <i class="material-icons right">arrow_drop_down</i></a></li>
+            <li style="margin-right: 20px;"><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> 欢迎您：<b><?php echo ($_SESSION['admin']['name']); ?></b> <i class="material-icons right"></i></a></li>
         </ul>
     </nav>
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
         <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
         </li>-->
-        <li><a href="<?php echo U('User/checkPass');?>"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+        <li><a href="<?php echo U('Index/checkPass');?>"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
         </li>
         <li><a href="<?php echo U('Admin/outLogin');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
@@ -274,7 +274,7 @@
                             <a href="<?php echo U('ProjectCate/index');?>" class=" <?php if(CONTROLLER_NAME == 'ProjectCate'): ?>active-menu<?php endif; ?> " >项目分类</a>
                         </li><?php endif; ?>
                     <?php if((in_array('Task',$rr))): ?><li>
-                            <a href="<?php echo U('Task/index');?>" class=" <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?> " >任务名称</a>
+                            <a href="<?php echo U('Task/index');?>" class=" <?php if(CONTROLLER_NAME == 'Task'): ?>active-menu<?php endif; ?> " >任务分类</a>
                         </li><?php endif; ?>
                 <?php if((in_array('TaskInfo',$rr))): ?><li>
                         <a href="<?php echo U('TaskInfo/index');?>" class=" <?php if(CONTROLLER_NAME == 'TaskInfo'): ?>active-menu<?php endif; ?> " >任务信息</a>
@@ -302,64 +302,103 @@
                                 编辑用户
                             </div>
                             <div class="card-content">
-                                <form class="col s12">
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            姓名:<input id="name" type="text" class="validate" value="<?php echo ($info["name"]); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            昵称:<input id="nickname" type="text" class="validate" value="<?php echo ($info["nickname"]); ?>">
-                                        </div>
-                                    </div>
+                                <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            角色:<select class="form-control" id="depart">
+                                            部门:<select class="form-control" id="department" style="width: 300px;">
+                                            <option value="">选择部门</option>
+                                            <?php if(is_array($department)): foreach($department as $key=>$v): ?><option <?php if($v[id] == $info[department]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['name']); ?></option><?php endforeach; endif; ?>
+                                        </select>
+                                        </div>
+                                        <div class="select-field col s6">
+                                            角色:<select class="form-control" id="depart" style="width: 300px;">
                                             <option value="">选择角色</option>
                                             <?php if(is_array($depart)): foreach($depart as $key=>$v): ?><option <?php if($v[id] == $info[depart]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['depart']); ?></option><?php endforeach; endif; ?>
                                         </select>
                                         </div>
                                     </div>
-<!--                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            性别:<input id="gender" type="text" class="validate">
-                                        </div>
-                                    </div>-->
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            性别:
-                                            <p>
-                                                <input name="gender" type="radio" <?php if($info["gender"] == 1): ?>checked<?php endif; ?> value="1" id="test1" />
+                                            姓名:<input id="name" type="text" class="validate" value="<?php echo ($info["name"]); ?>" style="width: 200px;">
+                                            昵称:<input id="nickname" type="text" class="validate" value="<?php echo ($info["nickname"]); ?>" style="width: 200px;">
+                                        </div>
+
+                                        <div class="input-field col s6" style="width: 300px;">
+                                            <p style="margin-top:12px;">性别:</p>
+                                            <p style="float: right; margin-top: -34px;">
+                                                <input id="test1"  name="gender" type="radio" <?php if($info["gender"] == 1): ?>checked<?php endif; ?> value="1" id="test1" />
                                                 <label for="test1">男</label>
                                             </p>
-                                            <p>
-                                                <input name="gender" type="radio" <?php if($info["gender"] == 2): ?>checked<?php endif; ?>  value="2" id="test2" />
+                                            <p style=" margin-top: -34px; margin-left: 80px;">
+                                                <input id="test2"  name="gender" type="radio" <?php if($info["gender"] == 2): ?>checked<?php endif; ?>  value="2" id="test2" />
                                                 <label for="test2">女</label>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            民族:<input id="national" type="text" class="validate" value="<?php echo ($info["national"]); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="select-field col s6">
-                                            部门:<select class="form-control" id="department">
-                                            <option value="">选择部门</option>
-                                            <?php if(is_array($department)): foreach($department as $key=>$v): ?><option <?php if($v[id] == $info[department]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['name']); ?></option><?php endforeach; endif; ?>
-                                        </select>
+                                            民族:<input id="national" type="text" class="validate" value="<?php echo ($info["national"]); ?>" style="width: 200px;">
+                                            年龄:<input id="age" type="text" class="validate" value="<?php echo ($info["age"]); ?>"  style="width: 200px;">
+                                            出生年月:<input id="born" type="text" class="validate" value="<?php echo ($info["born"]); ?>"  style="width: 200px;">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            职位:<input id="position" type="text" class="validate" value="<?php echo ($info["position"]); ?>">
+                                            职位:<input id="position" type="text" class="validate" value="<?php echo ($info["position"]); ?>" style="width: 200px;">
+                                            手机号:<input id="phone" type="text" class="validate" value="<?php echo ($info["phone"]); ?>"  style="width: 200px;">
+                                            邮箱:<input id="email" type="text" class="validate" value="<?php echo ($info["email"]); ?>"  style="width: 200px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            政治面貌:<input id="political" type="text" class="validate" value="<?php echo ($info["political"]); ?>"  style="width: 150px;">
+                                            籍贯:<input id="native_place" type="text" class="validate" value="<?php echo ($info["native_place"]); ?>"  style="width: 150px;">
+                                            户口所在地:<input id="registered_residence" type="text" class="validate" value="<?php echo ($info["registered_residence"]); ?>"  style="width: 250px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            住址:<input id="address" type="text" class="validate" value="<?php echo ($info["address"]); ?>"  style="width: 700px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            入职时间:<input id="induction_time" type="text" class="validate" value="<?php echo ($info["induction_time"]); ?>"  style="width: 200px;">
+                                            工龄:<input id="work_year" type="text" class="validate" value="<?php echo ($info["work_year"]); ?>"  style="width: 200px;">
+                                            工号:<input id="work_number" type="text" class="validate" value="<?php echo ($info["work_number"]); ?>"  style="width: 200px;">
+                                            学历:<input id="school" type="text" class="validate" value="<?php echo ($info["school"]); ?>"  style="width: 200px;">
+                                            专业:<input id="professional" type="text" class="validate" value="<?php echo ($info["professional"]); ?>"  style="width: 200px;">
+                                            毕业院校:<input id="graduation" type="text" class="validate" value="<?php echo ($info["graduation"]); ?>"  style="width: 200px;">
+                                            证书:<input id="certificate" type="text" class="validate" value="<?php echo ($info["certificate"]); ?>"  style="width: 200px;">
+                                            转正日期:<input id="positive" type="text" class="validate" value="<?php echo ($info["positive"]); ?>"  style="width: 200px;">
+                                            婚姻状况:<input id="married" type="text" class="validate" value="<?php echo ($info["married"]); ?>"  style="width: 160px;">
+                                            紧急联系人:<input id="emergency_contact" type="text" class="validate" value="<?php echo ($info["emergency_contact"]); ?>"  style="width: 280px;">
+                                            身份证:<input id="idcard" type="text" class="validate" value="<?php echo ($info["idcard"]); ?>"  style="width: 330px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            银行账号:<input id="bank_card" type="text" class="validate" value="<?php echo ($info["bank_card"]); ?>"  style="width: 270px;">
+                                            工资银行卡名称:<input id="bank_name" type="text" class="validate" value="<?php echo ($info["bank_name"]); ?>"  style="width: 300px;">
+                                            社保账号:<input id="social_security" type="text" class="validate" value="<?php echo ($info["social_security"]); ?>"  style="width: 290px;">
+                                            公积金账号:<input id="accumulation_fund" type="text" class="validate" value="<?php echo ($info["accumulation_fund"]); ?>"  style="width: 300px;">
+                                            担保情况:<input id="guarantee" type="text" class="validate" value="<?php echo ($info["guarantee"]); ?>"  style="width: 280px;">
+                                            意外保险购保日期:<input id="accident_insurance_time" type="text" class="validate" value="<?php echo ($info["accident_insurance_time"]); ?>"  style="width: 280px;">
+                                            社保购买日期:<input id="social_security_time" type="text" class="validate" value="<?php echo ($info["social_security_time"]); ?>"  style="width: 270px;">
+                                            公积金购买日期:<input id="accumulation_fund_time" type="text" class="validate" value="<?php echo ($info["accumulation_fund_time"]); ?>"  style="width: 280px;">
+                                            保密协议签订日期:<input id="confidentiality_agreement_time" type="text" class="validate" value="<?php echo ($info["confidentiality_agreement_time"]); ?>"  style="width: 250px;">
+                                            劳动合同期限:<input id="labor_contract_limit" type="text" class="validate"  value="<?php echo ($info["labor_contract_limit"]); ?>" style="width: 280px;">
+                                            劳动合同签发日期:<input id="labor_contract_time" type="text" class="validate" value="<?php echo ($info["labor_contract_time"]); ?>"  style="width: 250px;">
+                                            劳动合同截止日期:<input id="labor_contract_finishtime" type="text" class="validate" value="<?php echo ($info["labor_contract_finishtime"]); ?>"  style="width: 250px;">
+                                            原部门/项目:<input id="original_depart_pro" type="text" class="validate" value="<?php echo ($info["original_depart_pro"]); ?>"  style="width: 290px;">
+                                            调入时间:<input id="callin" type="text" class="validate" value="<?php echo ($info["callin"]); ?>"  style="width: 300px;">
+                                            离职日期:<input id="departure_time" type="text" class="validate" value="<?php echo ($info["departure_time"]); ?>"  style="width: 300px;">
+                                            离职原因:<input id="departure_why" type="text" class="validate" value="<?php echo ($info["departure_why"]); ?>"  style="width: 300px;">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="select-field col s6">
-                                            员工关系:<select class="form-control" id="relation">
+                                            员工关系:<select class="form-control" id="relation" style="width: 300px;">
                                             <option value="">选择</option>
                                             <option <?php if($info["relation"] == '全日制合同工'): ?>selected<?php endif; ?> value="全日制合同工">全日制合同工</option>
                                             <option <?php if($info["relation"] == '非全日制合同工'): ?>selected<?php endif; ?> value="非全日制合同工">非全日制合同工</option>
@@ -368,48 +407,32 @@
                                             <option <?php if($info["relation"] == '劳务派遣'): ?>selected<?php endif; ?> value="劳务派遣">劳务派遣</option>
                                         </select>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="select-field col s6">
-                                            员工级别:<select class="form-control" id="level">
+                                            员工级别:<select class="form-control" id="level" style="width: 300px;">
                                             <option value="">选择级别</option>
                                             <?php if(is_array($levels)): foreach($levels as $key=>$v): ?><option <?php if($v[id] == $info[level_id]): ?>selected<?php endif; ?> value="<?php echo ($v["id"]); ?>"><?php echo ($v['level']); ?>级</option><?php endforeach; endif; ?>
                                         </select>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s6">
-                                            手机号:<input id="phone" type="text" class="validate" value="<?php echo ($info["phone"]); ?>">
+                                        <div class="input-field col s12">
+                                            备注:<textarea id="note" class="materialize-textarea"><?php echo ($info["note"]); ?></textarea>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            邮箱:<input id="email" type="text" class="validate" value="<?php echo ($info["email"]); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            住址:<input id="address" type="text" class="validate" value="<?php echo ($info["address"]); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            学历:<input id="school" type="text" class="validate" value="<?php echo ($info["school"]); ?>">
-                                        </div>
-                                    </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        可查看项目:
-                                        <?php if(is_array($project)): foreach($project as $key=>$v): ?><p>
-                                                <input name="project" type="checkbox" class="filled-in"  id="project<?php echo ($v["id"]); ?>" value="<?php echo ($v["id"]); ?>"
-                                                <?php if(in_array($v['id'],$info['have_project'])){echo "checked=checked";} ?>  />
-                                                <label for="project<?php echo ($v["id"]); ?>"><?php echo ($v["name"]); ?></label>
-                                            </p><?php endforeach; endif; ?>
-                                    </div>
-                                </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
 
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            可查看项目:
+                                            <?php if(is_array($project)): foreach($project as $key=>$v): ?><p>
+                                                    <input name="project" type="checkbox" class="filled-in"  id="project<?php echo ($v["id"]); ?>" value="<?php echo ($v["id"]); ?>"
+                                                    <?php if(in_array($v['id'],$info['have_project'])){echo "checked=checked";} ?>  />
+                                                    <label for="project<?php echo ($v["id"]); ?>"><?php echo ($v["name"]); ?></label>
+                                                </p><?php endforeach; endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            上传员工图片：
                                             <div id="img">
                                                 <img id="pic" src="<?php echo ($info["pic"]); ?>" width="200px;" pod="0">
                                             </div>
@@ -418,6 +441,7 @@
 
                                         </div>
                                     </div>
+
                                     <div class="btn " role="group" aria-label="..." onclick="editMaster()">
                                         提交
 
@@ -425,6 +449,7 @@
                                 </form>
                                 <div class="clearBoth"></div>
                             </div>
+
                         </div>
                     </div>
                  </div>
@@ -501,6 +526,38 @@
             var relation = $("#relation").val();
             var department = $("#department").val();
             var levels = $("#level").val();
+            var induction_time = $("#induction_time").val();
+            var work_year = $("#work_year").val();
+            var work_number = $("#work_number").val();
+            var age = $("#age").val();
+            var born = $("#born").val();
+            var professional = $("#professional").val();
+            var graduation = $("#graduation").val();
+            var certificate = $("#certificate").val();
+            var political = $("#political").val();
+            var positive = $("#positive").val();
+            var married = $("#married").val();
+            var emergency_contact = $("#emergency_contact").val();
+            var native_place = $("#native_place").val();
+            var registered_residence = $("#registered_residence").val();
+            var idcard = $("#idcard").val();
+            var bank_card = $("#bank_card").val();
+            var bank_name = $("#bank_name").val();
+            var social_security = $("#social_security").val();
+            var accumulation_fund = $("#accumulation_fund").val();
+            var guarantee = $("#guarantee").val();
+            var accident_insurance_time = $("#accident_insurance_time").val();
+            var social_security_time = $("#social_security_time").val();
+            var accumulation_fund_time = $("#accumulation_fund_time").val();
+            var confidentiality_agreement_time = $("#confidentiality_agreement_time").val();
+            var labor_contract_time = $("#labor_contract_time").val();
+            var labor_contract_finishtime = $("#labor_contract_finishtime").val();
+            var labor_contract_limit = $("#labor_contract_limit").val();
+            var original_depart_pro = $("#original_depart_pro").val();
+            var callin = $("#callin").val();
+            var departure_time = $("#departure_time").val();
+            var departure_why = $("#departure_why").val();
+            var note = $("#note").val();
             var upPod = $("#pic").attr('pod');
 
             obj = $("input[name='project']");
@@ -522,9 +579,9 @@
             }*/
             if(!upPod) {
                 var pic = $("#pic").attr('src');
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,pic:pic,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project,induction_time:induction_time,work_year:work_year,work_number:work_number,age:age,born:born,professional:professional,graduation:graduation,certificate:certificate,political:political,positive:positive,married:married,emergency_contact:emergency_contact,native_place:native_place,registered_residence:registered_residence,idcard:idcard,bank_card:bank_card,bank_name:bank_name,social_security:social_security,accumulation_fund:accumulation_fund,guarantee:guarantee,accident_insurance_time:accident_insurance_time,social_security_time:social_security_time,accumulation_fund_time:accumulation_fund_time,confidentiality_agreement_time:confidentiality_agreement_time,labor_contract_time:labor_contract_time,labor_contract_finishtime:labor_contract_finishtime,labor_contract_limit:labor_contract_limit,original_depart_pro:original_depart_pro,callin:callin,departure_time:departure_time,departure_why:departure_why,note:note};
             } else {
-                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project};
+                var data = {id:id,name:name,nickname:nickname,gender:gender,national:national,position:position,phone:phone,email:email,address:address,school:school,depart:depart,relation:relation,level_id:levels,department:department,have_project:have_project,induction_time:induction_time,work_year:work_year,work_number:work_number,age:age,born:born,professional:professional,graduation:graduation,certificate:certificate,political:political,positive:positive,married:married,emergency_contact:emergency_contact,native_place:native_place,registered_residence:registered_residence,idcard:idcard,bank_card:bank_card,bank_name:bank_name,social_security:social_security,accumulation_fund:accumulation_fund,guarantee:guarantee,accident_insurance_time:accident_insurance_time,social_security_time:social_security_time,accumulation_fund_time:accumulation_fund_time,confidentiality_agreement_time:confidentiality_agreement_time,labor_contract_time:labor_contract_time,labor_contract_finishtime:labor_contract_finishtime,labor_contract_limit:labor_contract_limit,original_depart_pro:original_depart_pro,callin:callin,departure_time:departure_time,departure_why:departure_why,note:note};
             }
             $.post("<?php echo U('User/editUser');?>",data,function(res) {
                 if(res.err==1) {
