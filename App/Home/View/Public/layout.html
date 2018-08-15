@@ -282,6 +282,27 @@
                         </ul>
                     </li>
                 </if>
+            <if  condition="(in_array('Askleave',$rr))">
+                <if condition="$controller eq 'Askleave'">
+                    <li class="active">
+                        <else/>
+                    <li>
+                </if>
+                <a href="javascript:;" class="waves-effect <?php if(CONTROLLER_NAME == 'Askleave'): ?>active-menu<?php endif; ?>  waves-dark"><i class="fa fa-sitemap"></i> 考勤管理<span class="fa arrow"></span></a>
+                <if condition="$controller eq 'Askleave'">
+                    <ul class="nav nav-second-level collapse in ">
+                        <else/>
+                        <ul class="nav nav-second-level">
+                </if>
+                <if condition="(in_array('Askleave',$rr))">
+                    <li>
+                        <a href="{:U('Askleave/index')}" class=" <?php if(CONTROLLER_NAME == 'Askleave'): ?>active-menu<?php endif; ?> " >请假信息</a>
+                    </li>
+                </if>
+                </ul>
+
+                </li>
+            </if>
             <if  condition="(in_array('Project',$rr)) || (in_array('ProjectCate',$rr)) || (in_array('Task',$rr)) || (in_array('TaskInfo',$rr)) || (in_array('TaskNumber',$rr))">
                 <if condition="$controller eq 'Project' || $controller eq 'ProjectCate' || $controller eq 'Task' || $controller eq 'TaskInfo' || $controller eq 'TaskNumber'">
                     <li class="active">

@@ -36,9 +36,7 @@ class CommonController extends Controller {
             if(!in_array($controller,$rr)) {
                 $userRules = TRUE;
             }
-
         }
-        //print_r($ruless);die;
         if($userRules == TRUE) {
             header("location:".U("Index/noData"));
         }
