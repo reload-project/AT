@@ -53,15 +53,18 @@ class CommonController extends Controller {
         // $path = I('post.path'); //路径
         // $file = I('post.file'); //文件base64
         //图片处理
+        $controller = CONTROLLER_NAME;
+        $time = date('Y-m-d',time());
         if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $file, $result)){
             $type = $result[2];
-            $new_file = "Public/upload/";
+            $new_file = "Public/upload/".$controller."/".$time."/";
             if(!file_exists($new_file))
             {
                 //检查是否有该文件夹，如果没有就创建，并给予最高权限
                 mkdir($new_file, 0777);
             }
             $new_file = $new_file.time().".{$type}";
+            //print_r($new_file);die;
             if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $file)))){//base64转码
 
                 $data = array('err'=>1,'msg'=>'上传成功！','pic'=>$new_file);
