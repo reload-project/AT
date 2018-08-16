@@ -18,8 +18,8 @@ class UserModel extends RelationModel {
     }
 
     //获取单条数据
-    public function get_one($map){
-         $res = $this->where($map)->find();
+    public function get_one($map,$field='*'){
+         $res = $this->where($map)->field($field)->find();
          if($res){
             return $res;
         }else{

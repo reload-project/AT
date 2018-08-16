@@ -19,6 +19,7 @@ class RoleModel extends RelationModel {
 
     //获取单条数据
     public function get_one($map){
+//         print_r($map);die;
          $res = $this->where($map)->find();
          if($res){
             return $res;

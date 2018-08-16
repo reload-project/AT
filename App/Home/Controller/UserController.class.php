@@ -22,12 +22,13 @@ class UserController extends CommonController {
         }
         $data = D('User')->get_all($map,$field='*',$page=1,$pagenum=999999);
         $depart = D('Role')->get_all($map='',$field='id,depart',$page=1,$pagenum=999999);
+//        echo '<pre>';print_r($data);die;
         $depart = array_column($depart,'depart','id');
         $levels = D('Levels')->get_all($map='',$field='id,level');
         $levels = array_column($levels,'level','id');
         $department = D('Depart')->get_all($map='',$field="id,name");
         $department = array_column($department,'name','id');
-        //print_r($depart);die;
+
         foreach($data as &$v) {
             $v['gender'] = $v['gender']==1?"男":"女";
             if($v['add_time']) {
@@ -202,7 +203,37 @@ class UserController extends CommonController {
 
     //员工信息详情
     public function userInfo() {
-        
+        $id = I('get.id');
+        $map['id'] = $id;
+        $info = D('User')->get_one($map);
+        $info['have_project'] = explode(',',$info['have_project']);
+        $map = array();
+        $map['id'] = $info['department'];
+        $depart = D('Role')->get_one($map);
+        $map = array();
+        $map['id'] = $info['level_id'];
+        $levels = D('Levels')->get_one($map);
+        if($levels > 0){
+            $levels['level'] .= '级';
+        }
+        $map = array();
+        $map['id'] = $info['department'];
+        $department = D('Depart')->get_one($map,$field="name");
+        $map = array();
+        $project = D('Project')->get_all($map,$field="id,name");
+        $projects = '';
+        foreach($project as $item){
+            if( in_array($item['id'],$info['have_project']) ){
+                $projects .= $item['name'].' ，';
+            };
+        }
+        $projects = rtrim($projects, "，");
+        $this->assign('projects',$projects);
+        $this->assign('department',$department);
+        $this->assign('levels',$levels);
+        $this->assign('depart',$depart);
+        $this->assign('info',$info);
+
         $this->display();
     }
 

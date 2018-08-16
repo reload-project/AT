@@ -81,6 +81,9 @@
                                                         <div class="btn " role="group" aria-label="..." onclick='statusUser("{$v[id]}","{$v[status]}")'>
                                                             <a  href="javascript:" style="color: #0D47A1;">更改状态</a>
                                                         </div>
+                                                        <div class="btn " role="group" aria-label="..." >
+                                                            <a  href='{:U("User/userInfo?id=$v[id]" )}' style="color: #0D47A1;">详情</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </foreach>
