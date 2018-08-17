@@ -66,12 +66,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            请假起始时间:<input id="apply_time" type="text" class="validate" style="width: 200px;" value="{$info.apply_time}">
-                                            请假结束时间:<input id="induction_time" type="text" class="validate" style="width: 200px;" value="{$info.induction_time}">
+                                            请假起始时间:<input id="stime" type="text" class="validate" style="width: 140px;" value="{$info.stime}">
+                                            请假结束时间:<input id="etime" type="text" class="validate" style="width: 140px;" value="{$info.etime}">
+                                            实际请假:<input id="rtime" type="text" class="validate" style="width: 40px;" value="{$info.rtime}">天
                                         </div>
-                                        <label>温馨提示:如请假半天情况以13点时间为区分，小于13点为半天，大于13点则均算为1天假！</label>
-                                        <label>例子:选择 起始时间：2018-08-17 00:00:00，结束时间：2018-08-18 12:00:00 。 记为1.5天假！</label>
-                                        <label>例子:选择 起始时间：2018-08-17 00:00:00，结束时间：2018-08-18 18:00:00 。 记为2天假！</label>
+                                        <label>温馨提示:请假半天情况以13点时间为区分，小于13点为半天，大于13点则均算为1天假！实际请假天数必须是0.5天的倍数！</label>
+                                        <label>    例子:选择 起始时间：2018-08-17 00:00:00，结束时间：2018-08-18 12:00:00 。 记为1.5天假！</label>
+                                        <label>    例子:选择 起始时间：2018-08-17 00:00:00，结束时间：2018-08-18 18:00:00 。 记为2天假！</label>
                                     </div>
 
                             <div class="row">
@@ -128,7 +129,7 @@
 
             //执行一个laydate实例
             laydate.render({
-                elem: '#apply_time' //指定元素
+                elem: '#stime' //指定元素
                  ,type: 'datetime'
             });
         });
@@ -137,7 +138,7 @@
 
             //执行一个laydate实例
             laydate.render({
-                elem: '#induction_time' //指定元素
+                elem: '#etime' //指定元素
                  ,type: 'datetime'
             });
         });
@@ -152,9 +153,9 @@
             var work_number = $("#work_number").val();
             var department = $("#department").val();
             var position = $("#position").val();
-            var apply_time = $("#apply_time").val();
-            var induction_time = $("#induction_time").val();
-            var askleave_time = $("#askleave_time").val();
+            var stime = $("#stime").val();
+            var etime = $("#etime").val();
+            var rtime = $("#rtime").val();
             if(!project) {
                 layer.msg('项目不能为空！');return
             }
@@ -164,8 +165,11 @@
             if(!name) {
                 layer.msg('请假人员不能为空！');return
             }
-            if(!apply_time || !induction_time) {
+            if(!stime || !etime || !rtime) {
                 layer.msg('请假时间不能为空！');return
+            }
+            if((rtime * 10)%5 != 0){
+                layer.msg('实际请假天数必须是0.5的倍数！');return
             }
             var upPod = $("#pic").attr('pod');
             if(!upPod) {
@@ -179,9 +183,9 @@
                     work_number: work_number,
                     department: department,
                     position: position,
-                    apply_time: apply_time,
-                    induction_time: induction_time,
-                    askleave_time: askleave_time,
+                    stime: stime,
+                    etime: etime,
+                    rtime: rtime,
                     pic: pic
                 };
             } else {
@@ -194,9 +198,9 @@
                     work_number: work_number,
                     department: department,
                     position: position,
-                    apply_time: apply_time,
-                    induction_time: induction_time,
-                    askleave_time: askleave_time
+                    stime: stime,
+                    etime: etime,
+                    rtime: rtime
                 };
             }
             //console.log(data);return

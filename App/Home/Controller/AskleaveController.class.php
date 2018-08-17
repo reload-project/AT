@@ -15,16 +15,18 @@ class AskleaveController extends CommonController {
             $map['user_id'] = $userId;
         }
         $data = D('Askleave')->get_all($map);
+//        echo '<pre>'; print_r($data); die;
         $map = array();
         $user = D('User')->get_all($map,$field="id,name");
         $user = array_column($user,'name','id');
         $project = D('Project')->get_all($map,$field="id,name");
         $project = array_column($project,'name','id');
-        foreach($data as &$v) {
+        foreach($data as &$v){
             $v['user_id'] = $user[$v['user_id']];
             $v['project_id'] = $project[$v['project_id']];
-            $v['apply_time'] = date('Y-m-d',$v['apply_time']);
-            $v['induction_time'] = date('Y-m-d',$v['induction_time']);
+            $v['stime']     = date('Y-m-d H:i:s',$v['stime']);
+            $v['etime']     = date('Y-m-d H:i:s',$v['etime']);
+            $v['add_time']  = date('Y-m-d H:i:s',$v['add_time']);
             if($v['type']==1) {
                 $v['type'] = '事假';
             } else if($v['type']==2) {
@@ -36,7 +38,6 @@ class AskleaveController extends CommonController {
             } else if($v['type']==5) {
                 $v['type'] = '其他';
             }
-            $v['add_time'] = date('Y-m-d',$v['add_time']);
         }
         $this->assign('data',$data);
         $this->display();
@@ -46,27 +47,22 @@ class AskleaveController extends CommonController {
         $userId = $_SESSION['admin']['id'];
         if(IS_POST) {
             $postdata = I('post.');
-            $postdata['askleave_time'] = '从 '.$postdata['apply_time'].' 到 '.$postdata['induction_time'];
-            if($postdata['apply_time']) {
-                $postdata['apply_time'] = strtotime($postdata['apply_time']);
-            }
-            if($postdata['induction_time']) {
-                $postdata['induction_time'] = strtotime($postdata['induction_time']);
-            }
-            $askleave_time = sprintf("%.1f",($postdata['induction_time']-$postdata['apply_time'])/24/60/60);
-            $floats = explode('.',$askleave_time);
-            if($floats[1]<=0) {
-                $floats[1] = 0;
-            } else if(0<$floats[1] && $floats[1]<=5) {
-                $floats[1] = 5;
-            } else {
-                $floats[1] = 0;
-                $floats[0] = $floats[0]+1;
-            }
-            $askleave_time = implode('.',$floats);
-            $postdata['day_number'] = $askleave_time.'天';
-            unset($postdata['apply_time']);
-            unset($postdata['induction_time']);
+            $postdata['stime']  = strtotime($postdata['stime']);
+            $postdata['etime']  = strtotime($postdata['etime']);
+//            $askleave_time = sprintf("%.1f",($postdata['induction_time']-$postdata['apply_time'])/24/60/60);
+//            $floats = explode('.',$askleave_time);
+//            if($floats[1]<=0) {
+//                $floats[1] = 0;
+//            } else if(0<$floats[1] && $floats[1]<=5) {
+//                $floats[1] = 5;
+//            } else {
+//                $floats[1] = 0;
+//                $floats[0] = $floats[0]+1;
+//            }
+//            $askleave_time = implode('.',$floats);
+//            $postdata['day_number'] = $askleave_time.'天';
+//            unset($postdata['apply_time']);
+//            unset($postdata['induction_time']);
             if($postdata['pic']) {
                 $res = R("Common/upload",array($postdata['pic']));
                 if($res['err']==1) {
@@ -96,39 +92,41 @@ class AskleaveController extends CommonController {
         }
     }
 
-
     public function editAsk() {
         $userId = $_SESSION['admin']['id'];
         if(IS_POST) {
             $postdata = I('post.');
-            $postdata['askleave_time'] = '从 '.$postdata['apply_time'].' 到 '.$postdata['induction_time'];
-            if($postdata['apply_time']) {
-                $postdata['apply_time'] = strtotime($postdata['apply_time']);
-            }
-            if($postdata['induction_time']) {
-                $postdata['induction_time'] = strtotime($postdata['induction_time']);
-            }
-            $askleave_time = sprintf("%.1f",($postdata['induction_time']-$postdata['apply_time'])/24/60/60);
-            $floats = explode('.',$askleave_time);
-            if($floats[1]<=0) {
-                $floats[1] = 0;
-            } else if(0<$floats[1] && $floats[1]<=5) {
-                $floats[1] = 5;
-            } else {
-                $floats[1] = 0;
-                $floats[0] = $floats[0]+1;
-            }
-            $askleave_time = implode('.',$floats);
-            $postdata['day_number'] = $askleave_time.'天';
-            unset($postdata['apply_time']);
-            unset($postdata['induction_time']);
+//            $postdata['askleave_time'] = '从 '.$postdata['apply_time'].' 到 '.$postdata['induction_time'];
+//            if($postdata['apply_time']) {
+//                $postdata['apply_time'] = strtotime($postdata['apply_time']);
+//            }
+//            if($postdata['induction_time']) {
+//                $postdata['induction_time'] = strtotime($postdata['induction_time']);
+//            }
+//            $askleave_time = sprintf("%.1f",($postdata['induction_time']-$postdata['apply_time'])/24/60/60);
+//            $floats = explode('.',$askleave_time);
+//            if($floats[1]<=0) {
+//                $floats[1] = 0;
+//            } else if(0<$floats[1] && $floats[1]<=5) {
+//                $floats[1] = 5;
+//            } else {
+//                $floats[1] = 0;
+//                $floats[0] = $floats[0]+1;
+//            }
+//            $askleave_time = implode('.',$floats);
+//            $postdata['day_number'] = $askleave_time.'天';
+//            unset($postdata['apply_time']);
+//            unset($postdata['induction_time']);
             //print_r($postdata);die;
+            $postdata['stime']  = strtotime($postdata['stime']);
+            $postdata['etime']  = strtotime($postdata['etime']);
             if($postdata['pic']) {
                 $res = R("Common/upload",array($postdata['pic']));
                 if($res['err']==1) {
                     $postdata['pic'] = '/'.$res['pic'];
                 }
             }
+            $postdata['add_time'] = time();
             $res = D('Askleave')->editAsk($postdata);
             if($res) {
                 $data = array('err'=>1,'msg'=>"编辑成功");
@@ -140,15 +138,17 @@ class AskleaveController extends CommonController {
             $id = $_GET['id'];
             $map['id'] = $id;
             $info = D('Askleave')->get_one($map);
-            $info['askleave_time'] = explode(' ',$info['askleave_time']);
-            $one[] = $info['askleave_time'][1];
-            $one[] = $info['askleave_time'][2];
-            $two[] = $info['askleave_time'][4];
-            $two[] = $info['askleave_time'][5];
-            $info['apply_time'] = implode(' ',$one);
-            $info['induction_time'] = implode(' ',$two);
-            unset($info['askleave_time']);
-            //print_r($info);die;
+////            echo '<pre>';print_r($info);die;
+//            $info['askleave_time'] = explode(' ',$info['askleave_time']);
+//            $one[] = $info['askleave_time'][1];
+//            $one[] = $info['askleave_time'][2];
+//            $two[] = $info['askleave_time'][4];
+//            $two[] = $info['askleave_time'][5];
+//            $info['apply_time'] = implode(' ',$one);
+//            $info['induction_time'] = implode(' ',$two);
+//            unset($info['askleave_time']);
+            $info['stime'] = date('Y-m-d H:i:s',$info['stime']);
+            $info['etime'] = date('Y-m-d H:i:s',$info['etime']);
             $this->assign('info',$info);
             $map = array();
             if($userId!=1) {
@@ -162,7 +162,6 @@ class AskleaveController extends CommonController {
             $this->display();
         }
     }
-
 
     public function delAsk() {
         if(IS_POST) {

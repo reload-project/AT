@@ -235,7 +235,7 @@ class UserController extends CommonController {
         $this->assign('info',$info);
 
         $this->display();
-        
+
     }
 
 }
