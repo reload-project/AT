@@ -1,0 +1,196 @@
+﻿<extend name="Public/layout" />
+<block name="head">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__layer/css/laydate.css" media="all">
+
+</block>
+<block name="main">
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-action">
+                                添加请假单
+                            </div>
+                            <div class="card-content">
+                                <form id="myForm" class="col s12"  action="" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            所属项目:<select class="form-control" id="project" style="width: 300px;">
+                                                <option value="">选择项目</option>
+                                                <foreach name="project" item="v">
+                                                <option value="{$v.id}">{$v['name']}</option>
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="select-field col s6">
+                                            请假类型:<select class="form-control" id="type" onchange="checkType(value)" style="width: 300px;">
+                                            <option value="">选择类型</option>
+                                            <option value="1">事假</option>
+                                            <option value="2">病假</option>
+                                            <option value="3">调休</option>
+                                            <option value="4">年休假</option>
+                                            <option value="5">其他</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div id="checkType" class="row" style="display: none; width: 500px;">
+                                        <div class="input-field col s12">
+                                            请假原因:<textarea id="type_why" class="materialize-textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            请假人员:<input id="name" type="text" class="validate" style="width: 300px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            员工编号:<input id="work_number" type="text" class="validate" style="width: 300px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            部&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp门:<input id="department" type="text" class="validate" style="width: 300px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            职&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp位:<input id="position" type="text" class="validate" style="width: 300px;">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            请假起始时间:<input id="apply_time" type="text" class="validate" style="width: 200px;">
+                                            请假结束时间:<input id="induction_time" type="text" class="validate" style="width: 200px;">
+                                        </div>
+                                        <label>温馨提示:如请假半天情况以13点时间为区分，小于13点为半天，大于13点则均算为1天假！</label>
+                                        <label>例子:选择 起始时间：2018-08-17 00:00:00，结束时间：2018-08-18 12:00:00 。 记为1.5天假！</label>
+                                        <label>例子:选择 起始时间：2018-08-17 00:00:00，结束时间：2018-08-18 18:00:00 。 记为2天假！</label>
+                                    </div><!--
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            请假天数:<input id="askleave_time" type="text" class="validate" style="width: 400px;">
+                                        </div>
+                                    </div>-->
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            上传请假单图：
+                                                        <div id="img">
+                                                            <img id="pic" src="" width="200px;">
+                                                        </div>
+                                                        <input id="myfile" type="file" multiple=""/>
+
+
+                                        </div>
+                                        <label>温馨提示:上传图片大小尽量不超过2MB</label>
+                                    </div>
+
+                                    <div class="btn " role="group" aria-label="..." onclick="add()">
+                                        提交
+
+                                    </div>
+                                </form>
+                                <div class="clearBoth"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+
+
+</block>
+<block name="js">
+    <script type="text/javascript" src="__PUBLIC__common/js/jquery.md5.js"></script>
+    <script src="__PUBLIC__assets/js/filereader.js"></script>
+    <script src="__PUBLIC__layer/layui.js"></script>
+    <script>
+        $('#myfile').filereader({
+            type:['jpg','jpeg','png'],
+            max_size:1024,
+            preview:$('#img'),
+            success:function(){},
+            preview_attr:{id:'pic', height:'200px'}
+        });
+    </script>
+    <script>
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#apply_time' //指定元素
+                 ,type: 'datetime'
+            });
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#induction_time' //指定元素
+                 ,type: 'datetime'
+            });
+        });
+
+
+    </script>
+    <script type="text/javascript">
+        function add() {
+            var project = $("#project").val();
+            var type = $("#type").val();
+            var type_why = $("#type_why").val();
+            var name = $("#name").val();
+            var work_number = $("#work_number").val();
+            var department = $("#department").val();
+            var position = $("#position").val();
+            var apply_time = $("#apply_time").val();
+            var induction_time = $("#induction_time").val();
+            var askleave_time = $("#askleave_time").val();
+
+            var pic = $("#pic").attr('src');
+            if(!project) {
+                layer.msg('项目不能为空！');return
+            }
+            if(!type) {
+                layer.msg('请假类型不能为空！');return
+            }
+            if(!name) {
+                layer.msg('请假人员不能为空！');return
+            }
+            if(!apply_time || !induction_time) {
+                layer.msg('请假时间不能为空！');return
+            }
+            var data = {project_id:project,type:type,type_why:type_why,name:name,work_number:work_number,department:department,position:position,apply_time:apply_time,induction_time:induction_time,askleave_time:askleave_time,pic:pic};
+            //console.log(data);return
+            $.post("{:U('Askleave/addAsk')}",data,function(res) {
+                if(res.err==1) {
+
+                    location.href="{:U('Askleave/index')}";
+                } else {
+                    layer.msg(res.msg);
+                }
+            });
+        }
+
+
+        function checkType(val) {
+            if(val==5) {
+                $("#checkType").css("display","block");
+            } else {
+                $("#checkType").css("display","none");
+            }
+        }
+
+
+
+    </script>
+</block>
