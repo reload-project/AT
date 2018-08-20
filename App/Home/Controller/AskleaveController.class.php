@@ -26,7 +26,7 @@ class AskleaveController extends CommonController {
             $v['project_id'] = $project[$v['project_id']];
             $v['stime']     = date('Y-m-d H:i:s',$v['stime']);
             $v['etime']     = date('Y-m-d H:i:s',$v['etime']);
-            $v['add_time']  = date('Y-m-d H:i:s',$v['add_time']);
+            $v['add_time']  = date('Y-m-d',$v['add_time']);
             if($v['type']==1) {
                 $v['type'] = '事假';
             } else if($v['type']==2) {
